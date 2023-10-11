@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'schedule.css' %}">
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+
+    <body>
+        <header>
+            <div class='navbar'>
+                <a href="/"><b>Home</b></a>
+                <a href="/about-us/">About Us</a>
+                <a href="/problem/">Societal Problem</a>
+                <a href="/deliverables/">Deliverables</a>
+                <a href="/presentations/">Presentations</a>
+                <a href="/labs/">Labs</a>
+                <a href="/references/">References</a>
+            </div>
+        </header>
+
+        {% block content %}
+        {% endblock %}
+        
+    </body>
+</html>

@@ -1,0 +1,251 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+    CS411W - Gold Group - Deliverables
+{% endblock %}
+
+{% block content %}
+    <h1>Process Flows</h1>
+    <table>
+        <tr>
+            <td>
+                <img style="width:100%" src="{% static 'Pictures/Process-Flows/Current.png' %}" alt="Current Process Flow">
+            </td>
+            <td>
+                <img style="width:100%" src="{% static 'Pictures/Process-Flows/Solution.png' %}" alt="Solution Process Flow">
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <hr>
+    <br>
+
+    <table>
+        <tr>
+            <td>
+                <h1>Major Functional Component Diagram</h1>
+                <img style="width:100%" src="{% static 'Pictures/MFCD.png' %}" alt="Major Functional Component Diagram">
+            </td>
+            <td>
+                <h1>Database Design</h1>
+                <img style="width:100%" src="{% static 'Pictures/Database.png' %}" alt="Database Design">
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <hr>
+    <br>
+
+    <h1>Competition Matrices</h1>
+    <table>
+        <tr>
+            <td colspan="2">
+                <img style="width:50%;" src="{% static 'Pictures/Competition/Main.png' %}" alt="Competition Matrix: Main Features">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img style="width:100%" src="{% static 'Pictures/Competition/Basic.png' %}" alt="Competition Matrix: Basic Features">
+            </td>
+            <td>
+                <img style="width:100%" src="{% static 'Pictures/Competition/Priority.png' %}" alt="Competition Matrix: Prioritization Features">
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <hr>
+    <br>
+
+    <h1>Risks</h1>
+    <table>
+        <tr>
+            <td style="text-align: left; width:50%">
+                <h2>Customer Risks</h2>
+                <h3>Risk Description</h3>
+                <ul>
+                    <li><b>C1: </b>User incorrectly inputs data</li>
+                    <ul>
+                        <li>Probability: Low</li>
+                        <li>Impact: Medium</li>
+                    </ul>
+                    <li><b>C2: </b>User doesn't know how to use system</li>
+                    <ul>
+                        <li>Probability: Low</li>
+                        <li>Impact: High</li>
+                    </ul>
+                </ul>
+
+                <h3>Mitigation</h3>
+                <ul>
+                    <li><b>C1: </b>Edit data later, error notifications</li>
+                    <li><b>C2: </b>Add tutorial reference</li>
+                </ul>
+            </td>
+            <td>
+                <img style="width:100%" src="{% static 'Pictures/Risk/Customer.png' %}" alt="Risk Matrix: Customer">
+            </td>
+        </tr>
+
+        <tr>
+            <td style="text-align: left; width:50%">
+                <h2>Technical Risks</h2>
+                <h3>Risk Description</h3>
+                <ul>
+                    <li><b>T1: </b>Loss of data</li>
+                    <ul>
+                        <li>Probability: Medium</li>
+                        <li>Impact: Very High</li>
+                    </ul>
+                    <li><b>T2: </b>Accidental deletion</li>
+                    <ul>
+                        <li>Probability: Very High</li>
+                        <li>Impact: High</li>
+                    </ul>
+                    <li><b>T3: </b>Loss of internet connection</li>
+                    <ul>
+                        <li>Probability: Medium</li>
+                        <li>Impact: Very High</li>
+                    </ul>
+                </ul>
+
+                <h3>Mitigation</h3>
+                <ul>
+                    <li><b>T1: </b>Perform regular backups of the database</li>
+                    <li><b>T2: </b>Allow for undo option</li>
+                    <li><b>T3: </b>Allow offline editing for user</li>
+                </ul>
+            </td>
+            <td>
+                <img style="width:100%" src="{% static 'Pictures/Risk/Technical.png' %}" alt="Risk Matrix: Technical">
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: left; width:50%">
+                <h2>Security Risks</h2>
+                <h3>Risk Description</h3>
+                <ul>
+                    <li><b>S1: </b>Data Compromise </li>
+                    <ul>
+                        <li>Probability: Low</li>
+                        <li>Impact: High</li>
+                    </ul>
+                    <li><b>S2: </b>User forgets password</li>
+                    <ul>
+                        <li>Probability: Medium</li>
+                        <li>Impact: High</li>
+                    </ul>
+                    <li><b>S3: </b>Malicious data input</li>
+                    <ul>
+                        <li>Probability: Medium</li>
+                        <li>Impact: High</li>
+                    </ul>
+                </ul>
+
+                <h3>Mitigation</h3>
+                <ul>
+                    <li><b>S1: </b>Follow industry best practices</li>
+                    <li><b>S2: </b>Allow for password reset</li>
+                    <li><b>S3: </b>Data sanitization</li>
+                </ul>
+            </td>
+            <td>
+                <img style="width:100%" src="{% static 'Pictures/Risk/Security.png' %}" alt="Risk Matrix: Security">
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <hr>
+    <br>
+
+    <h1>Mock Ups</h1>
+    <table>
+        <tr>
+            <td style="width:50%">
+                <img style="width:100%" src="{% static 'Pictures/Mockups/Login.png' %}" alt="Login Page">
+            </td>
+            <td style="width:50%">
+                <img style="width:100%" src="{% static 'Pictures/Mockups/Dashboard.png' %}" alt="Dashboard">
+            </td>
+        </tr>
+        <tr>
+            <td style="width:50%">
+                <img style="width:100%" src="{% static 'Pictures/Mockups/Workspace.png' %}" alt="Workspace">
+            </td>
+            <td style="width:50%">
+                <img style="width:100%" src="{% static 'Pictures/Mockups/Add-Task.png' %}" alt="Add Task">
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <hr>
+    <br>
+
+    <h1>Algorithms</h1>
+    <table>
+        <tr>
+            <td style="width:50%">
+                <img style="width:100%" src="{% static 'Pictures/Algorithms/WBS.png' %}" alt="Work Breakdown Structure">
+            </td>
+            <td style="width:50%">
+                <img style="width:100%" src="{% static 'Pictures/Algorithms/WBS-PA.png' %}" alt="Work Breakdown Structure: Preference Analysis">
+            </td>
+        </tr>
+        <tr>
+            <td style="width:50%">
+                <img style="width:100%" src="{% static 'Pictures/Algorithms/Profile.png' %}" alt="Profile Creation">
+            </td>
+            <td style="width:50%">
+                <img style="width:100%" src="{% static 'Pictures/Algorithms/Notification.png' %}" alt="Notification">
+            </td>
+        </tr>
+        <tr>
+            <td style="width:50%">
+                <img style="width:100%" src="{% static 'Pictures/Algorithms/Import.png' %}" alt="Calendar Import">
+            </td>
+            <td style="width:50%">
+                <img style="width:100%" src="{% static 'Pictures/Algorithms/Export.png' %}" alt="Calendar Export">
+            </td>
+        </tr>
+        <tr>
+            <td style="width:50%">
+                <img style="width:100%" src="{% static 'Pictures/Algorithms/Add-Task.png' %}" alt="Add Task">
+            </td>
+            <td style="width:50%">
+                <img style="width:100%" src="{% static 'Pictures/Algorithms/Conflict.png' %}" alt="Conflict Resolution">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="width:50%">
+                <img style="width:50%;" src="{% static 'Pictures/Algorithms/Automated-Creation.png' %}" alt="Automated Schedule Creation">
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <hr>
+    <br>
+
+    <h1>Real World Product vs Prototype</h1>
+    <table>
+        <tr>
+            <td style="width:50%">
+                <img style="width:100%" src="{% static 'Pictures/RWP-vs-Prototype/Basic.png' %}" alt="Basic Features">
+            </td>
+            <td style="width:50%">
+                <img style="width:100%" src="{% static 'Pictures/RWP-vs-Prototype/Automate-Custom-Priority.png' %}" alt="Automation, Customization, and Prioritization Features">
+            </td>
+        </tr>
+    </table>
+    
+
+    <footer>
+        <br><br><hr>
+        <a href="/"><b>Return to homepage</b></a>
+    </footer>
+{% endblock %}

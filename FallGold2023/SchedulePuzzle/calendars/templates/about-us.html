@@ -1,0 +1,113 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+    CS411W - Gold Group - About Us
+{% endblock %} 
+
+{% block content %}
+    <h1>Meet the Team</h1>
+
+    <p>Hello! We are Group Gold, the team behind Schedule Puzzle!</p>
+
+    <table>
+        <tr>
+            <td>
+                <img src="{% static '/Pictures/Bio/ashleypic.jpg' %}" alt="Ashley Carter" style="width:250px;height:250px">
+                <br>
+                <p>
+                    <b>Ashley Carter</b><br>
+                    Ashley Carter is a senior at Old Dominion University majoring in Computer Science. 
+                    She has experience working with C++ and Java. Her hobbies are reading and building keyboards.
+                </p>
+            </td>
+
+            <td>
+                <img src="{% static 'Pictures/Bio/jacindapicture.jpg' %}" alt="Jacinda Rosario" style="width:250px;height:250px">
+                <br>
+                <p>
+                    <b>Jacinda Rosario</b><br>
+                    Jacinda Rosario is an undergraduate student at Old Dominion University majoring in Computer Science.
+                    She has experience working in C++, Java, and Python. In her free time, she enjoys playing
+                    video games or spending time with her pets. 
+                </p>
+            </td>
+
+            <td>
+                <img src="{% static 'Pictures/Bio/kayla-pineda-profile.jpg' %}" alt="Kayla Pineda" style="width:250px;height:250px">
+                <br>
+                <p>
+                    <b>Kayla Pineda</b><br>
+                    Kayla Pineda is a junior at Old Dominion University majoring in Computer Science.
+                    She is currently an Undergraduate Research Assistant with the Computer Science Department at ODU.
+                    Her hobbies are 3D puzzles, writing, and 3D art.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="{% static 'Pictures/Bio/Kofi-pic.JPG' %}" alt="Kofi Amoah" style="width:250px;height:250px">
+                <br>
+                <p>
+                    <b>Kofi Amoah</b><br>
+                    Kofi Amoah is a senior at Old Dominion University majoring in Computer Science.
+                    He is a Help Desk Technician working at the university's ITS Help Desk.
+                    He has experience with C++ and Java and currently learning about Javascript and AWS.
+                    His hobbies are travelling, watching sports, reading and spending time with family.
+                </p>
+            </td>
+
+            <td>
+                <img src="{% static 'Pictures/Bio/bio picture 2.jpg' %}" alt="Pablo Castaneda" style="width:250px;height:250px">
+                <br>
+                <p>
+                    <b>Pablo Castaneda</b><br>
+                    Pablo Castaneda is senior at Old Dominion University majoring in Computer Science.
+                    He currently works as a tutor for the Computer Science Tutoring Center and is in the Navy reserves.
+                    He has experience with Java, C++, Python, and is currently learning about the Django REST framework.
+                </p>
+            </td>
+
+            <td>
+                <img src="{% static 'Pictures/Bio/Xavier.jpg' %}" alt="Xavier Jordan" style="width:250px;height:250px">
+                <br>
+                <p>
+                    <b>Xavier Jordan</b><br>
+                    Xavier Jordan is a senior at Old Dominion University currently working on his Bachelor's Degree in
+                    Computer Science. He has experience with Java, C++, and is currently learning Python. His interests
+                    are music, video games, and Harry Potter.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="{% static 'Pictures/Bio/JRA_ProfilePic.jpg' %}" alt="Jake Austin" style="width:250px;height:250px">
+                <br>
+                <p>
+                    <b>Jake Austin</b><br>
+                    Jake Austin is a senior at Old Dominion University working in obtaining his Bachelor's Degree in 
+                    Computer Science and Minor in Cybersecurity and Electerial Computer Engneering. He transferred from 
+                    Tidewater Community College from 2017 and has experience with programs such as Unix and Eclipse. His 
+                    preferred coding langauges are C++ and Java. His hobbies are reaading, sketching, video games, 
+                    exercising, and cooking.
+                </p>
+            </td>
+
+            <td>
+                <img src="{% static 'Pictures/Bio/RyanTran.jpg' %}" alt="Ryan Tran" style="width:250px;height:250px">
+                <br>
+                <p>
+                    <b>Ryan Tran</b><br>
+                    Ryan Tran is a senior at Old Dominion University majoring in computer science. He is currently working at
+                    Geek Squad as a computer hardware technician. He has experience in C++, Java, and is learning Python. His 
+                    hobbies include watching anime, playing games, and spending money on unnecessary items.
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    <footer>
+        <br><br><hr>
+        <a href="/"><b>Return to homepage</b></a>
+    </footer>
+{% endblock %}

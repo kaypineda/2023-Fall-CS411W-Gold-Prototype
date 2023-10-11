@@ -1,0 +1,91 @@
+{% extends "master.html" %}
+{% load static %}
+
+{% block title %}
+    CS411W - Gold Group - Labs
+{% endblock %}
+
+{% block content %}
+    <h1>Lab 1</h1>
+    <table>
+        <tr>
+            <th width="50%"><h2>Group</h2></th>
+            <th colspan="2"><h2>Individual</h2></th>
+        </tr>
+        <tr>
+            <td rowspan="4">
+                <object data="{% static 'Documents/411W-Lab1-Outline-0905.pdf' %}" width="100%" height="750px">
+                    <p>Unable to display PDF file. <a href="{% static 'Documents/411W-Lab1-Outline-0905.pdf' %}">Download</a> instead.</p>
+                </object>
+            </td>
+            <td>
+                <h3>Ashley Carter</h3>
+                <p>Link to Ashley's individual 
+                    <a href="{% static 'Documents/CS410-Lab1-Carter.pdf' %}" target="_blank" rel="noopener noreferrer">here</a>
+                </p>
+            </td>
+            <td>
+                <h3>Pablo Castaneda</h3>
+                <p>Link to Pablo's individual 
+                    <a href="./Documents/CS 410-Lab1-Castaneda.pdf" target="_blank" rel="noopener noreferrer">here</a>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3>Jacinda Rosario</h3>
+                <p>Link to Jacinda's individual 
+                    <a href="./Documents/CS410-Lab1-Rosario.pdf" target="_blank" rel="noopener noreferrer">here</a>
+                </p>
+            </td>
+            <td>
+                <h3>Xavier Jordan</h3>
+                <p>Link to Xavier's individual 
+                    <a href="./Documents/CS410-Lab1-Jordan.pdf" target="_blank" rel="noopener noreferrer">here</a>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3>Kayla Pineda</h3>
+                <p>Link to Kayla's individual
+                    <a href="./Documents/CS410-Lab1-Pineda.pdf" target="_blank" rel="noopener noreferrer">here</a>
+                </p>
+            </td>
+            <td>
+                <h3>Ryan Tran</h3>
+                <p>TDA</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3>Kofi Amoah</h3>
+                <p>Link to Kofi's individual 
+                    <a href="./Documents/CS 410-Lab1-Amoah.pdf" target="_blank" rel="noopener noreferrer">here</a>
+                </p>
+            </td>
+            <td>
+                <h3>Jake Austin</h3>
+                <p>TDA</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3>Previous Versions</h3>
+                <p><a href="./Documents/Lab1.pdf" target="_blank" rel="noopener noreferrer">410-Version 1</a></p>
+            </td>
+            
+        </tr>
+    </table>
+
+    
+
+    
+
+    
+
+    <footer>
+        <br><br><hr>
+        <a href="/"><b>Return to homepage</b></a>
+    </footer>
+{% endblock %}
