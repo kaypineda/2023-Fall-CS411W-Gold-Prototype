@@ -2,7 +2,7 @@
 Prototype for CS411W Group Gold
 
 ## Members
-  - kaypineda - Kayla Pineda - kpine003@odu.edu
+  - kaypineda - Kayla Pineda - kpine003@odu.edu -test
   - jrosario005 - Jacinda Rosario - jrosa005@odu.edu
   - ashjcarter - Ashley Carter - acart052@odu.edu
   - kamoah233 - Kofi Amoah - kamoa001@odu.edu
