@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-exsg^a^#pkatn@ii3e5&x9k)lwafia(jj%f+n7ga%#07_0-6t$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'SchedulePuzzle.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'SchedulePuzzle',
+        'NAME': 'schedulepuzzle',
         'USER': 'gold',
         'PASSWORD': '411wgold',
         'HOST': 'localhost',
