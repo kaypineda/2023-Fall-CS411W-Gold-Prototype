@@ -75,3 +75,30 @@ body {
     cursor: pointer;
     outline: none;
 }
+
+.cancelbtn {
+    width: auto;
+    padding: 1px 4px;
+    /* background-color: #f44336; */
+}
+.Forgotbtn {
+    width: auto;
+    padding: 1px 4px;
+}
+
+.Createbtn {
+    width: auto;
+    padding: 1px 4px;
+}
+
+label {
+    margin-top: 12px;
+    font-size: 14.5px;
+    margin-bottom: auto;
+}
+
+
+/* span.psw{
+    float: right;
+    padding-top: 16px;
+} */
