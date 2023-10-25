@@ -13,3 +13,15 @@ class Location(models.Model):
     street = models.CharField(max_length=200)
     city = models.CharField(max_length=200)
     zipcode = models.CharField(max_length=200)
+
+#TODO: ask about variable names
+class Task(models.Model):
+    task_id = models.AutoField(primary_key=True)
+    schedule_id = models.ForeignKey(Schedule, on_delete=models.CASCADE)
+    location_id = models.ForeignKey(Location, on_delete=models.CASCADE)
+    task_name = models.CharField(max_length=200)
+    task_source = models.CharField(max_length=200)
+    start_date = models.DateField()
+    due_date = models.DateField()
+    notes = models.TextField() # description?
+    category = models.CharField(max_length=200)
