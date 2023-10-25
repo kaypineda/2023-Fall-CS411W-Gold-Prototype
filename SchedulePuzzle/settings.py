@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'AppUser',
+    'AppCalendar',
 ]
 
 MIDDLEWARE = [
@@ -69,29 +71,30 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SchedulePuzzle.wsgi.application'
 
+AUTH_USER_MODEL = 'AppUser.CustomUser'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-# # SQLite database
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# PostgreSQL database
+# SQLite database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'schedulepuzzle',
-        'USER': 'gold',
-        'PASSWORD': '411wgold',
-        'HOST': 'localhost',
-        'PORT': '',
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# PostgreSQL database
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'schedulepuzzle',
+#         'USER': 'gold',
+#         'PASSWORD': '411wgold',
+#         'HOST': 'localhost',
+#         'PORT': '',
+
+#     }
+# }
 
 
 # Password validation
