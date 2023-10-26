@@ -14,7 +14,7 @@ def index(request):
     return HttpResponse('hello')
 
 class CalendarView(generic.ListView):
-    model = Event
+    model = Task
     template_name = 'AppCalendar/calendar.html'
 
     def get_context_data(self, **kwargs):
@@ -47,11 +47,11 @@ def next_month(d):
     return month
 
 def event(request, event_id=None):
-    instance = Event()
+    instance = Task()
     if event_id:
-        instance = get_object_or_404(Event, pk=event_id)
+        instance = get_object_or_404(Task, pk=event_id)
     else:
-        instance = Event()
+        instance = Task()
 
     form = EventForm(request.POST or None, instance=instance)
     if request.POST and form.is_valid():
