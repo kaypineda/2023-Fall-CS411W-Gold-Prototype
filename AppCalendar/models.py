@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
+from django.urls import reverse
 
-# Create your models here.
 class Schedule(models.Model):
     schedule_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -25,7 +25,18 @@ class Task(models.Model):
     due_date = models.DateField()
     notes = models.TextField() # description?
     category = models.CharField(max_length=200)
-    
+
+#class Event(models.Model):
+#    title = models.CharField(max_length=200)
+#    description = models.TextField()
+#    start_time = models.DateTimeField()
+#    end_time = models.DateTimeField()
+
+    @property
+    def get_html_url(self):
+        url = reverse('AppCalendar:event_edit', args=(self.id,))
+        return f'<a href="{url}"> {self.task_name} </a>'
+
 class Notifications(models.Model):
     notification_id = models.AutoField(primary_key=True)
     task_id = models.ForeignKey('Task', on_delete=models.CASCADE)
