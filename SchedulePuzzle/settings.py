@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'AppCalendar.apps.CalendarConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -92,7 +93,6 @@ DATABASES = {
 #         'PASSWORD': '411wgold',
 #         'HOST': 'localhost',
 #         'PORT': '',
-
 #     }
 # }
 
