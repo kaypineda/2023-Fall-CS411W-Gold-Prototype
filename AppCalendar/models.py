@@ -26,7 +26,6 @@ class Task(models.Model):
     notes = models.TextField() # description?
     category = models.CharField(max_length=200)
 
-
 #class Event(models.Model):
 #    title = models.CharField(max_length=200)
 #    description = models.TextField()
@@ -37,3 +36,22 @@ class Task(models.Model):
     def get_html_url(self):
         url = reverse('AppCalendar:event_edit', args=(self.id,))
         return f'<a href="{url}"> {self.task_name} </a>'
+
+class Notifications(models.Model):
+    notification_id = models.AutoField(primary_key=True)
+    task_id = models.ForeignKey('Task', on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    notification_time=models.DateTimeField()
+    TYPE_CHOICES = [
+        ('Email', 'Email'),
+        ('Push', 'Push'),
+        ('Text', 'Text'),
+    ]
+    type = models.CharField(max_length=5, choices=TYPE_CHOICES, default='Email')
+    time_created = models.DateTimeField(auto_now_add=True)
+    time_sent = models.DateTimeField(null=True, blank = True)
+
+class NotificationMessage(models.Model):
+    message_id = models.AutoField(primary_key=True)
+    notification_id = models.ForeignKey('Notifications', on_delete=models.CASCADE)
+    message = models.TextField()
