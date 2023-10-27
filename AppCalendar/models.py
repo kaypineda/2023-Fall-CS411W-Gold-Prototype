@@ -8,17 +8,13 @@ class Schedule(models.Model):
     schedule_name = models.CharField(max_length=200)
     schedule_source = models.CharField(max_length=200)
 
-class Location(models.Model):
-    location_id = models.AutoField(primary_key=True)
-    street = models.CharField(max_length=200)
-    city = models.CharField(max_length=200)
-    zipcode = models.CharField(max_length=200)
 
 class Event(models.Model):
    title = models.CharField(max_length=200)
    description = models.TextField()
    start_time = models.DateTimeField()
    end_time = models.DateTimeField()
+
 
 @property
 def get_html_url(self):
