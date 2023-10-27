@@ -1,9 +1,9 @@
 from django.forms import ModelForm, DateInput
-from AppCalendar.models import Task
+from AppCalendar.models import Event
 
 class EventForm(ModelForm):
   class Meta:
-    model = Task
+    model = Event
     # datetime-local is a HTML5 input type, format to make date time show on fields
     widgets = {
       'start_time': DateInput(attrs={'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M'),
