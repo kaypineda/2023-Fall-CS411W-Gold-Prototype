@@ -11,8 +11,8 @@ class Schedule(models.Model):
 
 class Task(models.Model):
     task_id = models.AutoField(primary_key=True)
-    category = models.CharField(max_length=200)
-    priority = models.IntegerField()
+    category = models.CharField(max_length=200, default='')
+    priority = models.IntegerField(default=1)
     title = models.CharField(max_length=200)
     description = models.TextField()
     start_time = models.DateTimeField()
