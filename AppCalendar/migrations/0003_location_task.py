@@ -20,18 +20,4 @@ class Migration(migrations.Migration):
                 ('zipcode', models.CharField(max_length=200)),
             ],
         ),
-        migrations.CreateModel(
-            name='Task',
-            fields=[
-                ('task_id', models.AutoField(primary_key=True, serialize=False)),
-                ('task_name', models.CharField(max_length=200)),
-                ('task_source', models.CharField(max_length=200)),
-                ('start_date', models.DateField()),
-                ('due_date', models.DateField()),
-                ('notes', models.TextField()),
-                ('category', models.CharField(max_length=200)),
-                ('location_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='AppCalendar.location')),
-                ('schedule_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='AppCalendar.schedule')),
-            ],
-        ),
     ]
