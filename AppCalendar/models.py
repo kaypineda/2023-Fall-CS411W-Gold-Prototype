@@ -19,10 +19,10 @@ class Task(models.Model):
     end_time = models.DateTimeField()
 
 
-@property
-def get_html_url(self):
-    url = reverse('AppCalendar:task_edit', args=(self.id,))
-    return f'<a href="{url}"> {self.Task_name} </a>'
+    @property
+    def get_html_url(self):
+        url = reverse('AppCalendar:task_edit', args=(self.task_id,))
+        return f'<a href="{url}"> {self.title} </a>'
 
 class Notifications(models.Model):
     notification_id = models.AutoField(primary_key=True)
