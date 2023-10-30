@@ -1,17 +1,16 @@
-from datetime import datetime, timedelta, date
-from django.shortcuts import render, get_object_or_404
+import calendar
+from datetime import date, datetime, timedelta
+
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views import generic
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-import calendar
+from django.views import generic
 
+from .forms import TaskForm
 from .models import *
 from .utils import Calendar
-from .forms import TaskForm
 
-def index(request):
-    return HttpResponse('hello')
 
 class CalendarView(generic.ListView):
     model = Task
