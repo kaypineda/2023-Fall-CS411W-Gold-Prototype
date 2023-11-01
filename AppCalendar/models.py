@@ -1,6 +1,9 @@
-from django.db import models
+from sqlite3 import Connection
+
 from django.conf import settings
+from django.db import models
 from django.urls import reverse
+
 
 class Schedule(models.Model):
     schedule_id = models.AutoField(primary_key=True)
@@ -42,3 +45,10 @@ class NotificationMessage(models.Model):
     message_id = models.AutoField(primary_key=True)
     notification_id = models.ForeignKey('Notifications', on_delete=models.CASCADE)
     message = models.TextField()
+
+# class sad(models.Model):
+#     c = Connection.cursor()
+#     for row in c.execute("SELECT a.title, a.category, a.start_time FROM AppCalendar_task a JOIN (SELECT title, category, start_time, COUNT(*) FROM AppCalendar_task GROUP BY start_time HAVING COUNT(*) > 1) b ON a.start_time = b.start_time ORDER BY a.title;"):
+#         print("These tasks have the same times:", c.fetchone())
+
+#     Connection.close()
