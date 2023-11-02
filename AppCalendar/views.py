@@ -1,6 +1,8 @@
 import calendar
+from collections import Counter
 from datetime import date, datetime, timedelta
 
+from django.db.models import Count
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -57,3 +59,8 @@ def task(request, task_id=None):
         form.save()
         return HttpResponseRedirect(reverse('AppCalendar:calendar'))
     return render(request, 'AppCalendar/task.html', {'form': form})
+
+def sad(request):
+    if request.method == 'GET':
+        duplicateTimes = Task.objects.values('title', 'category', 'start_time').annotate(
+            time_count=Count('start_time')).filter(time_count__gt=1)
