@@ -8,25 +8,26 @@ class Schedule(models.Model):
     schedule_name = models.CharField(max_length=200)
     schedule_source = models.CharField(max_length=200)
 
+class Location(models.Model):
+    location_id = models.AutoField(primary_key=True)
+    street = models.CharField(max_length=200)
+    city = models.CharField(max_length=200)
+    zipcode = models.CharField(max_length=200)
 
-class Task(models.Model):
-    task_id = models.AutoField(primary_key=True)
-    category = models.CharField(max_length=200, default='')
-    priority = models.IntegerField(default=1)
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+class Event(models.Model):
+   title = models.CharField(max_length=200)
+   description = models.TextField()
+   start_time = models.DateTimeField()
+   end_time = models.DateTimeField()
 
-
-    @property
-    def get_html_url(self):
-        url = reverse('AppCalendar:task_edit', args=(self.task_id,))
-        return f'<a href="{url}"> {self.title} </a>'
+@property
+def get_html_url(self):
+    url = reverse('AppCalendar:event_edit', args=(self.id,))
+    return f'<a href="{url}"> {self.Event_name} </a>'
 
 class Notifications(models.Model):
     notification_id = models.AutoField(primary_key=True)
-    task_id = models.ForeignKey('Task', on_delete=models.CASCADE)
+    event_id = models.ForeignKey('Event', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     notification_time=models.DateTimeField()
     TYPE_CHOICES = [
