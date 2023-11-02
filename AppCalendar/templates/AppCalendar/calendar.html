@@ -8,7 +8,7 @@ Calendar
 <div class="clearfix">
 	<a class="btn btn-info left" href="{% url 'AppCalendar:calendar' %}?{{ prev_month }}"> Previous Month </a>
 	<a class="btn btn-info right" href="{% url 'AppCalendar:calendar' %}?{{ next_month }}"> Next Month </a>
-	<a class="btn btn-info right" href="{% url 'AppCalendar:event_new' %}"> New Event </a>
+	<a class="btn btn-info right" href="{% url 'AppCalendar:task_new' %}"> New Task </a>
 </div>
 
 {{ calendar }}

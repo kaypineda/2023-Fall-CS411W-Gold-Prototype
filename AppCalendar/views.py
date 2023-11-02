@@ -8,13 +8,13 @@ import calendar
 
 from .models import *
 from .utils import Calendar
-from .forms import EventForm
+from .forms import TaskForm
 
 def index(request):
     return HttpResponse('hello')
 
 class CalendarView(generic.ListView):
-    model = Event
+    model = Task
     template_name = 'AppCalendar/calendar.html'
 
     def get_context_data(self, **kwargs):
@@ -46,15 +46,15 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
 
-def event(request, event_id=None):
-    instance = Event()
-    if event_id:
-        instance = get_object_or_404(Event, pk=event_id)
+def task(request, task_id=None):
+    instance = Task()
+    if task_id:
+        instance = get_object_or_404(Task, pk=task_id)
     else:
-        instance = Event()
+        instance = Task()
 
-    form = EventForm(request.POST or None, instance=instance)
+    form = TaskForm(request.POST or None, instance=instance)
     if request.POST and form.is_valid():
         form.save()
         return HttpResponseRedirect(reverse('AppCalendar:calendar'))
-    return render(request, 'AppCalendar/event.html', {'form': form})
+    return render(request, 'AppCalendar/task.html', {'form': form})
