@@ -19,6 +19,8 @@ class Task(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
 
+    def __str__(self):
+        return f'{self.category}:   {self.title}'
 
     @property
     def get_html_url(self):
