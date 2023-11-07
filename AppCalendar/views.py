@@ -61,5 +61,8 @@ def task(request, task_id=None):
         return HttpResponseRedirect(reverse('AppCalendar:calendar'))
     return render(request, 'AppCalendar/task.html', {'form': form})
 
+def task_delete(request, task_id=None):
+    instance = Task.objects.get(pk=task_id)
+    instance.delete()
 
-
+    return HttpResponseRedirect(reverse('AppCalendar:calendar'))
