@@ -6,7 +6,7 @@ Task
 
 {% block content %}
 <div class="clearfix">
-  <a class="btn btn-info left" href="{% url 'AppCalendar:calendar' %}"> Calendar </a>
+  <a class="btn btn-info right" href="{% url 'AppCalendar:calendar' %}"> Cancel </a>
 </div>
 
 {% if form.errors %}
@@ -28,7 +28,11 @@ Task
   {% csrf_token %}
   <table class="form form-table">
     {{ form }}
-    <tr><td colspan="2"><button type="submit" class="btn btn-info right"> Submit </button></td></tr>
+    <tr>
+      <td>
+        <input class="btn buttons add-button login_btn" type="submit" value="Add Event">
+      </td>
+     </tr>
   </table>
 </form>
 {% endblock %}
