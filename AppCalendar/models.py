@@ -18,7 +18,6 @@ class Task(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
 
-
     @property
     def get_html_url(self):
         url = reverse('AppCalendar:task_edit', args=(self.task_id,))
