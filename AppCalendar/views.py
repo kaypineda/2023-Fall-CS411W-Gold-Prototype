@@ -64,7 +64,7 @@ def export(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="schedule.csv"'
     writer = csv.writer(response)
-    writer.writerow(['id', 'category', 'priority', 'title', 'description', 'start_time', 'end_time'])
-    for task in Task.objects.all().values_list('id', 'category', 'priority', 'title', 'description', 'start_time', 'end_time'):
+    writer.writerow(['category', 'priority', 'title', 'description', 'start_time', 'end_time'])
+    for task in Task.objects.all().values_list('category', 'priority', 'title', 'description', 'start_time', 'end_time'):
         writer.writerow(task)
     return response
