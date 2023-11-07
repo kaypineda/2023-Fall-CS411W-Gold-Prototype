@@ -61,7 +61,7 @@ def task(request, task_id=None):
     return render(request, 'AppCalendar/task.html', {'form': form})
 
 def export(request):
-    response = HttpResponse(context_type='text/csv')
+    response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="schedule.csv"'
     writer = csv.writer(response)
     writer.writerow(['id', 'category', 'priority', 'title', 'description', 'start_time', 'end_time'])
