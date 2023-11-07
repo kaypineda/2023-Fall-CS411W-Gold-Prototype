@@ -5,6 +5,7 @@ from django.views import generic
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 import calendar
+import csv 
 
 from .models import *
 from .utils import Calendar
@@ -58,3 +59,12 @@ def task(request, task_id=None):
         form.save()
         return HttpResponseRedirect(reverse('AppCalendar:calendar'))
     return render(request, 'AppCalendar/task.html', {'form': form})
+
+def export(request):
+    response = HttpResponse(context_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="schedule.csv"'
+    writer = csv.writer(response)
+    writer.writerow(['id', 'category', 'priority', 'title', 'description', 'start_time', 'end_time'])
+    for task in Task.objects.all().values_list('id', 'category', 'priority', 'title', 'description', 'start_time', 'end_time'):
+        writer.writerow(task)
+    return response
