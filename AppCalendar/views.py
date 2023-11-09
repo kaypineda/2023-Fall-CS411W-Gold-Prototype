@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta, date
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 
 from django.views import generic
@@ -64,6 +64,10 @@ def task(request, task_id=None):
     return render(request, 'AppCalendar/task.html', {'form': form})
 
 def export(request, format):
+    if request.method == 'POST':
+        format = request.POST.get('format')
+
+        # return export_schedule(request, format)
     if format == 'csv':
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="schedule.csv"'
@@ -97,7 +101,9 @@ def export(request, format):
             cal.add_component(ical_task)
             print(f"Added event: {task.title}, Start: {task.start_time}, End: {task.end_time}")
     
-    response.write(cal.to_ical())
+        response.write(cal.to_ical())
 
-    return response
+        return response
+
+    return redirect('AppCalendar:calendar')
 
