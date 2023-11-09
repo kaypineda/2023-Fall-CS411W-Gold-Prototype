@@ -77,11 +77,15 @@ def export(request, format):
     elif format == 'ics':
         response = HttpResponse(content_type='text/calendar')
         response['Content-Disposition'] = 'attachment; filename="schedule.ics"'
-
         cal = icalendar.Calendar()
+        cal.add('prodid', '-//Schedule Puzzle//EN')
+        cal.add('version', '2.0')
+        
+        
         tasks = Task.objects.all()
         for task in tasks:
             ical_task = icalendar.Event()
+
             
             ical_task.add('uid', task.task_id)
             ical_task.add('subject', task.title)
