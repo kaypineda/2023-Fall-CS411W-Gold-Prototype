@@ -70,6 +70,7 @@ def export(request, format):
 
         writer = csv.writer(response)
         writer.writerow(['title', 'description', 'start_time', 'end_time'])
+        
         for task in Task.objects.all().values_list('title', 'description', 'start_time', 'end_time'):
             writer.writerow(task)
         return response
@@ -77,20 +78,20 @@ def export(request, format):
     elif format == 'ics':
         response = HttpResponse(content_type='text/calendar')
         response['Content-Disposition'] = 'attachment; filename="schedule.ics"'
+        
         cal = icalendar.Calendar()
         cal.add('prodid', '-//Schedule Puzzle//EN')
         cal.add('version', '2.0')
-        
-        
+             
         tasks = Task.objects.all()
         for task in tasks:
             ical_task = icalendar.Event()
-
-            
+           
             ical_task.add('uid', task.task_id)
-            ical_task.add('subject', task.title)
-            ical_task.add('dstart', task.start_time)
-            ical_task.add('dend', task.end_time)
+            ical_task.add('summary', task.title)
+            ical_task.add('dtstart', task.start_time)
+            ical_task.add('dtend', task.end_time)
+            ical_task.add('dtstamp', datetime.now())
 
             cal.add_component(ical_task)
             print(f"Added event: {task.title}, Start: {task.start_time}, End: {task.end_time}")
