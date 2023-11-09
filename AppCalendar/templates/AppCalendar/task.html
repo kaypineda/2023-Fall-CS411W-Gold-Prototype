@@ -24,7 +24,7 @@ Task
     {% endfor %}
 {% endif %}
 
-<form method="post.get" action="{% url 'AppCalendar:sad' %}">
+<form method="post" action="{% url 'AppCalendar:prioritize' %}">
   {% csrf_token %}
   <table class="form form-table">
     {{ form }}

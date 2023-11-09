@@ -59,3 +59,12 @@ def task(request, task_id=None):
         form.save()
         return HttpResponseRedirect(reverse('AppCalendar:calendar'))
     return render(request, 'AppCalendar/task.html', {'form': form})
+
+def prio(self):
+    if self.method == 'GET':
+        duplicateTimes = Task.objects.values('start_time').annotate(time_count=Count('start_time')).filter(time_count__gt=1)
+
+        if duplicateTimes != 1:
+            return duplicateTimes
+
+    return self
