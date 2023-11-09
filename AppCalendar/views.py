@@ -82,7 +82,8 @@ def export(request, format):
         tasks = Task.objects.all()
         for task in tasks:
             ical_task = icalendar.Event()
-
+            
+            ical_task.add('uid', task.task_id)
             ical_task.add('subject', task.title)
             ical_task.add('dstart', task.start_time)
             ical_task.add('dend', task.end_time)
