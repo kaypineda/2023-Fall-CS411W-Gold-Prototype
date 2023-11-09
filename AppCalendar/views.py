@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta, date
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
+from ics import Calendar, Event
 from django.views import generic
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -60,11 +61,34 @@ def task(request, task_id=None):
         return HttpResponseRedirect(reverse('AppCalendar:calendar'))
     return render(request, 'AppCalendar/task.html', {'form': form})
 
-def export(request):
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="schedule.csv"'
-    writer = csv.writer(response)
-    writer.writerow(['category', 'priority', 'title', 'description', 'start_time', 'end_time'])
-    for task in Task.objects.all().values_list('category', 'priority', 'title', 'description', 'start_time', 'end_time'):
-        writer.writerow(task)
+def export(request, format):
+    if format == 'csv':
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="schedule.csv"'
+
+        writer = csv.writer(response)
+        writer.writerow(['title', 'description', 'start_time', 'end_time'])
+        for task in Task.objects.all().values_list('title', 'description', 'start_time', 'end_time'):
+            writer.writerow(task)
+        return response
+    
+    # elif format == 'ics':
+    #     response = HttpResponse(content_type='text/calendar')
+    #     response['Content-Disposition'] = 'attachment; filename="schedule.ics"'
+
+    #     calendar = Calendar()
+    #     for task in Task.objects.all():
+    #         event = Event()
+    #         event.name = task.title
+    #         event.begin=task.start_time.strftime("%Y%m%dT%H%M%S")
+    #         calendar.add_component(event)
+    #     response = HttpResponse(content_type='text/ics')
+    #     response['Content-Disposition'] = 'attachment; filename="schedule.ics"'
+    #     return response
+
+    else:
+        response.status_code = 404
+        response.reason_phrase = 'Invalid file format'
+
     return response
+
