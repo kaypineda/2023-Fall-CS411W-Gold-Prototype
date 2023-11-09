@@ -92,6 +92,7 @@ def export(request, format):
             ical_task.add('dtstart', task.start_time)
             ical_task.add('dtend', task.end_time)
             ical_task.add('dtstamp', datetime.now())
+            ical_task.add('description', task.description)
 
             cal.add_component(ical_task)
             print(f"Added event: {task.title}, Start: {task.start_time}, End: {task.end_time}")
