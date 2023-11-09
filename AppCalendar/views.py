@@ -1,11 +1,13 @@
 from datetime import datetime, timedelta, date
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
-from ics import Calendar, Event
+
 from django.views import generic
 from django.urls import reverse
 from django.utils.safestring import mark_safe
+
 import calendar
+import icalendar
 import csv 
 
 from .models import *
@@ -72,23 +74,40 @@ def export(request, format):
             writer.writerow(task)
         return response
     
-    # elif format == 'ics':
-    #     response = HttpResponse(content_type='text/calendar')
-    #     response['Content-Disposition'] = 'attachment; filename="schedule.ics"'
+    elif format == 'ics':
+        response = HttpResponse(content_type='text/calendar')
+        response['Content-Disposition'] = 'attachment; filename="schedule.ics"'
 
-    #     calendar = Calendar()
-    #     for task in Task.objects.all():
-    #         event = Event()
-    #         event.name = task.title
-    #         event.begin=task.start_time.strftime("%Y%m%dT%H%M%S")
-    #         calendar.add_component(event)
-    #     response = HttpResponse(content_type='text/ics')
-    #     response['Content-Disposition'] = 'attachment; filename="schedule.ics"'
-    #     return response
+        cal = icalendar.Calendar()
+        tasks = Task.objects.all()
+        for task in tasks:
+            ical_task = icalendar.Event()
 
-    else:
-        response.status_code = 404
-        response.reason_phrase = 'Invalid file format'
+            ical_task.add('subject', task.title)
+            ical_task.add('dstart', task.start_time)
+            ical_task.add('dend', task.end_time)
+
+            cal.add_component(ical_task)
+            print(f"Added event: {task.title}, Start: {task.start_time}, End: {task.end_time}")
+        response.write(cal.to_ical())
+
+        # cal = Calendar()
+        # #tasks = Task.objects.all()
+        # for task in Task.objects.all():
+        #     event = Event()
+        #     event.name = task.title
+        #     event.begin = task.start_time,
+        #     event.end = task.end_time
+
+        #     cal.add(event)
+        #     print(cal)
+        
+        # response.write(str(cal))
+        # return response
+
+    # else:
+    #     response.status_code = 404
+    #     response.reason_phrase = 'Invalid file format'
 
     return response
 
