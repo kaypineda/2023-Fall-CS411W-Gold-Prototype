@@ -89,25 +89,8 @@ def export(request, format):
 
             cal.add_component(ical_task)
             print(f"Added event: {task.title}, Start: {task.start_time}, End: {task.end_time}")
-        response.write(cal.to_ical())
-
-        # cal = Calendar()
-        # #tasks = Task.objects.all()
-        # for task in Task.objects.all():
-        #     event = Event()
-        #     event.name = task.title
-        #     event.begin = task.start_time,
-        #     event.end = task.end_time
-
-        #     cal.add(event)
-        #     print(cal)
-        
-        # response.write(str(cal))
-        # return response
-
-    # else:
-    #     response.status_code = 404
-    #     response.reason_phrase = 'Invalid file format'
+    
+    response.write(cal.to_ical())
 
     return response
 
