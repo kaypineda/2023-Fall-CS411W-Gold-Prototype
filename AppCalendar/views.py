@@ -67,7 +67,6 @@ def export(request):
     if request.method == 'POST':
         format = request.POST.get('format')
 
-        # return export_schedule(request, format)
     if format == 'csv':
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="schedule.csv"'
