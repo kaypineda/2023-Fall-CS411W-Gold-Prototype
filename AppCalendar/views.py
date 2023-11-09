@@ -63,7 +63,7 @@ def task(request, task_id=None):
         return HttpResponseRedirect(reverse('AppCalendar:calendar'))
     return render(request, 'AppCalendar/task.html', {'form': form})
 
-def export(request, format):
+def export(request):
     if request.method == 'POST':
         format = request.POST.get('format')
 
