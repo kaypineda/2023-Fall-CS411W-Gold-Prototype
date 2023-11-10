@@ -2,6 +2,7 @@ import calendar
 from collections import Counter
 from datetime import date, datetime, timedelta
 
+from django.contrib import messages
 from django.db.models import Count
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
@@ -56,15 +57,22 @@ def task(request, task_id=None):
 
     form = TaskForm(request.POST or None, instance=instance)
     if request.POST and form.is_valid():
-        form.save()
-        return HttpResponseRedirect(reverse('AppCalendar:calendar'))
+        
+        print("Entering prioritize function!!")
+        start_time = form.cleaned_data['start_time']
+        title = form.cleaned_data['title']
+        category = form.cleaned_data['category']
+        duplicateTimes = Task.objects.exclude(pk=instance.pk).filter(
+            start_time__date = start_time.date(),
+            start_time__time = start_time.time()
+        )
+        
+        if duplicateTimes:
+            print("There are tasks with the same date and times")
+            messages.warning(request, "Duplicate times found:")
+        else:       
+            print("Saving edit")
+            form.save()
+            return HttpResponseRedirect(reverse('AppCalendar:calendar'))   
+    print("Returning to form.")        
     return render(request, 'AppCalendar/task.html', {'form': form})
-
-def prio(self):
-    if self.method == 'GET':
-        duplicateTimes = Task.objects.values('start_time').annotate(time_count=Count('start_time')).filter(time_count__gt=1)
-
-        if duplicateTimes != 1:
-            return duplicateTimes
-
-    return self
