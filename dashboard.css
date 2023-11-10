@@ -11,7 +11,12 @@ body {
 .topnav {
     overflow: hidden;
     background-color: #e9e9e9;
-    position:inherit;
+    /* position:inherit; */
+     position: fixed;
+     top: 0;
+     right:0;
+    /* q: how to move it to the top middle? */ 
+    /*a: use position: fixed; and top: 0; left: 0; */
 }
 
 .topnav a:hover {
