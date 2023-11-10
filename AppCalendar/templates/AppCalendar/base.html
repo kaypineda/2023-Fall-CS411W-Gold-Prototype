@@ -13,8 +13,38 @@
     crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{% static 'AppCalendar/css/styles.css' %}">
   <title>Django Calendar App</title>
+
+  <style>
+    body {
+        margin: 0;
+        display: flex;
+        min-height: 100vh;
+    }
+  
+    #calendar {
+        flex: 1;
+        width: 100vw;
+        height: 100vh;
+        background-color: #f0f0f0;
+        /* Your calendar styling goes here */
+      }
+      
+    #sidebar{
+      width: 200px;
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+    
+      }
+      </style>
+
 </head>
+
+
+
 <body>
+
+ 
 
   <h1 class="title">{% block title %}{% endblock %}</h1>
   <hr>
@@ -33,5 +63,13 @@
 
   {% block script %}
   {% endblock %}
+
+  <div id="sidebar">
+    <h2>Add Task</h2>
+    <form id = "taskForm">
+      <label for="title">Title:</label>
+    </form>
+  </div>
+
 </body>
 </html>
