@@ -8,6 +8,11 @@ class Schedule(models.Model):
     schedule_name = models.CharField(max_length=200)
     schedule_source = models.CharField(max_length=200)
 
+class Location(models.Model):
+    location_id = models.AutoField(primary_key=True)
+    street = models.CharField(max_length=200)
+    city = models.CharField(max_length=200)
+    zipcode = models.CharField(max_length=200)
 
 class Task(models.Model):
     task_id = models.AutoField(primary_key=True)
@@ -25,7 +30,7 @@ class Task(models.Model):
 
 class Notifications(models.Model):
     notification_id = models.AutoField(primary_key=True)
-    task_id = models.ForeignKey('Task', on_delete=models.CASCADE)
+    event_id = models.ForeignKey('Event', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     notification_time=models.DateTimeField()
     TYPE_CHOICES = [
