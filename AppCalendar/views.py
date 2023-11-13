@@ -72,7 +72,8 @@ def export(request):
         response['Content-Disposition'] = 'attachment; filename="schedule.csv"'
 
         writer = csv.writer(response)
-        writer.writerow(['title', 'description', 'start_time', 'end_time'])
+        writer.writerow(['Subject', 'Start Date', 'Start Time', 'End Date', 'End Time', 
+                         'All Day Event', 'Description', 'Location', 'Private'])
         
         for task in Task.objects.all().values_list('title', 'description', 'start_time', 'end_time'):
             writer.writerow(task)
