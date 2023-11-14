@@ -68,11 +68,11 @@ def task(request, task_id=None):
         )
         
         if duplicateTimes:
-            print("There are tasks with the same date and times")
+            #print("There are tasks with the same date and times")
             return render(request, 'AppCalendar/popup.html')
         else:       
-            print("Saving edit")
+            #print("Saving edit")
             form.save()
             return HttpResponseRedirect(reverse('AppCalendar:calendar'))   
-    print("Returning to form.")        
+    #print("Returning to form.")        
     return render(request, 'AppCalendar/task.html', {'form': form})
