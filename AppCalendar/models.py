@@ -22,7 +22,8 @@ class Task(models.Model):
     @property
     def get_html_url(self):
         url = reverse('AppCalendar:task_edit', args=(self.task_id,))
-        return f'<a href="{url}"> {self.title} </a>'
+        delete = reverse('AppCalendar:task_delete', args=(self.task_id,))
+        return f'<a href="{url}"> {self.title} </a> | <a href="{delete}">Delete</a>'
     
     def clean(self):
         if self.end_time <= self.start_time:
