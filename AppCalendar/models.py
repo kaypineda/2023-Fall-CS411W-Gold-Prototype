@@ -30,7 +30,7 @@ class Task(models.Model):
 
 class Notifications(models.Model):
     notification_id = models.AutoField(primary_key=True)
-    event_id = models.ForeignKey('Event', on_delete=models.CASCADE)
+    task_id = models.ForeignKey('Task', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     notification_time=models.DateTimeField()
     TYPE_CHOICES = [
