@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
+from django.core.exceptions import ValidationError
 
 class Schedule(models.Model):
     schedule_id = models.AutoField(primary_key=True)
@@ -27,6 +28,10 @@ class Task(models.Model):
     def get_html_url(self):
         url = reverse('AppCalendar:task_edit', args=(self.task_id,))
         return f'<a href="{url}"> {self.title} </a>'
+    
+    def clean(self):
+        if self.end_time <= self.start_time:
+            raise ValidationError('Ending time must after starting times')
 
 class Notifications(models.Model):
     notification_id = models.AutoField(primary_key=True)
