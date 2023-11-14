@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, date
+from datetime import datetime, timedelta, date, time
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 
@@ -75,8 +75,13 @@ def export(request):
         writer.writerow(['Subject', 'Start Date', 'Start Time', 'End Date', 'End Time', 
                          'All Day Event', 'Description', 'Location', 'Private'])
         
-        for task in Task.objects.all().values_list('title', 'description', 'start_time', 'end_time'):
-            writer.writerow(task)
+        for task in Task.objects.all().values_list('title', 'start_time', 'end_time','description'):
+            start_time = task[1].time()
+            end_time = task[2].time() 
+
+            all_day_event = 'True' if start_time == time(0,0) and end_time == time(23,59,59) else 'False'
+            writer.writerow([task[0], task[1].date(), start_time.strftime('%H:%M:%S'), task[2].date(), end_time.strftime('%H:%M:%S'),
+                             all_day_event, task[3], '', ''])
         return response
     
     elif format == 'ics':
