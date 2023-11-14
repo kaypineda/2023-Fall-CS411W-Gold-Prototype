@@ -1,0 +1,19 @@
+<div class="popupWindow">
+  <h2>Duplicate Tasks</h2>
+  <p>There are duplicate tasks that need attention.</p>
+  <button id="closeWindowBtn">Close Window</button>
+</div>
+
+<script>
+  var openWindowBtn = document.getElementById('submitBtn');
+  var closeWindowBtn = document.getElementById('closeWindowBtn');
+  var popupWindow = document.getElementById('popupWindow');
+
+  openWindowBtn.onclick = function() {
+      popupWindow.style.display = "block";
+  }
+
+  closeWindowBtn.onclick = function () {
+      popupWindow.style.display = 'none';
+  }
+</script>

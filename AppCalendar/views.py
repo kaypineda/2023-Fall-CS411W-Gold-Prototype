@@ -69,7 +69,7 @@ def task(request, task_id=None):
         
         if duplicateTimes:
             print("There are tasks with the same date and times")
-            messages.warning(request, "Duplicate times found:")
+            return render(request, 'AppCalendar/popup.html')
         else:       
             print("Saving edit")
             form.save()
