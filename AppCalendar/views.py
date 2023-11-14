@@ -1,5 +1,5 @@
-from datetime import datetime, timedelta, date, time
-from django.shortcuts import render, get_object_or_404, redirect
+from datetime import datetime, timedelta, date
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 
 from django.views import generic
@@ -7,8 +7,6 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 
 import calendar
-import icalendar
-import csv 
 
 from .models import *
 from .utils import Calendar
