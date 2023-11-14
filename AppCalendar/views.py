@@ -76,3 +76,6 @@ def task(request, task_id=None):
             return HttpResponseRedirect(reverse('AppCalendar:calendar'))   
     #print("Returning to form.")        
     return render(request, 'AppCalendar/task.html', {'form': form})
+
+
+
