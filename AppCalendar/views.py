@@ -1,11 +1,8 @@
 from datetime import datetime, timedelta, date
-""" added redirect here"""
 from django.shortcuts import render, get_object_or_404, redirect
-""" added this line here"""
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
-""" added this line here"""
-from .forms import UserCreationForm, LoginForm
+from .forms import UserCreationForm, AuthenticationForm
 
 from django.views import generic
 from django.urls import reverse
@@ -19,6 +16,7 @@ from .forms import TaskForm
 
 def index(request):
     return HttpResponse('hello')
+    return render(request, 'AppCalendar/index.html')
 
 class CalendarView(generic.ListView):
     model = Task
@@ -86,10 +84,10 @@ def user_signup(request):
         
         else:
             form = UserCreationForm()
-            return render(request, 'registerform.html', {'form': form})
+        return render(request, 'AppCalendar/registerform.html', {'form': form})
         
     #login page
-    def user_login(request):
+def user_login(request):
         if request.method == 'POST':
             form = LoginForm(request.POST)
             if form.is_valid():
@@ -101,9 +99,9 @@ def user_signup(request):
                     return redirect('home')
                 else:
                     form = LoginForm()
-                    return render(request, 'login.html', {'form': form})
+                return render(request, 'AppCalendar/login.html', {'form': form})
                 
                 #logout page
-                def user_logout(request):
-                    logout(request)
-                    return redirect('login')
+def user_logout(request):
+    logout(request)
+    return redirect('login')
