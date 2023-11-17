@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
+from django.utils import timezone
 from django.core.exceptions import ValidationError
 
 class Schedule(models.Model):
@@ -16,8 +17,8 @@ class Task(models.Model):
     priority = models.IntegerField(default=1)
     title = models.CharField(max_length=200)
     description = models.TextField()
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    start_time = models.DateTimeField(default=timezone.now)
+    end_time = models.DateTimeField(default=timezone.now)
 
     @property
     def get_html_url(self):
