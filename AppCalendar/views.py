@@ -15,7 +15,8 @@ from .utils import Calendar
 from .forms import TaskForm
 
 def index(request):
-    return HttpResponse('hello')
+    #return HttpResponse('hello')
+    #return render(request, 'AppCalendar/index.html')
     return render(request, 'AppCalendar/index.html')
 
 class CalendarView(generic.ListView):
@@ -86,22 +87,22 @@ def user_signup(request):
             form = UserCreationForm()
         return render(request, 'AppCalendar/registerform.html', {'form': form})
         
-    #login page
+#login page
 def user_login(request):
-        if request.method == 'POST':
-            form = LoginForm(request.POST)
-            if form.is_valid():
-                username = form.cleaned_data['username']
-                password = form.cleaned_data['password']
-                user = authenticate(request, username=username, password=password)
-                if user:
-                    login(request, user)
-                    return redirect('home')
-                else:
-                    form = LoginForm()
-                return render(request, 'AppCalendar/login.html', {'form': form})
-                
-                #logout page
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user:
+                login(request, user)
+                return redirect('home')
+            else:
+                form = LoginForm()
+            return render(request, 'AppCalendar/login.html', {'form': form})
+
+#logout page
 def user_logout(request):
     logout(request)
     return redirect('login')
