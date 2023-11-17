@@ -38,10 +38,13 @@ def export(request):
         for task in tasks:
             ical_task = icalendar.Event()
 
+            uid = f"{task.title}_{task.task_id}_{task.start_time.replace(tzinfo=None)}"
+            
             start_time_naive = task.start_time.replace(tzinfo=None)
             end_time_naive = task.end_time.replace(tzinfo=None)
            
-            ical_task.add('uid', task.task_id)
+            # ical_task.add('uid', task.task_id)
+            ical_task.add('uid', uid)
             ical_task.add('summary', task.title)
             ical_task.add('dtstart', start_time_naive)
             ical_task.add('dtend', end_time_naive)
