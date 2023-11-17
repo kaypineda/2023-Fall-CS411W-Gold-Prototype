@@ -1,7 +1,7 @@
 from django.forms import ModelForm, DateInput
 from AppCalendar.models import Task
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, LoginForm
 from django.contrib.auth.models import User
 
 class TaskForm(ModelForm):
@@ -20,6 +20,6 @@ class TaskForm(ModelForm):
     self.fields['start_time'].input_formats = ('%Y-%m-%dT%H:%M',)
     self.fields['end_time'].input_formats = ('%Y-%m-%dT%H:%M',)
 
-    class LoginForm(forms.Form):
-      username = forms.CharField()
-      password = forms.CharField(widget=forms.PasswordInput)
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
