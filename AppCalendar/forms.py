@@ -1,5 +1,8 @@
 from django.forms import ModelForm, DateInput
 from AppCalendar.models import Task
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class TaskForm(ModelForm):
   class Meta:
@@ -16,3 +19,7 @@ class TaskForm(ModelForm):
     # input_formats parses HTML5 datetime-local input to datetime field
     self.fields['start_time'].input_formats = ('%Y-%m-%dT%H:%M',)
     self.fields['end_time'].input_formats = ('%Y-%m-%dT%H:%M',)
+
+    class LoginForm(forms.Form):
+      username = forms.CharField()
+      password = forms.CharField(widget=forms.PasswordInput)

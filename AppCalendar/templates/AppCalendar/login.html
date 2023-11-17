@@ -1,50 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <!--<link rel="stylesheet" href="css/login.css"> -->
-    <link rel="stylesheet" href="login.css">
-    <script defer src="login-page.js"></script>
-</head>
-
-<body>
-    <main id="main-holder">
-        <h1 id="login-header">Schedule Puzzle Login</h1>
-
-        <div id="login-error-msg-holder">
-            <p id="login-error-msg">Invalid username <span id="error-msg-second-line">and/or password </span></p>
-        </div>
-
-        <form id="login-form">
-            <input type="text" name="username" id="username-field" class="login-form-field" placeholder="Username">
-            <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
-            <input type="submit" value="Login" id="login-form-submit">
-            <br>
-            <!---->
-            
-            
-            <!-- <input type="checkbox" checked="checked"> Remember me -->
-            <label>  
-                 <input type="checkbox" checked="checked" placeholder="Remember me"> Remember me
-            </label>
-            
-            <br>
-            <br>
-            <!-- <button type="button" class="cancelbtn">Cancel</button> -->
-            <button type="button" class="Forgotbtn">Forgot Password</button>
-            <!-- <button type="button" class="Createbtn">Create Account</button> -->
-            <a href="registerform.html">
-                <button type="button">Create Account</button>
-            </a>
-
-            <!-- <a href="#">Forgot password?</a>
-            <!--<span class ="psw">Create -->
-<!--             <a href="#">Create account</a> -->
-         </form>
-    </main>
-</body>
-
-</html>
+<h1>Login</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+    <a href="{% url 'signup' %}">Don't have Account Create</a>
+</form>
