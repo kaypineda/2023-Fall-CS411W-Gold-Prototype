@@ -2,16 +2,16 @@
 
 {% block title %}
 Calendar
-{% endblock %}
+{% endblock title %}
 
 {% block content %}
 <div class="clearfix">
 	<a class="btn btn-info left" href="{% url 'AppCalendar:calendar' %}?{{ prev_month }}"> Previous Month </a>
-	<a class="btn btn-info right" href="{% url 'AppCalendar:calendar' %}?{{ next_month }}"> Next Month </a>
+	<a class="btn btn-info left" href="{% url 'AppCalendar:calendar' %}?{{ next_month }}"> Next Month </a>
 	<a class="btn btn-info right" href="{% url 'AppCalendar:task_new' %}"> New Task </a>
     
 	<div class="dropdown" style="display: inline-block;">
-		<button class="btn btn-info dropdown-toggle" type="button" id="exportDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<button class="btn btn-info right dropdown-toggle" type="button" id="exportDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			Export
 		</button>
 		<div class="dropdown-menu dropdown-menu-right" aria-labelledby="exportDropdown">
@@ -27,8 +27,7 @@ Calendar
 			</form>
 		</div>
 	</div>
-
 </div>
 
 {{ calendar }}
-{% endblock %}
+{% endblock content %}
