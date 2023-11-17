@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'AppUser',
     #'AppCalendar',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
