@@ -11,9 +11,9 @@ def login(request):
         
         if user is not None:
             login(request, user)
-            return redirect('AppUser:dashboard')
+            return redirect('AppCalendar:dashboard')
         else:
             messages.success(request, ('There was an error logging in. Please try again.'))
             return redirect('AppUser:login')
         
-        return render(request, 'AppUser/login.html')
+    return render(request, 'AppUser/login.html')
