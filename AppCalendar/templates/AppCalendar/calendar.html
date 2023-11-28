@@ -29,6 +29,15 @@ Calendar
 	</div>
 </div>
 
+<form method="post" action="{% url 'AppCalendar:import_csv' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="uploadFile">Import tasks:</label>
+    <input type="file" id="uploadFile" name="file">
+    <button type="submit" class="btn btn-info">Import</button>
+</form>
+</div>
+</div>
+
 {{ calendar }}
 {% endblock %}
 	<!-- Add the import button-->
