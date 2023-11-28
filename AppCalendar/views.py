@@ -58,7 +58,7 @@ def task(request, task_id=None):
     form = TaskForm(request.POST or None, instance=instance)
     if request.POST and form.is_valid():
         
-        print("Entering prioritize function!!")
+        #print("Entering prioritize function!!")
         start_time = form.cleaned_data['start_time']
         title = form.cleaned_data['title']
         category = form.cleaned_data['category']
