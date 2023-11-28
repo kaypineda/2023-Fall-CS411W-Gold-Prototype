@@ -1,0 +1,31 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<div id="popUp" class="popupWindow">
+  <div class="popupWindow-content">
+    <div class="popupWindow-header">
+      <h2>Duplicate Tasks</h2>
+    </div>
+    <div class="popupWindow-body">
+      <p>There are duplicate tasks that need attention.</p>
+    </div>
+    <button id="closeWindowBtn" class="closeWindowBtn">Close Window</button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var openWindowBtn = document.getElementById('submitBtn');
+    var closeWindowBtn = document.getElementById('close');
+    var popupWindow = document.getElementById('popUp');
+
+    openWindowBtn.addEventListener('click', () => {
+        popupWindow.style.display = "block";
+    });
+
+    closeWindowBtn.addEventListener('click', () => {
+        popupWindow.style.display = 'none';
+    });
+  });
+</script>

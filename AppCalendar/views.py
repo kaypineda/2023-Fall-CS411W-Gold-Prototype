@@ -58,7 +58,7 @@ def task(request, task_id=None):
     form = TaskForm(request.POST or None, instance=instance)
     if request.POST and form.is_valid():
         
-        print("Entering prioritize function!!")
+        #print("Entering prioritize function!!")
         start_time = form.cleaned_data['start_time']
         title = form.cleaned_data['title']
         category = form.cleaned_data['category']
@@ -68,11 +68,21 @@ def task(request, task_id=None):
         )
         
         if duplicateTimes:
-            print("There are tasks with the same date and times")
-            messages.warning(request, "Duplicate times found:")
+            #print("There are tasks with the same date and times")
+            return render(request, 'AppCalendar/popup.html')
         else:       
-            print("Saving edit")
+            #print("Saving edit")
             form.save()
             return HttpResponseRedirect(reverse('AppCalendar:calendar'))   
-    print("Returning to form.")        
+    #print("Returning to form.")        
     return render(request, 'AppCalendar/task.html', {'form': form})
+
+def task_delete(request, task_id=None):
+    instance = Task.objects.get(pk=task_id)
+
+    if request.method == 'POST':
+        instance.delete()
+        return HttpResponseRedirect(reverse('AppCalendar:calendar'))
+
+    return render(request, 'AppCalendar/delete.html', {'task': instance})
+
