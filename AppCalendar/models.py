@@ -1,8 +1,10 @@
-from django.db import models
 from django.conf import settings
 from django.urls import reverse
 from django.utils import timezone
 from django.core.exceptions import ValidationError
+from django.db import models
+from django.urls import reverse
+
 
 class Schedule(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -18,6 +20,9 @@ class Task(models.Model):
     description = models.TextField()
     start_time = models.DateTimeField(default=timezone.now)
     end_time = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f'{self.category}:   {self.title}'
 
     @property
     def get_html_url(self):
