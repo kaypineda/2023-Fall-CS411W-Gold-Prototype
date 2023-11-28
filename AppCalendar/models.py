@@ -5,7 +5,6 @@ from django.utils import timezone
 from django.core.exceptions import ValidationError
 
 class Schedule(models.Model):
-    schedule_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     schedule_name = models.CharField(max_length=200)
     schedule_source = models.CharField(max_length=200)
