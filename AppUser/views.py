@@ -8,7 +8,7 @@ def dashboard(request):
 
 def user_login(request):
     if request.method == 'POST':
-        email = request.POST['username']
+        email = request.POST['email']
         password = request.POST['password']
         print(email, password)
         user = authenticate(request, username=email, password=password)
