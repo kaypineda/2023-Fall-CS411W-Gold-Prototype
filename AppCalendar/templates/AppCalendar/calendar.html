@@ -27,10 +27,22 @@ Calendar
 			</form>
 		</div>
 	</div>
-    {{ calendar }}
+</div>
+
+<form method="post" action="{% url 'AppCalendar:import_csv' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="uploadFile">Import tasks:</label>
+    <input type="file" id="uploadFile" name="file">
+    <button type="submit" class="btn btn-info">Import</button>
+</form>
+</div>
+</div>
+
+{{ calendar }}
+{% endblock %}    {{ calendar }}
     {% endblock %}
 	<!-- Add the import button-->
-	<!-- <div class="dropdown" style="display: inline-block;">
+	<!-- <!-- <div class="dropdown" style="display: inline-block;">
         <button class="btn btn-info dropdown-toggle" type="button" id="importDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Import
         </button>
@@ -52,6 +64,5 @@ Calendar
                 <button class="dropdown-item" type="submit">Import ICS</button>
             </form>
         </div>
-    </div>
-</div> -->
+    </div> --> -->
 
