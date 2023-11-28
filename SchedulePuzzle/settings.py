@@ -72,7 +72,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SchedulePuzzle.wsgi.application'
 
-AUTH_USER_MODEL = 'AppUser.CustomUser'
+AUTH_USER_MODEL = 'auth.User'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
