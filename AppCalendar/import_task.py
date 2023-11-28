@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from .models import Task
 
-def read_csv(csv_file):
+def import_csv(csv_file):
     task_list = []
     dupe_task_list = []
     
