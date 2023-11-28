@@ -54,6 +54,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'SchedulePuzzle.urls'
 
+AUTHENTICATION_BACKENDS = [
+    'AppUser.backends.EmailBackend',  # Replace with your backend
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
