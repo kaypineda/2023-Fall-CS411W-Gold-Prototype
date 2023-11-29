@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'AppUser',
     #'AppCalendar',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'SchedulePuzzle.urls'
+
+AUTHENTICATION_BACKENDS = [
+    'AppUser.backends.EmailBackend',  # Replace with your backend
+]
 
 TEMPLATES = [
     {
@@ -72,7 +77,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SchedulePuzzle.wsgi.application'
 
-AUTH_USER_MODEL = 'AppUser.CustomUser'
+AUTH_USER_MODEL = 'AppUser.EmailUser'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

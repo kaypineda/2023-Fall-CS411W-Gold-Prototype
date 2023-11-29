@@ -1,19 +1,19 @@
-from datetime import datetime, timedelta, date
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+import calendar
+from collections import Counter
+from datetime import date, datetime, timedelta
 
-from django.views import generic
+from django.contrib import messages
+from django.db.models import Count
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils.safestring import mark_safe
+from django.views import generic
 
-import calendar
-
+from .forms import TaskForm
 from .models import *
 from .utils import Calendar
-from .forms import TaskForm
 
-def index(request):
-    return HttpResponse('hello')
 
 class CalendarView(generic.ListView):
     model = Task
@@ -57,8 +57,24 @@ def task(request, task_id=None):
 
     form = TaskForm(request.POST or None, instance=instance)
     if request.POST and form.is_valid():
-        form.save()
-        return HttpResponseRedirect(reverse('AppCalendar:calendar'))
+        
+        #print("Entering prioritize function!!")
+        start_time = form.cleaned_data['start_time']
+        title = form.cleaned_data['title']
+        category = form.cleaned_data['category']
+        duplicateTimes = Task.objects.exclude(pk=instance.pk).filter(
+            start_time__date = start_time.date(),
+            start_time__time = start_time.time()
+        )
+        
+        if duplicateTimes:
+            #print("There are tasks with the same date and times")
+            return render(request, 'AppCalendar/popup.html')
+        else:       
+            #print("Saving edit")
+            form.save()
+            return HttpResponseRedirect(reverse('AppCalendar:calendar'))   
+    #print("Returning to form.")        
     return render(request, 'AppCalendar/task.html', {'form': form})
 
 def task_delete(request, task_id=None):
