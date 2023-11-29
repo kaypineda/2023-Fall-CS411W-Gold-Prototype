@@ -10,30 +10,7 @@ Calendar
 	<a class="btn btn-info left" href="{% url 'AppCalendar:calendar' %}?{{ next_month }}"> Next Month </a>
 	<a class="btn btn-info right" href="{% url 'AppCalendar:task_new' %}"> New Task </a>
 
-	<!--
-	<div class="dropdown" style="display: inline-block;">
-        <button class="btn btn-info dropdown-toggle" type="button" id="importDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Import
-        </button>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="importDropdown">
-            <form method="post" action="{% url 'AppCalendar:import_csv' %}" enctype="multipart/form-data">
-                {% csrf_token %}
-                <label class="dropdown-item">
-                    <span>Select CSV File</span>
-                    <input type="file" name="csv_file" accept=".csv" style="display: none;">
-                </label>
-                <button class="dropdown-item" type="submit">Import CSV</button>
-            </form>
-            <form method="post" action="{% url 'AppCalendar:import_ics' %}" enctype="multipart/form-data">
-                {% csrf_token %}
-                <label class="dropdown-item">
-                    <span>Select ICS File</span>
-                    <input type="file" name="ics_file" accept=".ics" style="display: none;">
-                </label>
-                <button class="dropdown-item" type="submit">Import ICS</button>
-            </form>
-        </div>
-    </div>-->
+
     
 	<div class="dropdown" style="display: inline-block;">
 		<button class="btn btn-info right dropdown-toggle" type="button" id="exportDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
