@@ -11,7 +11,9 @@
         padding-top:20px;
         padding-bottom: 20px;
         padding-left: 20px;
-        border:solid 2px blueviolet
+        border:solid 2px blueviolet;
+        font-family: sans-serif; /* Change 'Your Chosen Font' to the desired font name */
+
 
     }
 
@@ -21,7 +23,7 @@
 <div class="sidenav">
     <h2><u>To-do List</u></h2>
     <ul>
-        {% for item in sidebar_items %}
+        {% for item in items %}
             <li>{{ item.title }}</li>
         {% endfor %}
     </ul>

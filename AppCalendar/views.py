@@ -88,8 +88,8 @@ def task_delete(request, task_id=None):
     return render(request, 'AppCalendar/delete.html', {'task': instance})
 
 def sidebar(request):
-    context = {
-        "sidebar_items": Task.objects.all()
+    items = Task.objects.all()
+    return render(request, 'AppCalendar/sidebar.html'), {'items': items}
 
-    }
-    return render(request, 'sidebar.html', context)
+# ideas to try
+# 1. play with the pathing on line 92
