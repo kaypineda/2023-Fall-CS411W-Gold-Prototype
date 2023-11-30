@@ -73,9 +73,9 @@ def import_ics(request):
                 )
                 new_task.save()
             
-            return redirect('AppCalendar:calendar')
-        else:
-            return HttpResponse('File not uploaded.')
+        return redirect('AppCalendar:calendar')
+    else:
+        return HttpResponse('File not uploaded.')
             
    
     # task_list = []
