@@ -2,14 +2,16 @@
 <style type="text/css">
     .sidenav {
         height: 100%;
-        width:160px;
+        width:200px;
         position: fixed;
         z-index: 1;
-        top:0;
         left:0;
         background-color: azure;
         overflow-x: hidden;
         padding-top:20px;
+        padding-bottom: 20px;
+        padding-left: 10px;
+        border:solid 2px blueviolet
 
     }
 
@@ -17,7 +19,7 @@
 
 
 <div class="sidenav">
-    <h2>abc</h2>
+    <h2><u>To-do List</u></h2>
     <ul>
         {% for item in sidebar_items %}
             <li>{{ item.title }}</li>
