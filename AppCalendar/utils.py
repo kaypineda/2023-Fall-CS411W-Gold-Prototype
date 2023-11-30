@@ -6,7 +6,8 @@ class Calendar(HTMLCalendar):
 	def __init__(self, year=None, month=None):
 		self.year = year
 		self.month = month
-		super(Calendar, self).__init__()
+		self.setfirstweekday(6)
+		super(Calendar, self).__init__(self.firstweekday)
 
 	# formats a day as a td
 	# filter tasks by day
@@ -26,6 +27,11 @@ class Calendar(HTMLCalendar):
 		for d, weekday in theweek:
 			week += self.formatday(d, tasks)
 		return f'<tr> {week} </tr>'
+	
+	def formatweekheader(self):
+		weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+		header = ''.join(f'<th class="{name}">{name}</th>' for name in weekdays)
+		return f'<tr> {header} </tr>'
 
 	# formats a month as a table
 	# filter tasks by year and month

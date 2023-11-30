@@ -1,4 +1,5 @@
 {% comment %}
+{% extends 'AppCalendar/base.html' %}
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
@@ -28,8 +29,6 @@
 
     closeWindowBtn.addEventListener('click', () => {
         popupWindow.style.display = 'none';
-        window.location.href = '{% url "AppCalendar:task_new" %}';
     });
   });
-</script> 
-{% endcomment %}
+</script>

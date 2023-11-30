@@ -55,6 +55,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'SchedulePuzzle.urls'
 
+AUTHENTICATION_BACKENDS = [
+    'AppUser.backends.EmailBackend',  # Replace with your backend
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -73,7 +77,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SchedulePuzzle.wsgi.application'
 
-AUTH_USER_MODEL = 'AppUser.CustomUser'
+AUTH_USER_MODEL = 'AppUser.EmailUser'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -133,6 +137,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "SchedulePuzzle/static",
+    BASE_DIR / "AppCalendar/static",
+    BASE_DIR / "AppUser/static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
