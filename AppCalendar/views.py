@@ -88,5 +88,8 @@ def task_delete(request, task_id=None):
     return render(request, 'AppCalendar/delete.html', {'task': instance})
 
 def sidebar(request):
-    sidebar_items = Task.objects.all()
-    return render(request, 'sidebar.html', {'sidebar_items': sidebar_items})
+    context = {
+        "sidebar_items": Task.objects.all()
+
+    }
+    return render(request, 'sidebar.html', context)
