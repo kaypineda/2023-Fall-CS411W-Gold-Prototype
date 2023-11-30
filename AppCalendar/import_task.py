@@ -13,33 +13,33 @@ def import_file(request):
         if csv_file is not None:
             return HttpResponse('No CSV file found.')
         
-        if not csv_file.name.endswith('.csv'):
-            return HttpResponse('The uploaded file is not a CSV file.')
+            if not csv_file.name.endswith('.csv'):
+                return HttpResponse('The uploaded file is not a CSV file.')
 
-    
-        reader = csv.DictReader(csv_file.read().decode('utf-8').splitlines())
-    
-        for row in reader:
-            title = row.get('Subject')
-            start_date = row.get('Start Date')
-            start_time = row.get('Start Time')
-            end_date = row.get('End Date')
-            end_time = row.get('End Time')
-            description = row.get('Description')
-            
-            start_datetime = datetime.strptime(f'{start_date} {start_time}', '%Y-%m-%d %H:%M:%S')
-            end_datetime = datetime.strptime(f'{end_date} {end_time}', '%Y-%m-%d %H:%M:%S')
         
-            formatted_start_time = start_datetime.strftime('%Y-%m-%dT%H:%M')
-            formatted_end_time = end_datetime.strftime('%Y-%m-%dT%H:%M')
+            reader = csv.DictReader(csv_file.read().decode('utf-8').splitlines())
+        
+            for row in reader:
+                title = row.get('Subject')
+                start_date = row.get('Start Date')
+                start_time = row.get('Start Time')
+                end_date = row.get('End Date')
+                end_time = row.get('End Time')
+                description = row.get('Description')
+                
+                start_datetime = datetime.strptime(f'{start_date} {start_time}', '%Y-%m-%d %H:%M:%S')
+                end_datetime = datetime.strptime(f'{end_date} {end_time}', '%Y-%m-%d %H:%M:%S')
             
-            new_task = Task(
-                title = title,
-                start_time = formatted_start_time,
-                end_time = formatted_end_time,
-                description = description
-            )
-            new_task.save()
+                formatted_start_time = start_datetime.strftime('%Y-%m-%dT%H:%M')
+                formatted_end_time = end_datetime.strftime('%Y-%m-%dT%H:%M')
+                
+                new_task = Task(
+                    title = title,
+                    start_time = formatted_start_time,
+                    end_time = formatted_end_time,
+                    description = description
+                )
+                new_task.save()
             
         if ics_file is not None:
             return HttpResponse('No ICS file found.')
