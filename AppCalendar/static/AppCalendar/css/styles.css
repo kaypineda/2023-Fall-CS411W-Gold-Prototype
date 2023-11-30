@@ -1,82 +1,97 @@
 /* Common styles */
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
 body {
-    font-family: "ptsans", "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
+  background-color: #ffffff;
+  font-family: "Lato";
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 10px;
+}
+
+h1, h2 {
+  font-family: 'Raleway';
+}
   
-  .left {
-    float: left;
-  }
+.left {
+  float: left;
+}
   
-  .right {
-    float: right;
-  }
+.right {
+  float: right;
+}
   
-  .btn {
-    outline: none;
-    color: black;
-    background-color: transparent;
-    box-shadow: 0 0 0 0;
-    margin-right: 3px;
-  }
+.btn {
+  outline: none;
+  color: black;
+  background-color: transparent;
+  box-shadow: 0 0 0 0;
+  margin-right: 3px;
+}
   
-  .clearfix {
-    margin: 15px;
-  }
+.clearfix {
+  margin: 15px;
+}
   
-  .form {
-    margin: auto;
-  }
+.form {
+  margin: auto;
+}
   
-  .form input, .form select, .form textarea {
-    border-radius: 5px;
-    border: 1px solid #17a2b8;
-    outline: none;
-    background: none;
-    padding: 5px;
-    width: 100%;
-  }
+.form input, .form select, .form textarea {
+  border-radius: 5px;
+  border: 1px solid #17a2b8;
+  outline: none;
+  background: none;
+  padding: 5px;
+  width: 100%;
+}
   
-  /* App styles */
-  .title {
-    text-align: center;
-    margin: 10px;
-  }
+/* App styles */
+.title {
+  background-color: #e9edee;
+  text-align: center;
+  margin: 0px;
+  padding: 10px
+}
   
-  .calendar {
-    width: 98%;
-    margin: auto;
-    font-size: 13px;
-  }
+.calendar {
+  align-self: right;
+  font-size: 14px;
+  width: 100%;
+  margin: 10px;
+  background-color: #ffffff;
+}
   
-  .calendar tr, .calendar td {
-    border: 1px solid black;
-  }
+.calendar tr, .calendar td {
+  border: 1px solid rgb(0, 0, 0);
+}
   
-  .calendar th {
-    padding: 10px;
-    text-align: center;
-    font-size: 18px;
-  }
+.calendar th {
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.calendar td {
+  width: 200px;
+  height: 150px;
+  padding: 20px 0px 0px 5px;
+}
+ 
+.month {
+  font-size: 25px;
+}
   
-  .calendar td {
-    width: 200px;
-    height: 150px;
-    padding: 20px 0px 0px 5px;
-  }
+.date {
+  font-size: 16px;
+}
   
-  .month {
-    font-size: 25px;
-  }
+ul {
+  height: 100%;
+  padding: 0px 5px 0px 20px;
+}
   
-  .date {
-    font-size: 16px;
-  }
-  
-  ul {
-    height: 100%;
-    padding: 0px 5px 0px 20px;
-  }
-  
-  a {
-    color: #17a2b8;
-  }
+a {
+  color: #17a2b8;
+}

@@ -1,36 +1,66 @@
 {% extends 'AppCalendar/base.html' %}
 
 {% block title %}
-Calendar
-{% endblock %}
+    Calendar
+{% endblock title %}
+
 
 {% block content %}
 <div class="clearfix">
-	<a class="btn btn-info left" href="{% url 'AppCalendar:calendar' %}?{{ prev_month }}"> Previous Month </a>
-	<a class="btn btn-info right" href="{% url 'AppCalendar:calendar' %}?{{ next_month }}"> Next Month </a>
-	<a class="btn btn-info right" href="{% url 'AppCalendar:task_new' %}"> New Task </a>
-    
-	<div class="dropdown" style="display: inline-block;">
-		<button class="btn btn-info dropdown-toggle" type="button" id="exportDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			Export
-		</button>
-		<div class="dropdown-menu dropdown-menu-right" aria-labelledby="exportDropdown">
-			<form method="post" action="{% url 'AppCalendar:export' %}">
-				{% csrf_token %}
-				<input type="hidden" name="format" value="ics">
-				<button class="dropdown-item" type="submit">.ICS</button>
-			</form>
-			<form method="post" action="{% url 'AppCalendar:export' %}">
-				{% csrf_token %}
-				<input type="hidden" name="format" value="csv">
-				<button class="dropdown-item" type="submit">.CSV</button>
-			</form>
-		</div>
-	</div>
-    {{ calendar }}
-    {% endblock %}
+    <a class="btn btn-info right" href="{% url 'AppCalendar:task_new' %}"> User Settings (Change link) </a>
+</div>
+
+<table>
+    <tr>
+        <td style="vertical-align: top; width: 25%;">
+            <div class="clearfix">
+                <form method="post" action="{% url 'AppCalendar:import_csv' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="uploadFile">Import tasks:</label>
+                    <input type="file" id="uploadFile" name="file">
+                    <button class="btn btn-info left" type="submit">Import</button>
+                </form>
+                
+                <br> <br> <br>
+
+                <div class="dropdown" style="display: inline-block;">
+                    <button class="btn btn-info left dropdown-toggle" type="button" id="exportDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Export
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="exportDropdown">
+                        <form method="post" action="{% url 'AppCalendar:export' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="format" value="ics">
+                            <button class="dropdown-item" type="submit">.ICS</button>
+                        </form>
+                        <form method="post" action="{% url 'AppCalendar:export' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="format" value="csv">
+                            <button class="dropdown-item" type="submit">.CSV</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <br>
+            
+            <a class="btn btn-info right" href="{% url 'AppCalendar:task_new' %}"> New Task </a>
+        </td>
+
+        <td>
+            <div class="clearfix">
+	            <a class="btn btn-info left" href="{% url 'AppCalendar:calendar' %}?{{ prev_month }}"> Previous Month </a>
+	            <a class="btn btn-info right" href="{% url 'AppCalendar:calendar' %}?{{ next_month }}"> Next Month </a>
+            </div>
+
+            {{ calendar }}
+        </td>
+    </tr>
+</table>
+
+{% endblock content %}   
 	<!-- Add the import button-->
-	<!-- <div class="dropdown" style="display: inline-block;">
+	<!-- <!-- <div class="dropdown" style="display: inline-block;">
         <button class="btn btn-info dropdown-toggle" type="button" id="importDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Import
         </button>
@@ -52,6 +82,5 @@ Calendar
                 <button class="dropdown-item" type="submit">Import ICS</button>
             </form>
         </div>
-    </div>
-</div> -->
+    </div> --> -->
 
