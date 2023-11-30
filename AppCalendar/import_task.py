@@ -58,8 +58,7 @@ def import_file(request):
                         description = description
                     )
                     new_task.save()
-                
-            
+                            
         return redirect('AppCalendar:calendar')
     
     else:
