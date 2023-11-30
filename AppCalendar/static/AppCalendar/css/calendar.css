@@ -1,0 +1,34 @@
+/* All css relating to the calendar */
+
+.calendar {
+  align-self: right;
+  background-color: #ffffff;  
+  font-size: 14px;
+  margin: 10px;
+  width: 100%;
+}
+    
+.calendar tr, .calendar td {
+  border: 1px solid rgb(0, 0, 0);
+}
+    
+.calendar th {
+  font-size: 18px;  
+  padding: 10px;
+  text-align: center;
+  
+}
+  
+.calendar td {
+  height: 150px;
+  padding: 20px 0px 0px 5px;
+  width: 200px;
+}
+   
+.month {
+  font-size: 25px;
+}
+    
+.date {
+  font-size: 16px;
+}
