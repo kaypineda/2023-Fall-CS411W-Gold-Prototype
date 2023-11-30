@@ -5,11 +5,19 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from .models import Task
 
-def import_csv(csv_file):
-    task_list = []
-    dupe_task_list = []
+def import_csv(request):
+    if request.method == 'POST':
+        csv_file = request.FILES['csv_file']
+        
+        if csv_file is None:
+            return HttpResponse('No file was uploaded.')
+        
+        if not csv_file.name.endswith('.csv'):
+            return HttpResponse('The uploaded file is not a CSV file.')
+
     
-    reader = csv.DictReader(csv_file)
+    reader = csv.DictReader(csv_file.read().decode('utf-8').splitlines())
+    
     for row in reader:
         title = row.get('Subject')
         start_date = row.get('Start Date')
@@ -23,15 +31,25 @@ def import_csv(csv_file):
     
         formatted_start_time = start_datetime.strftime('%Y-%m-%dT%H:%M')
         formatted_end_time = end_datetime.strftime('%Y-%m-%dT%H:%M')
+        
+        new_task = Task(
+            title = title,
+            start_time = formatted_start_time,
+            end_time = formatted_end_time,
+            description = description
+        )
+        new_task.save()
+        
+        return redirect('AppCalendar:calendar')
+    
+    else:
+        return HttpResponse('File not uploaded.')
    
    
    
    
-   
-   
-   
-   
-   
+    # task_list = []
+    # dupe_task_list = []
     
     #     existing_task = Task.objects.filter(
     #         title = title, 
