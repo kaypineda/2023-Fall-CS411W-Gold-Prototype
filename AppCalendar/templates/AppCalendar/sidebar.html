@@ -1,0 +1,26 @@
+<!-- sidebar.html -->
+<style type="text/css">
+    .sidenav {
+        height: 100%;
+        width:160px;
+        position: fixed;
+        z-index: 1;
+        top:0;
+        left:0;
+        background-color: azure;
+        overflow-x: hidden;
+        padding-top:20px;
+
+    }
+
+</style>
+
+
+<div class="sidenav">
+    <h2>abc</h2>
+    <ul>
+        {% for item in sidebar_items %}
+            <li>{{ item.title }}</li>
+        {% endfor %}
+    </ul>
+</div>
