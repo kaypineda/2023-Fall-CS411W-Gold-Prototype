@@ -23,23 +23,32 @@ def import_csv(csv_file):
     
         formatted_start_time = start_datetime.strftime('%Y-%m-%dT%H:%M')
         formatted_end_time = end_datetime.strftime('%Y-%m-%dT%H:%M')
+   
+   
+   
+   
+   
+   
+   
+   
+   
     
-        existing_task = Task.objects.filter(
-            title = title, 
-            start_time = formatted_start_time, 
-            end_time = formatted_end_time
-            ).first()
+    #     existing_task = Task.objects.filter(
+    #         title = title, 
+    #         start_time = formatted_start_time, 
+    #         end_time = formatted_end_time
+    #         ).first()
         
-        if existing_task:
-            dupe_task_list.append(existing_task)
-        else:
-            task_list.append(Task(
-                title = title,
-                start_time = formatted_start_time,
-                end_time = formatted_end_time,
-                description = description
-            ))
+    #     if existing_task:
+    #         dupe_task_list.append(existing_task)
+    #     else:
+    #         task_list.append(Task(
+    #             title = title,
+    #             start_time = formatted_start_time,
+    #             end_time = formatted_end_time,
+    #             description = description
+    #         ))
             
-    return task_list, dupe_task_list
+    # return task_list, dupe_task_list
         
             
