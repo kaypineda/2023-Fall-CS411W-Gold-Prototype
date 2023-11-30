@@ -95,3 +95,15 @@ ul {
 a {
   color: #17a2b8;
 }
+
+p {
+  text-align: center;
+  font-size: 18px;
+}
+
+.warning {
+  text-align: center;
+  font-size: 22px;
+  color: #eb5600; 
+  font-weight: 1000;
+}
