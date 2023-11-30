@@ -5,12 +5,13 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from .models import Task
 
-def import_csv(request):
+def import_file(request):
     if request.method == 'POST':
         csv_file = request.FILES.get('csv_file')
+        ics_file = request.FILES.get('ics_file')
         
-        if csv_file is None:
-            return HttpResponse('No file was uploaded.')
+        if csv_file is not None:
+            return HttpResponse('No CSV file found.')
         
         if not csv_file.name.endswith('.csv'):
             return HttpResponse('The uploaded file is not a CSV file.')
@@ -40,21 +41,8 @@ def import_csv(request):
             )
             new_task.save()
             
-        return redirect('AppCalendar:calendar')
-    
-    else:
-        return HttpResponse('File not uploaded.')
-   
-
-def import_ics(request):
-    if request.method == 'POST':
-        ics_file = request.FILES.get('ics_file')
-        
-        if ics_file is None:
-            return HttpResponse('No file was uploaded.')
-        
-        if not ics_file.name.endswith('.ics'):
-            return HttpResponse('The uploaded file is not an ICS file.')
+        if ics_file is not None:
+            return HttpResponse('No ICS file found.')
         
         cal = icalendar.Calendar.from_ical(ics_file.read().decode('utf-8'))
         
@@ -73,9 +61,43 @@ def import_ics(request):
                 )
                 new_task.save()
             
+            
         return redirect('AppCalendar:calendar')
+    
     else:
         return HttpResponse('File not uploaded.')
+   
+
+# def import_ics(request):
+#     if request.method == 'POST':
+#         ics_file = request.FILES.get('ics_file')
+        
+#         if ics_file is None:
+#             return HttpResponse('No file was uploaded.')
+        
+#         if not ics_file.name.endswith('.ics'):
+#             return HttpResponse('The uploaded file is not an ICS file.')
+        
+#         cal = icalendar.Calendar.from_ical(ics_file.read().decode('utf-8'))
+        
+#         for component in cal.walk():
+#             if component.name == 'VEVENT':
+#                 title = component.get('summary')
+#                 start_time = component.get('dtstart').dt
+#                 end_time = component.get('dtend').dt
+#                 description = component.get('description')
+                
+#                 new_task = Task(
+#                     title = title,
+#                     start_time = start_time,
+#                     end_time = end_time,
+#                     description = description
+#                 )
+#                 new_task.save()
+            
+#         return redirect('AppCalendar:calendar')
+#     else:
+#         return HttpResponse('File not uploaded.')
             
    
     # task_list = []
