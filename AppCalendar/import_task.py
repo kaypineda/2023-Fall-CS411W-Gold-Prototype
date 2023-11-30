@@ -11,11 +11,8 @@ def import_file(request):
         ics_file = request.FILES.get('ics_file')
         
         if csv_file is not None:
-            return HttpResponse('No CSV file found.')
-        
             if not csv_file.name.endswith('.csv'):
-                return HttpResponse('The uploaded file is not a CSV file.')
-
+                return HttpResponse('No CSV file found.')
         
             reader = csv.DictReader(csv_file.read().decode('utf-8').splitlines())
         
@@ -42,25 +39,26 @@ def import_file(request):
                 new_task.save()
             
         if ics_file is not None:
-            return HttpResponse('No ICS file found.')
+            if not ics_file.name.endswith('.ics'):
+                return HttpResponse('No ICS file found.')
         
-        cal = icalendar.Calendar.from_ical(ics_file.read().decode('utf-8'))
-        
-        for component in cal.walk():
-            if component.name == 'VEVENT':
-                title = component.get('summary')
-                start_time = component.get('dtstart').dt
-                end_time = component.get('dtend').dt
-                description = component.get('description')
-                
-                new_task = Task(
-                    title = title,
-                    start_time = start_time,
-                    end_time = end_time,
-                    description = description
-                )
-                new_task.save()
+            cal = icalendar.Calendar.from_ical(ics_file.read().decode('utf-8'))
             
+            for component in cal.walk():
+                if component.name == 'VEVENT':
+                    title = component.get('summary')
+                    start_time = component.get('dtstart').dt
+                    end_time = component.get('dtend').dt
+                    description = component.get('description')
+                    
+                    new_task = Task(
+                        title = title,
+                        start_time = start_time,
+                        end_time = end_time,
+                        description = description
+                    )
+                    new_task.save()
+                
             
         return redirect('AppCalendar:calendar')
     
