@@ -45,8 +45,38 @@ def import_csv(request):
     else:
         return HttpResponse('File not uploaded.')
    
-   
-   
+
+def import_ics(request):
+    if request.method == 'POST':
+        ics_file = request.FILES.get('ics_file')
+        
+        if ics_file is None:
+            return HttpResponse('No file was uploaded.')
+        
+        if not ics_file.name.endswith('.ics'):
+            return HttpResponse('The uploaded file is not an ICS file.')
+        
+        cal = icalendar.Calendar.from_ical(ics_file.read().decode('utf-8'))
+        
+        for component in cal.walk():
+            if component.name == 'VEVENT':
+                title = component.get('summary')
+                start_time = component.get('dtstart').dt
+                end_time = component.get('dtend').dt
+                description = component.get('description')
+                
+                new_task = Task(
+                    title = title,
+                    start_time = start_time,
+                    end_time = end_time,
+                    description = description
+                )
+                new_task.save()
+            
+            return redirect('AppCalendar:calendar')
+        else:
+            return HttpResponse('File not uploaded.')
+            
    
     # task_list = []
     # dupe_task_list = []
