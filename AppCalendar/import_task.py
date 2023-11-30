@@ -7,7 +7,7 @@ from .models import Task
 
 def import_csv(request):
     if request.method == 'POST':
-        csv_file = request.FILES['csv_file']
+        csv_file = request.FILES.get('csv_file')
         
         if csv_file is None:
             return HttpResponse('No file was uploaded.')
@@ -40,10 +40,10 @@ def import_csv(request):
             )
             new_task.save()
             
-            return redirect('AppCalendar:calendar')
-        
-        else:
-            return HttpResponse('File not uploaded.')
+        return redirect('AppCalendar:calendar')
+    
+    else:
+        return HttpResponse('File not uploaded.')
    
    
    
