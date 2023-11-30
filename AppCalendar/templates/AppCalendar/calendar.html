@@ -14,10 +14,13 @@
     <tr>
         <td style="vertical-align: top; width: 25%;">
             <div class="clearfix">
-                <form method="post" action="{% url 'AppCalendar:import_ics' %}" enctype="multipart/form-data">
+                <form method="post" action="{% url 'AppCalendar:import_file' %}" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <label for="uploadFile">Import tasks:</label>
-                    <input type="file" id="uploadFile" name="ics_file" accept=".ics">
+                    <label for="csvFile">Upload CSV file:</label>
+                    <input type="file" id="csvFile" name="csv_file" accept=".csv"><br>
+
+                    <label for="icsFile">Upload ICS file</label>
+                    <input type="file" id="icsFile" name="ics_file" accept=".ics"><br>
                     <button class="btn btn-info left" type="submit">Import</button>
                 </form>
                 
