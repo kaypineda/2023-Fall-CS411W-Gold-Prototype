@@ -1,16 +1,17 @@
 * {box-sizing: border-box}
 
 /*Full-width input fields */
-input[type=text], input[type=password] {
+input[type=email], input[type=password] {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
     display: inline-block;
     border: none;
     background: #f1f1f1;
+    font-family: 'Lato', sans-serif;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type=email]:focus, input[type=password]:focus {
     background-color: #ddd;
     outline: none;
 }
@@ -20,7 +21,12 @@ hr {
     margin-bottom: 25px;
 }
 
-button {
+.button-container {
+    display: flex;
+    justify-content:  space-between;
+}
+
+.signupbtn, .cancelbtn {
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -29,35 +35,33 @@ button {
     cursor: pointer;
     width: 100%;
     opacity: 0.9;
+    font-family: 'Lato', sans-serif;
 }
 
-button:hover {
+.signupbtn:hover, .cancelbtn {
     opacity: 1;
 }
 
-.canclebtn {
-    padding: 14px 20px;
+.cancelbtn {
     background-color: #f44336;
+    text-decoration: none;
+    text-align: center;
 }
 
 /* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
+/* .cancelbtn, .signupbtn {
+    vertical-align: middle;
     float: left;
-    width: 50%;
-}
+    width: auto;
+} */
 
 .container {
     padding: 16px;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
+    font-family: 'Lato', sans-serif;
 }
 
 @media screen and (max-width: 300px) {
-    .canclebtn, .signupbtn {
+    .cancelbtn, .signupbtn {
         width: 100%;
     }
 }

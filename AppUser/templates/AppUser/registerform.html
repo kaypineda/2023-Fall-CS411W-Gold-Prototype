@@ -1,36 +1,49 @@
-
-<form action="action_page.php" style="border:1px solid #ccc">
-    
-    <link rel="stylesheet" type="text/css" href="{% static '/css/styles.css' %}">
+{% load static %}
+<form action="{% url 'AppUser:user_register' %}" method="POST" style="border:1px solid #ccc">
+    {% csrf_token %}
+    <!-- {{ form.as_p}} -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'AppCalendar/css/styles.css' %}"> -->
     <link rel="stylesheet" type="text/css" href="{% static 'AppUser/css/registerform.css' %}">
 <div class="container">
     <h1>Account Sign Up</h1>
     <p>Please fill in this form to create your account.</p>
     <hr>
 
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" id="email" required>
+    <label for="{{ form.email.id_for_label }}"><b>Email</b></label>
+    {{ form.email }}
+    {% if form.email.errors %}
+        <div class = "field-error">{{ form.email.errors }}</div>
+    {% endif %}
+
 
    <!--  <label for="Phone Number"><b>Phone Number</b></label>
     <input type="text" placeholder="Enter Phone Number" name="Phone Number" id="Phone Number" required> -->
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
 
-    <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+    <label for="{{ form.password1.id_for_label }}"><b>Password</b></label>
+    {{ form.password1 }}
+    {% if form.password1.errors %}
+        <div class="field-error">{{ form.password1.errors }}</div>
+    {% endif %}
+    <!-- <input type="password" placeholder="Enter Password" name="password1" id="password1" required> -->
 
-    <label>
-        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-    </label>
+    <label for="{{ form.password2.id_for_label }}"><b>Repeat Password</b></label>
+    {{ form.password2 }}
+    {% if form.password2.errors %}
+        <div class="field-error">{{ form.password2.errors }}</div>
+    {% endif %}
+    <!-- <input type="password" placeholder="Repeat Password" name="password2" id="password2" required> -->
 
     <!-- <p>By creating an account you agree to <a href="#" style="color:dodgerblue">Schedule Puzzle's Terms & Privacy</a>.</p> -->
 
+
+    <div class="button-container">
+        <button type="submit" class="signupbtn">Sign Up</button>
+        <a href="{% url 'AppUser:user_login' %}" class="cancelbtn">Cancel</a>
+        
+    </div>
     <p>By creating an account you agree to Schedule Puzzle's Terms & Privacy.</p>
 
-    <div class="clearfix">
-        <button type="button" class="cancelbtn">Cancel</button>
-        <button type="submit" class="signupbtn">Sign Up</button>
-    </div>
 </div>
 </form>
