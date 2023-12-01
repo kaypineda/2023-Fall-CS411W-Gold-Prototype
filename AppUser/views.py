@@ -29,7 +29,7 @@ def user_register(request):
         form = CustomUserForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('AppUser:login')
+            return redirect('AppUser:user_login')
     else:
         form = CustomUserForm()
     return render(request, 'AppUser/registerform.html', {'form': form})
