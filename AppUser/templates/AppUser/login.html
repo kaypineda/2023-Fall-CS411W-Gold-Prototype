@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="main-holder">
-        <form method="post" action="{% url 'AppUser:login' %}">
+        <form method="post" action="{% url 'AppUser:user_login' %}">
             {% csrf_token %}
             <input type="text" name="email" id="email" class="login-form-field" placeholder="Username"> <br>
             <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
@@ -27,8 +27,8 @@
             <button class="invis_btn" type="button">Forgot Password</button> 
             <button class="invis_btn" type="button">Create Account</button>
             
-            <!--  <a href="registerform.html" class="Createbtn">
-             <span class ="psw">Create -->
+              <a href="{% url 'AppUser:user_register' %}" class="invis_btn" type="button">Create Account</a>
+             <!-- <span class ="psw">Create  -->
             <!-- <a href="#">Create account</a> -->
         </form>
         <div id="login-error-msg-holder">
