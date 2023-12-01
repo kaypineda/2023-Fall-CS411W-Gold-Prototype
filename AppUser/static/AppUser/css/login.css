@@ -1,14 +1,14 @@
 /* CSS Related to login page */
 
-#main-holder {
+.main-holder {
     width: 50%;
     height: 70%;
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    background-color: blanchedalmond;
+    background-color: #1a9988;
     border-radius: 7px;
     box-shadow: 0px 0px 5px 2px black;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
 }
 
 #login-error-msg-holder {
@@ -36,12 +36,7 @@
     display: block;
 }
 
-#login-form {
-    align-self: flex-start;
-    display: grid;
-    justify-items: center;
-    align-items: center;
-}
+
 
  .login-form-field {
     border: none;
@@ -50,16 +45,17 @@
     border-radius: 3px;
     outline: none;
     padding: 0px 0px 5px 5px;
+    width: 90%;
 }
 
 #login-form-submit {
-    width: 100%;
+    width: 90%;
     padding: 7px;
-    border:none;
     border-radius: 5px;
+    border-color: #ffffff;
     color: white;
     font-weight: bold;
-    background-color: #3a3a3a;
+    background-color: #66aaaa;
     cursor: pointer;
     outline: none;
 }
@@ -69,15 +65,18 @@
     padding: 1px 4px;
     /* background-color: #f44336; */
 }
-.Forgotbtn {
-    width: auto;
-    padding: 1px 4px;
+
+.invis_btn {
+    width: 20%;
+    padding: 7px;
+    border: 0px;
+    color: white;
+    font-weight: bold;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
 }
 
-.Createbtn {
-    width: auto;
-    padding: 1px 4px;
-}
 
 label {
     margin-top: 12px;

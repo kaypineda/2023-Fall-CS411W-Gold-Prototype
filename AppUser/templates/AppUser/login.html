@@ -1,56 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'AppUser/base.html' %}
 
-<head>
-    {% load static %}
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <!--<link rel="stylesheet" href="css/login.css"> -->
-    <link rel="stylesheet" type="text/css" href="{% static '/css/styles.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'AppUser/css/login.css' %}">
-    <!-- <script defer src="login.js"></script> -->
-</head>
+{% block title %}
+    Schedule Puzzle
+{% endblock title %}
 
-<body>
-    <main id="main-holder">
-        <h1 id="login-header">Schedule Puzzle Login</h1>
+{% block content %}
+    <div class="main-holder">
+        <form method="post" action="{% url 'AppUser:login' %}">
+            {% csrf_token %}
+            <input type="text" name="email" id="email" class="login-form-field" placeholder="Username"> <br>
+            <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
 
+            <hr style="height: 20px; background-color: #ffffff">
+
+            <input type="submit" value="Login" id="login-form-submit">
+            
+            <br>
+                        
+            <!-- <input type="checkbox" checked="checked"> Remember me -->
+            <label>  
+                <input type="checkbox" checked="checked" placeholder="Remember me"> Remember me
+            </label>
+                
+            <br>
+            
+            <!-- <button type="button" class="cancelbtn">Cancel</button> -->
+            <button class="invis_btn" type="button">Forgot Password</button> 
+            <button class="invis_btn" type="button">Create Account</button>
+            <!--  <a href="registerform.html" class="Createbtn">
+            <button type="button">Create Account</button>
+            </a> -->
+                
+            <!-- <a href="#">Forgot password?</a>
+            <!-- <span class ="psw">Create -->
+            <!-- <a href="#">Create account</a> -->
+        </form>
         <div id="login-error-msg-holder">
             <p id="login-error-msg">Invalid username <span id="error-msg-second-line">and/or password </span></p>
         </div>
-
-        <form id="login-form" method="post" action="{% url 'AppUser:login' %}">
-            {% csrf_token %}
-            <input type="text" name="email" id="email" class="login-form-field" placeholder="Username">
-            <input type="password" name="password" id="password-field" class="login-form-field" placeholder="Password">
-            <input type="submit" value="Login" id="login-form-submit">
-            <br>
-            <!---->
-            
-            
-            <!-- <input type="checkbox" checked="checked"> Remember me -->
-            <label>  
-                 <input type="checkbox" checked="checked" placeholder="Remember me"> Remember me
-            </label>
-            
-            <br>
-            <br>
-            <!-- <button type="button" class="cancelbtn">Cancel</button> -->
-            <button type="button" class="Forgotbtn">Forgot Password</button>
-            <!-- <button type="button" class="Createbtn">Create Account</button> -->
-           <!--  <a href="registerform.html" class="Createbtn">
-                <button type="button">Create Account</button>
-              </a> -->
-              
-              <a href="{% url 'AppUser:register' %}" class="Createbtn">
-                <button type="button">Create Account</button>
-
-            <!-- <a href="#">Forgot password?</a>
-            <!--<span class ="psw">Create -->
-<!--             <a href="#">Create account</a> -->
-         </form>
-    </main>
-</body>
-
-</html>
+    </div>
+{% endblock content %}   
