@@ -2,12 +2,14 @@
 <html lang="en">
 
     <head>
+        {% load static %}
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login</title>
         <!--<link rel="stylesheet" href="css/login.css"> -->
-        <link rel="stylesheet" href="dashboard.css">
-        <script defer src="dashboard.js"></script>
+        <link rel="stylesheet" type="text/css" href="{% static '/css/styles.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'AppUser/css/dashboard.css' %}">
+        <!-- <script defer src="dashboard.js"></script> -->
     </head>
         
         <!-- <title>Dashboard</title>

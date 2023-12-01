@@ -9,6 +9,14 @@ Task
   <a class="btn btn-info right" href="{% url 'AppCalendar:calendar' %}"> Cancel </a>
 </div>
 
+{% if messages %}
+  <div class="alert alert-warning">
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+  </div>
+{% endif %}
+
 {% if form.errors %}
     {% for field in form %}
         {% for error in field.errors %}
@@ -30,9 +38,11 @@ Task
     {{ form }}
     <tr>
       <td>
-        <input class="btn buttons add-button login_btn" type="submit" value="Add Event">
+        <input class="btn buttons add-button login_btn" type="submit" value="Save">
       </td>
      </tr>
   </table>
 </form>
+
+<div id="popupContainer"></div>
 {% endblock %}

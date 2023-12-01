@@ -5,10 +5,25 @@ Delete
 {% endblock %}
 
 {% block content %}
-    <p>Are you sure you want to delete this task? {{ task.title }}</p>
+    <div class="clearfix">
+        <a class="btn btn-info right" href="{% url 'AppCalendar:calendar' %}"> Cancel </a>
+    </div>
 
     <form action="" method="post">
         {% csrf_token %}
-        <input type="submit" value="Delete">
+        <table class="form form-table">
+            <h2 class="warning"> Are you sure you want to delete this task?</h2> <br>
+            <p>
+                <b>Task Name: </b> {{ task.title }} <br>
+                <b>Start Time: </b> {{task.start_time}} <br>
+                <b>End Time: </b> {{task.end_time}} <br> <br>
+                <b>Description: </b> {{task.description}} <br>
+            </p>
+            <tr>
+                <td>
+                    <input class="btn buttons add-button login_btn" type="submit" value="Delete">
+                </td>
+            </tr>
+        </table>
     </form>
 {% endblock %}
