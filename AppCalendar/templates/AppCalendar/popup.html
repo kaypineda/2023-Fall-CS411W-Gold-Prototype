@@ -1,8 +1,3 @@
-{% extends 'AppCalendar/base.html' %}
-{% load bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-
 <div id="popUp" class="popupWindow">
   <div class="popupWindow-content">
     <div class="popupWindow-header">
@@ -15,18 +10,21 @@
   </div>
 </div>
 
+{% include 'AppCalendar/task.html' %}
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    var openWindowBtn = document.getElementById('submitBtn');
-    var closeWindowBtn = document.getElementById('close');
+    var openWindowBtn = document.querySelector('.add-button');
+    var closeWindowBtn = document.getElementById('closeWindowBtn');
     var popupWindow = document.getElementById('popUp');
 
-    openWindowBtn.addEventListener('click', () => {
-        popupWindow.style.display = "block";
+    openWindowBtn.addEventListener('click', function(event) {
+      event.preventDefault();
+      popupWindow.style.display = "block";
     });
 
-    closeWindowBtn.addEventListener('click', () => {
-        popupWindow.style.display = 'none';
+    closeWindowBtn.addEventListener('click', function() {
+      popupWindow.style.display = 'none';
+      window.location.href='{% url "AppCalendar:task_new" %}';
     });
   });
 </script>
