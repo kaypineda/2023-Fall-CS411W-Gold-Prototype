@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from .forms import CustomUserForm
 
 # Create your views here.
 def dashboard(request):
@@ -22,3 +23,13 @@ def user_login(request):
             return redirect('AppUser:login')
         
     return render(request, 'AppUser/login.html')
+
+def user_register(request):
+    if request.method == 'POST':
+        form = CustomUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('AppUser:login')
+    else:
+        form = CustomUserForm()
+    return render(request, 'AppUser/registerform.html', {'form': form})
