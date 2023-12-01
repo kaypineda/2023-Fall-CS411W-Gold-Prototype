@@ -24,14 +24,14 @@
     <label for="{{ form.password1.id_for_label }}"><b>Password</b></label>
     {{ form.password1 }}
     {% if form.password1.errors %}
-        <div class="field-error">{{ form.email.errors }}</div>
+        <div class="field-error">{{ form.password1.errors }}</div>
     {% endif %}
     <!-- <input type="password" placeholder="Enter Password" name="password1" id="password1" required> -->
 
     <label for="{{ form.password2.id_for_label }}"><b>Repeat Password</b></label>
     {{ form.password2 }}
     {% if form.password2.errors %}
-        <div class="field-error">{{ form.email.errors }}</div>
+        <div class="field-error">{{ form.password2.errors }}</div>
     {% endif %}
     <!-- <input type="password" placeholder="Repeat Password" name="password2" id="password2" required> -->
 
