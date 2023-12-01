@@ -9,7 +9,7 @@ class CustomUserForm(UserCreationForm):
         model = get_user_model()
         fields = ("email", "password1", "password2")
         
-    def save_user(self, commit = True):
+    def save(self, commit = True):
         user = super().save(commit = False)
         user.email = self.cleaned_data["email"]
         if commit:
