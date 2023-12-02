@@ -17,7 +17,7 @@ class Task(models.Model):
     category = models.CharField(max_length=200, default='')
     priority = models.IntegerField(default=1)
     title = models.CharField(max_length=200)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     start_time = models.DateTimeField(default=timezone.now)
     end_time = models.DateTimeField(default=timezone.now)
 
