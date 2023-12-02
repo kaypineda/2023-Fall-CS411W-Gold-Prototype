@@ -2,35 +2,32 @@
 
 
 {% block content %}     
-        <!-- <title>Dashboard</title>
-        <link rel="stylesheet" href="dashboard.css">
-        <script defer src="dashboard.js"></script>
-         -->
+    <!-- <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script defer src="dashboard.js"></script>-->
 
-         <!-- <form action="dashboard.php" method="post">
-            <input type="submit" value="Dashboard" id="dashboard-form-submit"> -->
-            <div class="topnav">
-                <a class="active" href="#home">Home</a>
-                <a href="#My Account">My Account</a>
-                <input type="text" placeholder="Search schedules">
-            </div>
-            <br>
+    <!-- <form action="dashboard.php" method="post">
+        <input type="submit" value="Dashboard" id="dashboard-form-submit"> -->
+        <div class="topnav">
+            <input type="text" placeholder="Search schedules">
+        </div>
+        <br>
 
-            <!-- <div class="sidenav">
-            <button type="button" class="Userbtn">User</button>
-            <br>
-            <button type="button" class="Newbtn">+New</button>
-            <button type="button" class="Categoriesbtn">Categories</button>
-            <button type="button" class="Templatebtn">Templates</button>
-            <button type="button" class="Editbtn">Trash</button>
-            </div> -->
+        <!-- <div class="sidenav">
+        <button type="button" class="Userbtn">User</button>
+        <br>
+        <button type="button" class="Newbtn">+New</button>
+        <button type="button" class="Categoriesbtn">Categories</button>
+        <button type="button" class="Templatebtn">Templates</button>
+        <button type="button" class="Editbtn">Trash</button>
+        </div> -->
             
-            <div class="sidenav">
-                <a href="#User">User</a>
-                <a href="#New">New+</a>
+        <div class="sidenav">
+            <a href="#User">User</a>
+            <a href="#New">New+</a>
             
-                <!-- <a href="#Categories">Categories</a> -->
-                <div class = "subnav">
+            <!-- <a href="#Categories">Categories</a> -->
+            <div class="subnav">
                 <a href="subnavbtn">Categories <i class="fa fa-caret-down"></i></a>
                 <div class="subnav-content">
                     <a href="#School">School</a>
@@ -38,72 +35,30 @@
                     <a href="#Personal">Personal</a>
                     <a href="#Family">Family</a>
                     <a href="Custom">Custom+</a>
-                </div>
-                </div>
-                <div>
+               </div>
+            </div>
+            <div>
                 <a href="#Templates">Templates</a>
                 <a href="#Trash">Trash</a>
             </div>
         </div>
-        
-            <!-- <div class = "subnav"
-            <button class="subnavbtn">Categories <i class="fa fa-caret-down"></i></button>
-            <div class="subnav-content">
-                <a href="#School">School</a>
-                <a href="#Work">Work</a>
-                <a href="#Personal">Personal</a>
-                <a href="#Family">Personal</a>
-            </div> -->
-            <div class = "calendar">
-                <div class = "calendar_picture">
-                    <h2> Under</h2>
-                    <!-- <img src="fall.jpg" alt="calendar" width="200" height="200"> -->
-                    <h3>Construction</h3>
-                </div>
-                <div class="calendar_date">    
-                <div class ="calendar_day">S</div>
-                <div class ="calendar_day">M</div>
-                <div class ="calendar_day">T</div>
-                <div class ="calendar_day">W</div>
-                <div class ="calendar_day">T</div>
-                <div class ="calendar_day">F</div>
-                <div class ="calendar_day">S</div>
-                <div class ="calendar_number"></div>
-                <div class ="calendar_number">1</div>
-                <div class ="calendar_number">2</div>
-                <div class ="calendar_number">3</div>
-                <div class ="calendar_number">4</div>
-                <div class ="calendar_number">5</div>
-                <div class ="calendar_number">6</div>
-                <div class ="calendar_number">7</div>
-                <div class ="calendar_number"></div>
 
-                <div class ="calendar_number">8</div>
-                <div class ="calendar_number">9</div>
-                <div class ="calendar_number">10</div>
-                <div class ="calendar_number">11</div>
-                <div class ="calendar_number">12</div>
-                <div class ="calendar_number">13</div>
-                <div class ="calendar_number">14</div>
-                <div class ="calendar_number">15</div>
-                <div class ="calendar_number">16</div>
-                <div class ="calendar_number">17</div>
-                <div class ="calendar_number">18</div>
-                <div class ="calendar_number">19</div>
-                <div class ="calendar_number">20</div>
-                <div class ="calendar_number">21</div>
-                <div class ="calendar_number">22</div>
-                <div class ="calendar_number">23</div>
-                <div class ="calendar_numbercalendar_number--current">24</div>
-                <div class ="calendar_number">25</div>
-                <div class ="calendar_number">26</div>
-                <div class ="calendar_number">27</div>
-                <div class ="calendar_number">28</div>
-                <div class ="calendar_number">29</div>
-                <div class ="calendar_number">30</div>
-                <div class ="calendar_number">31</div>
+        <br>
+        <a class="invis_btn" href="{% url 'AppCalendar:calendar' %}">Main Calendar</a>
 
-
-                </div>
+        <div class="main">
+            <h1> Main Calendar </h1>
+            <div class = "calendar_picture">
+                <a class="invis_btn" href="{% url 'AppCalendar:calendar' %}">Main Calendar</a>
             </div>
-            {% endblock content %}   
+
+            <br> <hr> <br>
+            
+            <h1>Sub Calendars</h1>
+
+            <div class = "calendar_picture">
+                <h2> Sub calendars shown here </h2>
+            </div>
+        </div>
+            
+{% endblock content %}   
