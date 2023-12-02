@@ -23,7 +23,7 @@ def import_file(request):
                 end_date = row.get('End Date')
                 end_time = row.get('End Time')
                 description = row.get('Description')
-                
+                 
                 start_datetime = datetime.strptime(f'{start_date} {start_time}', '%Y-%m-%d %H:%M:%S')
                 end_datetime = datetime.strptime(f'{end_date} {end_time}', '%Y-%m-%d %H:%M:%S')
             
