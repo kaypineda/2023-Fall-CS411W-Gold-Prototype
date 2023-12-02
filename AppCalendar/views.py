@@ -4,6 +4,7 @@ from datetime import date, datetime, timedelta
 
 from django.contrib import messages
 from django.db.models import Count
+from django.db.models.functions import TruncDate
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -27,6 +28,19 @@ class CalendarView(generic.ListView):
         context['calendar'] = mark_safe(html_cal)
         context['prev_month'] = prev_month(d)
         context['next_month'] = next_month(d)
+        
+        # Hope this fetches a weeks worth of tasks??
+        today = datetime.today()
+        start_week = today - timedelta(days=today.weekday())
+        end_week = start_week + timedelta(days=7)
+        context['this_week_tasks'] = Task.objects.annotate(
+            end_date=TruncDate('end_time')
+        ).filter(
+            end_date__range=[
+                start_week,
+                end_week
+        ]).order_by('priority', 'end_time')
+        
         return context
 
 def get_date(req_month):
