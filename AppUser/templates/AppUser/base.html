@@ -3,20 +3,6 @@
 <html lang="en">
 
 <head>
-    <!-- <style type ="text/css">
-      .sidenav {
-        height:100%;
-        width:160px;
-        position:fixed;
-        z-index:1;
-        top:0;
-        Left:0;
-        background-color:aqua;
-        /* overflow-x: :hidden; */
-        padding-top:200px;
-      } -->
-
-    </style>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,17 +12,11 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
     crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{% static '/css/styles.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'AppCalendar/css/calendar.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'AppCalendar/css/popup.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'AppUser/css/login.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'AppUser/css/dashboard.css' %}">
   <title>Schedule Puzzle Calendar</title>
 </head>
-
-
-
 <body>
-
-
- 
 
   <h1 class="title">{% block title %}{% endblock %}</h1>
   <hr>
@@ -53,12 +33,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
 
-
-    
-    {% block script %}
-    {% endblock %}
-    
-   
-
+  {% block script %}
+  {% endblock %}
 </body>
 </html>

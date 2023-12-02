@@ -1,4 +1,5 @@
 {% extends 'AppCalendar/base.html' %}
+{% load static %}
 
 {% block title %}
 Task
@@ -44,5 +45,39 @@ Task
   </table>
 </form>
 
-<div id="popupContainer"></div>
+{% comment %}
+<div id="popUp" class="popupWindow">
+  <div class="popupWindow-content">
+    <div class="popupWindow-header">
+      <h2>Duplicate Tasks</h2>
+    </div>
+    <div class="popupWindow-body">
+      <p>There are duplicate tasks that need attention.</p>
+    </div>
+    <button id="closeWindowBtn" class="closeWindowBtn">Close Window</button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var openWindowBtn = document.querySelector('.add-button');
+    var closeWindowBtn = document.getElementById('closeWindowBtn');
+    var popupWindow = document.getElementById('popUp');
+
+    if(openWindowBtn && closeWindowBtn) {
+      openWindowBtn.addEventListener('click', function(event) {
+        popupWindow.style.display = "block";
+      });
+
+      closeWindowBtn.addEventListener('click', function() {
+        popupWindow.style.display = 'none';
+        window.location.href = '{% url "AppCalendar:task_new" %}';
+      });
+    } else {
+      console.error('One or more elements not found. Check your IDs');
+    }
+  });
+</script>
+{% endcomment %}
+
 {% endblock %}

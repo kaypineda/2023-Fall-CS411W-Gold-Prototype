@@ -1,0 +1,67 @@
+* {box-sizing: border-box}
+
+/*Full-width input fields */
+input[type=email], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    font-family: 'Lato', sans-serif;
+}
+
+input[type=email]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+.button-container {
+    display: flex;
+    justify-content:  space-between;
+}
+
+.signupbtn, .cancelbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    font-family: 'Lato', sans-serif;
+}
+
+.signupbtn:hover, .cancelbtn {
+    opacity: 1;
+}
+
+.cancelbtn {
+    background-color: #f44336;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+/* .cancelbtn, .signupbtn {
+    vertical-align: middle;
+    float: left;
+    width: auto;
+} */
+
+.container {
+    padding: 16px;
+    font-family: 'Lato', sans-serif;
+}
+
+@media screen and (max-width: 300px) {
+    .cancelbtn, .signupbtn {
+        width: 100%;
+    }
+}
