@@ -1,7 +1,6 @@
 .topnav {
     overflow: hidden;
     background-color: #e9edee;
-    /* position:inherit; */
     position: fixed;
     top: 0;
     right:0;
@@ -16,7 +15,7 @@
     color: black;
 }
 
-.topnav a{
+.topnav a {
     float: left;
     display: block;
     color: black;
@@ -25,6 +24,7 @@
     text-decoration: none;
     font-size: 17px;
 }
+
 .topnav input[type=text] {
     float: right;
     padding: 6px;
@@ -33,7 +33,6 @@
     border: none;
     font-size: 17px;
 }
-
 
 .sidenav {
     height: 100%;
@@ -48,11 +47,12 @@
 }
 
 .sidenav a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 18px;
     color: black;
     display: block;
+    font-family: 'Raleway';
+    font-size: 20px;    
+    padding: 14px 16px;
+    text-decoration: none;
 }
 
 .sidenav a:hover {
@@ -64,11 +64,11 @@
     overflow: hidden;
 }
 
-.subnav {
+.subnav .btn {
+    color: #66aaaa;    
     font-size: 16px;
     border: none;
     outline: none;
-    color: #66aaaa;
     padding: 14px 16px;
     background-color: inherit;
     font-family: inherit;
@@ -92,6 +92,8 @@
     float: left;
     color: black;
     text-decoration: none;
+    padding: 14px 16px;
+    font-size: 16px;
 }
 
 /* adda grey background when you hover */

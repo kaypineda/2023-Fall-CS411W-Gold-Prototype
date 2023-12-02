@@ -2,63 +2,47 @@
 
 
 {% block content %}     
-    <!-- <title>Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css">
-    <script defer src="dashboard.js"></script>-->
-
-    <!-- <form action="dashboard.php" method="post">
-        <input type="submit" value="Dashboard" id="dashboard-form-submit"> -->
-        <div class="topnav">
-            <input type="text" placeholder="Search schedules">
-        </div>
-        <br>
-
-        <!-- <div class="sidenav">
-        <button type="button" class="Userbtn">User</button>
-        <br>
-        <button type="button" class="Newbtn">+New</button>
-        <button type="button" class="Categoriesbtn">Categories</button>
-        <button type="button" class="Templatebtn">Templates</button>
-        <button type="button" class="Editbtn">Trash</button>
-        </div> -->
+    <div class="topnav">
+        <input type="text" placeholder="Search schedules">
+    </div>
+    <br>
+        
+    <div class="sidenav">
+        <a href="#User">User</a> <br>
+        <a href="#New">New+</a> <br>
             
-        <div class="sidenav">
-            <a href="#User">User</a>
-            <a href="#New">New+</a>
-            
-            <!-- <a href="#Categories">Categories</a> -->
-            <div class="subnav">
-                <a href="subnavbtn">Categories <i class="fa fa-caret-down"></i></a>
-                <div class="subnav-content">
-                    <a href="#School">School</a>
-                    <a href="#Work">Work</a>
-                    <a href="#Personal">Personal</a>
-                    <a href="#Family">Family</a>
-                    <a href="Custom">Custom+</a>
-               </div>
+        <!-- <a href="#Categories">Categories</a> -->
+        <div class="subnav">
+            <a>Categories <i class="fa fa-caret-down"></i></a> <br>
+            <div class="subnav-content">
+                <a href="#School">School</a>
+                <a href="#Work">Work</a> 
+                <a href="#Personal">Personal</a>
+                <a href="#Family">Family</a> 
+                <a href="Custom">Custom+</a> 
             </div>
-            <div>
-                <a href="#Templates">Templates</a>
-                <a href="#Trash">Trash</a>
-            </div>
+        </div> <br>
+
+        <a href="#Templates">Templates</a> <br>
+        <a href="#Trash">Trash</a>
+    </div>
+
+    <br>
+
+    <a class="invis_btn" href="{% url 'AppCalendar:calendar' %}">Main Calendar</a>
+
+    <div class="main">
+        <h1> Main Calendar </h1>
+        <div class = "calendar_picture">
+            <a class="invis_btn" href="{% url 'AppCalendar:calendar' %}">Main Calendar</a>
         </div>
 
-        <br>
-        <a class="invis_btn" href="{% url 'AppCalendar:calendar' %}">Main Calendar</a>
-
-        <div class="main">
-            <h1> Main Calendar </h1>
-            <div class = "calendar_picture">
-                <a class="invis_btn" href="{% url 'AppCalendar:calendar' %}">Main Calendar</a>
-            </div>
-
-            <br> <hr> <br>
+        <br> <hr> <br>
             
-            <h1>Sub Calendars</h1>
+        <h1>Sub Calendars</h1>
 
-            <div class = "calendar_picture">
-                <h2> Sub calendars shown here </h2>
-            </div>
+        <div class = "calendar_picture">
+            <h2> Sub calendars shown here </h2>
         </div>
-            
+    </div>            
 {% endblock content %}   
