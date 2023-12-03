@@ -1,6 +1,7 @@
 import calendar
 from collections import Counter
 from datetime import date, datetime, timedelta
+from .models import Task
 
 from django.contrib import messages
 from django.db.models import Count
@@ -99,3 +100,17 @@ def task_delete(request, task_id=None):
         return HttpResponseRedirect(reverse('AppCalendar:calendar'))
 
     return render(request, 'AppCalendar/delete.html', {'task': instance})
+
+# def sidebar(request):
+
+#     context = {
+#         "trips": Task.objects.all()
+#     }
+#     return render(request, 'AppCalendar/sidebar.html', context)
+
+# ideas to try
+# 1. play with the pathing on line 92
+
+def your_view(request):
+    data = Task.objects.all()
+    return render(request, 'AppCalendar/sidebar.html', {'data': data})

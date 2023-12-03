@@ -57,3 +57,4 @@ class NotificationMessage(models.Model):
     message_id = models.AutoField(primary_key=True)
     notification_id = models.ForeignKey('Notifications', on_delete=models.CASCADE)
     message = models.TextField()
+

@@ -1,0 +1,30 @@
+<!-- sidebar.html -->
+<style type="text/css">
+    .sidenav {
+        height: 100%;
+        width:210px;
+        position: fixed;
+        z-index: 1;
+        left:0;
+        background-color: azure;
+        overflow-x: hidden;
+        padding-top:20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        border:solid 2px blueviolet;
+        font-family: sans-serif; /* Change 'Your Chosen Font' to the desired font name */
+
+
+    }
+
+</style>
+
+
+<div class="sidenav">
+    <h2><u>To-do List</u></h2>
+    <ul>
+        {% for item in data %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+</div>
