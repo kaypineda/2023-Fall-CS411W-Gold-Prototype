@@ -32,15 +32,15 @@ class CalendarView(generic.ListView):
         
         # Hope this fetches a weeks worth of tasks??
         today = datetime.today()
-        start_week = today - timedelta(days=today.weekday())
-        end_week = start_week + timedelta(days=7)
-        context['this_week_tasks'] = Task.objects.annotate(
+        start_week = today - timedelta(days=today.weekday() + 1)
+        end_week = start_week + timedelta(days=6)
+        context['task_list'] = Task.objects.annotate(
             end_date=TruncDate('end_time')
         ).filter(
             end_date__range=[
                 start_week,
                 end_week
-        ]).order_by('priority', 'end_time')
+        ]).order_by('end_time', 'priority')
         
         return context
 
