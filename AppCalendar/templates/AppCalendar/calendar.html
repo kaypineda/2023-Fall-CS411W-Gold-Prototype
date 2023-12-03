@@ -50,13 +50,13 @@
             <div class="sidenav">
                 <a class="btn btn-info right" style="background-color: #ffffff;" href="{% url 'AppCalendar:task_new' %}"> New Task </a>
                 <h2>To-do List</h2>
-                <hr style="height: 8px; background-color: #aaaaaa">
+                <hr style="height: 1px; background-color: #000000">
                 {% for task in task_list %}
                     <b>Task Name: </b> {{ task.title }} <br>
                     <b>Start Time: </b> {{task.start_time}} <br>
                     <b>End Time: </b> {{task.end_time}} <br> <br>
                     <b>Description: </b> {{task.description}} <br>
-                    <hr style="height: 1px; background-color: #000000">
+                    <hr style="height: 1px; background-color: #aaaaaa">
                 {% endfor %}
             </div>
         </td>
