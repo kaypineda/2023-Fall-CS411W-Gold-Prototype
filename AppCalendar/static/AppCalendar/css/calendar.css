@@ -32,3 +32,13 @@
 .date {
   font-size: 16px;
 }
+
+.sidenav {
+  height: 100%;
+  z-index: 1;
+  left:0;
+  background-color: azure;
+  overflow-x: hidden;
+  padding: 20px;
+  border:solid 2px rgb(117, 116, 118)t;
+}
