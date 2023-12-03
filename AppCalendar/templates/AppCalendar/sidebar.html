@@ -1,3 +1,5 @@
+
+
 <!-- sidebar.html -->
 <style type="text/css">
     .sidenav {
@@ -23,8 +25,8 @@
 <div class="sidenav">
     <h2><u>To-do List</u></h2>
     <ul>
-        {% for item in data %}
-            <li>{{ item }}</li>
+        {% for nav_item in nav_items %}
+            <li><a href="{{ nav_item.link }}">{{ nav_item.title }}</a></li>
         {% endfor %}
     </ul>
 </div>

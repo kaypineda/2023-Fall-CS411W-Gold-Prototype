@@ -31,16 +31,18 @@ class CalendarView(generic.ListView):
         context['next_month'] = next_month(d)
         
         # Hope this fetches a weeks worth of tasks??
-        today = datetime.today()
-        start_week = today - timedelta(days=today.weekday())
-        end_week = start_week + timedelta(days=7)
-        context['this_week_tasks'] = Task.objects.annotate(
-            end_date=TruncDate('end_time')
-        ).filter(
-            end_date__range=[
-                start_week,
-                end_week
-        ]).order_by('priority', 'end_time')
+        # today = datetime.today()
+        # start_week = today - timedelta(days=today.weekday())
+        # end_week = start_week + timedelta(days=7)
+        # context['this_week_tasks'] = Task.objects.annotate(
+        #     end_date=TruncDate('end_time')
+        # ).filter(
+        #     end_date__range=[
+        #         start_week,
+        #         end_week
+        # ]).order_by('priority', 'end_time')
+        
+        
         
         return context
 
@@ -101,16 +103,12 @@ def task_delete(request, task_id=None):
 
     return render(request, 'AppCalendar/delete.html', {'task': instance})
 
-# def sidebar(request):
-
-#     context = {
-#         "trips": Task.objects.all()
-#     }
-#     return render(request, 'AppCalendar/sidebar.html', context)
-
-# ideas to try
-# 1. play with the pathing on line 92
-
-def your_view(request):
+def side_nav_list(request):
     data = Task.objects.all()
     return render(request, 'AppCalendar/sidebar.html', {'data': data})
+
+
+def home(request):
+    nav_items = Task.objects.all()
+    return render(request, 'home.html', {'nav_items': nav_items})
+

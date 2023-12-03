@@ -44,3 +44,8 @@ class Calendar(HTMLCalendar):
 		for week in self.monthdays2calendar(self.year, self.month):
 			cal += f'{self.formatweek(week, tasks)}\n'
 		return cal
+	
+class todo_list():
+	def to_do_function():
+		data = Task.objects.all()
+		return data

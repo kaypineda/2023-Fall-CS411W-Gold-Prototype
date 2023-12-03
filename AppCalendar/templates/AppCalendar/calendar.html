@@ -49,7 +49,7 @@
             
             <a class="btn btn-info right" href="{% url 'AppCalendar:task_new' %}"> New Task </a>
 
-            {% include 'AppCalendar/sidebar.html' %}
+            {% include 'AppCalendar/sidebar.html' with nav_items=nav_items %}
         </td>
 
         <td>
