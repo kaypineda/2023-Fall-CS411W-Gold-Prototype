@@ -80,17 +80,26 @@ def task(request, task_id=None):
         duplicateTimes = Task.objects.exclude(pk=instance.pk).filter(
             start_time__date = start_time.date(),
             start_time__time = start_time.time()
-        )
+        ) 
+
+        tasks = Task.objects.exclude(pk=instance.pk)
+        if tasks.exists():
+            for task in tasks:
+                overlap = instance.check_overlap(task.start_time, task.end_time, instance.start_time, instance.end_time)
+                #print(overlap)
+                if overlap:
+                    return render(request, 'AppCalendar/reschedule.html', {'task': instance, 'overlap_task': task})
         
         if duplicateTimes:
             #print("There are tasks with the same date and times")
             return render(request, 'AppCalendar/popup.html')
-        else:       
+        else:
             #print("Saving edit")
             form.save()
             return HttpResponseRedirect(reverse('AppCalendar:calendar'))   
     #print("Returning to form.")        
     return render(request, 'AppCalendar/task.html', {'form': form})
+
 
 def task_delete(request, task_id=None):
     instance = Task.objects.get(pk=task_id)
