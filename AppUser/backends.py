@@ -3,6 +3,20 @@ from django.contrib.auth import get_user_model
 
 class EmailBackend(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
+        
+        """
+        Authenticates a user by email and password.
+
+        Parameters:
+            request (HttpRequest): The HTTP request object.
+            username (str): User's email address.
+            password (str): User's password.
+            **kwargs: Additional keyword arguments.
+
+        Returns:
+            get_user_model(): The authenticated user if successful, None otherwise.
+        """
+        
         UserModel = get_user_model()
         try:
             user = UserModel.objects.get(email=username)

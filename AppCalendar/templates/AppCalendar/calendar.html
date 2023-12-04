@@ -17,13 +17,22 @@
                 <form method="post" action="{% url 'AppCalendar:import_file' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <label for="csvFile">Upload CSV file:</label>
-                    <input type="file" id="csvFile" name="csv_file" accept=".csv"><br>
+                    <input type="file" id="csvFile" name="csv_file" accept=".csv">
+                    <span type="button" class="removeFile" onclick="removeFile('csvFile')">❌</span>
 
                     <label for="icsFile">Upload ICS file</label>
-                    <input type="file" id="icsFile" name="ics_file" accept=".ics"><br>
+                    <input type="file" id="icsFile" name="ics_file" accept=".ics">
+                    <span type="button" class="removeFile" onclick="removeFile('icsFile')">❌</span>
                     <button class="btn btn-info left" type="submit">Import</button>
                 </form>
-                
+
+                <script>
+                    function removeFile(inputId) {
+                        const input = document.getElementById(inputId);
+                        input.value = ''; 
+                        const label = input.previousElementSibling;
+                    }
+                </script>  
                 <br> <br> <br>
 
                 <div class="dropdown" style="display: inline-block;">

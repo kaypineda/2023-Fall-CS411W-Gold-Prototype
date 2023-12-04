@@ -1,0 +1,24 @@
+{% extends 'AppCalendar/base.html' %}
+
+{% block title %}
+    Reschedule
+{% endblock title %}
+
+
+{% block content %}
+<div class="clearfix">
+    <a class="btn btn-info right" href="{% url 'AppCalendar:calendar' %}"> Cancel </a>
+</div>
+
+<b>Task Name: </b> {{ task.title }} <br>
+<b>Start Time: </b> {{task.start_time}} <br>
+<b>End Time: </b> {{task.end_time}} <br> <br>
+<b>Description: </b> {{task.description}} <br>
+
+<b>Task Name: </b> {{ overlap_task.title }} <br>
+<b>Start Time: </b> {{ overlap_task.start_time }} <br>
+<b>End Time: </b> {{ overlap_task.end_time }} <br> <br>
+<b>Description: </b> {{ overlap_task.description }} <br>
+
+
+{% endblock content %}   

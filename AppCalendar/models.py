@@ -17,9 +17,9 @@ class Task(models.Model):
     category = models.CharField(max_length=200, default='')
     priority = models.IntegerField(default=1)
     title = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    start_time = models.DateTimeField(default=timezone.now)
-    end_time = models.DateTimeField(default=timezone.now)
+    description = models.TextField(null=True, blank=True)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
 
     # String representation of the Task object, used for display purposes
     def __str__(self):
@@ -31,7 +31,19 @@ class Task(models.Model):
         url = reverse('AppCalendar:task_edit', args=(self.task_id,))
         delete = reverse('AppCalendar:task_delete', args=(self.task_id,))
         return f'<a href="{url}"> {self.title} </a> | <a href="{delete}">Delete</a>'
+
+
+    def check_overlap(self, fixed_start, fixed_end, new_start, new_end):
+        overlap = False
+        if new_start == fixed_end or new_end == fixed_start:    #edge case
+            overlap = False
+        elif (new_start >= fixed_start and new_start <= fixed_end) or (new_end >= fixed_start and new_end <= fixed_end): #innner limits
+            overlap = True
+        elif new_start <= fixed_start and new_end >= fixed_end: #outter limits
+            overlap = True
     
+        return overlap
+        
     # Custom validation method to ensure that the end time is after the start time
     def clean(self):
         if self.end_time <= self.start_time:

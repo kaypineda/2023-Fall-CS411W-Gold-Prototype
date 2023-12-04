@@ -31,18 +31,16 @@ class CalendarView(generic.ListView):
         context['next_month'] = next_month(d)
         
         # Hope this fetches a weeks worth of tasks??
-        # today = datetime.today()
-        # start_week = today - timedelta(days=today.weekday())
-        # end_week = start_week + timedelta(days=7)
-        # context['this_week_tasks'] = Task.objects.annotate(
-        #     end_date=TruncDate('end_time')
-        # ).filter(
-        #     end_date__range=[
-        #         start_week,
-        #         end_week
-        # ]).order_by('priority', 'end_time')
-        
-        
+        today = datetime.today()
+        start_week = today - timedelta(days=today.weekday() + 1)
+        end_week = start_week + timedelta(days=6)
+        context['task_list'] = Task.objects.annotate(
+            end_date=TruncDate('end_time')
+        ).filter(
+            end_date__range=[
+                start_week,
+                end_week
+        ]).order_by('priority', 'end_time')
         
         return context
 
@@ -82,17 +80,26 @@ def task(request, task_id=None):
         duplicateTimes = Task.objects.exclude(pk=instance.pk).filter(
             start_time__date = start_time.date(),
             start_time__time = start_time.time()
-        )
+        ) 
+
+        tasks = Task.objects.exclude(pk=instance.pk)
+        if tasks.exists():
+            for task in tasks:
+                overlap = instance.check_overlap(task.start_time, task.end_time, instance.start_time, instance.end_time)
+                #print(overlap)
+                if overlap:
+                    return render(request, 'AppCalendar/reschedule.html', {'task': instance, 'overlap_task': task})
         
         if duplicateTimes:
             #print("There are tasks with the same date and times")
             return render(request, 'AppCalendar/popup.html')
-        else:       
+        else:
             #print("Saving edit")
             form.save()
             return HttpResponseRedirect(reverse('AppCalendar:calendar'))   
     #print("Returning to form.")        
     return render(request, 'AppCalendar/task.html', {'form': form})
+
 
 def task_delete(request, task_id=None):
     instance = Task.objects.get(pk=task_id)
@@ -103,12 +110,16 @@ def task_delete(request, task_id=None):
 
     return render(request, 'AppCalendar/delete.html', {'task': instance})
 
-def side_nav_list(request):
+# def sidebar(request):
+
+#     context = {
+#         "trips": Task.objects.all()
+#     }
+#     return render(request, 'AppCalendar/sidebar.html', context)
+
+# ideas to try
+# 1. play with the pathing on line 92
+
+def your_view(request):
     data = Task.objects.all()
     return render(request, 'AppCalendar/sidebar.html', {'data': data})
-
-
-def home(request):
-    nav_items = Task.objects.all()
-    return render(request, 'home.html', {'nav_items': nav_items})
-
