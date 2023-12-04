@@ -6,6 +6,15 @@
 
 
 {% block content %}
+<!-- Displaying Duplicate Import Tasks-->
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</div>
+{% endif %}
+
 <div class="clearfix">
     <a class="btn btn-info right" href="{% url 'AppUser:dashboard' %}"> Home </a>
 </div>
