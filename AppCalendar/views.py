@@ -40,7 +40,7 @@ class CalendarView(generic.ListView):
             end_date__range=[
                 start_week,
                 end_week
-        ]).order_by('end_time', 'priority')
+        ]).order_by('priority', 'end_time')
         
         return context
 
