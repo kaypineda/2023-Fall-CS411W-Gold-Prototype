@@ -3,8 +3,9 @@ import icalendar
 from datetime import datetime, time
 from django.utils import timezone
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from .models import Task
+from django.contrib import messages
 
 def import_file(request):
     
@@ -31,6 +32,9 @@ def import_file(request):
         csv_file = request.FILES.get('csv_file')
         ics_file = request.FILES.get('ics_file')
         
+        # Create a list to store all duplicate tasks
+        duplicate_task_list = []
+        
         # Import from CSV file
         if csv_file is not None:
             if not csv_file.name.endswith('.csv'):
@@ -55,14 +59,28 @@ def import_file(request):
                 start_datetime = timezone.make_aware(start_datetime)
                 end_datetime = timezone.make_aware(end_datetime)
                 
-                # Create and save a new Task object
-                new_task = Task(
-                    title = title,
-                    start_time = start_datetime,
-                    end_time = end_datetime,
-                    description = description
+
+                # Check for duplicate tasks
+                duplicate_tasks = Task.objects.filter(
+                    title=title,
+                    start_time=start_datetime,
+                    end_time=end_datetime
                 )
-                new_task.save()
+                if duplicate_tasks.exists():
+                    duplicate_task_list.append(title)
+                    continue
+                    # duplicate_task_list.extend(list(duplicate_tasks))
+                
+                else:            
+                    # Create and save a new Task object
+                    new_task = Task(
+                        title = title,
+                        start_time = start_datetime,
+                        end_time = end_datetime,
+                        description = description
+                    )
+                    
+                    new_task.save()
             
         # Import from ICS file
         if ics_file is not None:
@@ -72,21 +90,37 @@ def import_file(request):
             # Parse ICS file and create tasks
             cal = icalendar.Calendar.from_ical(ics_file.read())
             
+            
             for component in cal.walk():
                 if component.name == 'VEVENT':
-                    title = component.get('summary')
+                    title = component.get('summary').to_ical().decode('utf-8')
                     start_time = component.get('dtstart').dt
                     end_time = component.get('dtend').dt
                     description = component.get('description')
                     
-                    new_task = Task(
+                    # Check for duplicate tasks
+                    duplicate_tasks = Task.objects.filter(
                         title = title,
                         start_time = start_time,
-                        end_time = end_time,
-                        description = description
+                        end_time = end_time
                     )
-                    new_task.save()
+                    if duplicate_tasks.exists():
+                        # duplicate_task_list.extend(list(duplicate_tasks))
+                        duplicate_task_list.append(title)
+                        continue
                     
+                    else:                   
+                        new_task = Task(
+                            title = title,
+                            start_time = start_time,
+                            end_time = end_time,
+                            description = description
+                        )
+                        new_task.save()
+        if duplicate_task_list:
+            # Display warning message and provide options to schedule or delete duplicate tasks
+            # return render(request, 'AppCalendar/duplicate_import.html', {'duplicate_tasks': duplicate_task_list})   
+            messages.warning(request, f'There are duplicate tasks in your file that have been skipped: {duplicate_task_list}')      
         # Redirect to the 'calendar' view after successful import           
         return redirect('AppCalendar:calendar')
     
