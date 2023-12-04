@@ -18,8 +18,8 @@ class Task(models.Model):
     priority = models.IntegerField(default=1)
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
-    start_time = models.DateTimeField(default=timezone.now)
-    end_time = models.DateTimeField(default=timezone.now)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
 
     # String representation of the Task object, used for display purposes
     def __str__(self):
