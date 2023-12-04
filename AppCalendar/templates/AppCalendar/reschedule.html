@@ -7,18 +7,41 @@
 
 {% block content %}
 <div class="clearfix">
-    <a class="btn btn-info right" href="{% url 'AppCalendar:calendar' %}"> Cancel </a>
+    {% csrf_token %}
+    <table class="form form-table">
+        <h2 class="warning"> There is a schedule conflict</h2> <br>
+        <tr>
+            <td>
+                <p>
+                    <b>Task Name: </b> {{ task.title }} <br>
+                    <b>Start Time: </b> {{task.start_time}} <br>
+                    <b>End Time: </b> {{task.end_time}} <br> <br>
+                    <b>Description: </b> {{task.description}} <br>
+                </p>
+            </td>
+            <td>
+                <p>
+                    <b>Task Name: </b> {{ overlap_task.title }} <br>
+                    <b>Start Time: </b> {{ overlap_task.start_time }} <br>
+                    <b>End Time: </b> {{ overlap_task.end_time }} <br> <br>
+                    <b>Description: </b> {{ overlap_task.description }} <br>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a class="btn buttons add-button login_btn" href="{% url 'AppCalendar:task_edit' task.task_id %}"> Reschedule </a>
+            </td>
+            <td>
+                <a class="btn buttons add-button login_btn" href="{% url 'AppCalendar:task_edit' overlap_task.task_id %}"> Reschedule </a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <a class="btn buttons add-button login_btn" href="{% url 'AppCalendar:calendar' %}"> Keep both tasks as is </a>
+            </td>
+        </tr>
+    </table>
 </div>
-
-<b>Task Name: </b> {{ task.title }} <br>
-<b>Start Time: </b> {{task.start_time}} <br>
-<b>End Time: </b> {{task.end_time}} <br> <br>
-<b>Description: </b> {{task.description}} <br>
-
-<b>Task Name: </b> {{ overlap_task.title }} <br>
-<b>Start Time: </b> {{ overlap_task.start_time }} <br>
-<b>End Time: </b> {{ overlap_task.end_time }} <br> <br>
-<b>Description: </b> {{ overlap_task.description }} <br>
-
 
 {% endblock content %}   
