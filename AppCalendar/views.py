@@ -22,6 +22,15 @@ class CalendarView(generic.ListView):
     template_name = 'AppCalendar/calendar.html'
 
     def get_context_data(self, **kwargs):
+        """
+        Get calendar data
+
+        Parameters:
+            self: class instance
+            **kwargs: Additonal keyword arguments
+        Returns:
+            context
+        """
         context = super().get_context_data(**kwargs)
         d = get_date(self.request.GET.get('month', None))
         cal = Calendar(d.year, d.month)
@@ -30,7 +39,7 @@ class CalendarView(generic.ListView):
         context['prev_month'] = prev_month(d)
         context['next_month'] = next_month(d)
         
-        # Hope this fetches a weeks worth of tasks??
+        # Fetches a weeks worth of tasks
         today = datetime.today()
         start_week = today - timedelta(days=today.weekday() + 1)
         end_week = start_week + timedelta(days=6)
@@ -64,6 +73,18 @@ def next_month(d):
     return month
 
 def task(request, task_id=None):
+    """
+    Adding/editing a task to user schedule. Check for existing tasks, and
+    saves task otherwise. 
+
+    Parameters:
+        request: The HTTP request object.
+        task_id: ID of task 
+
+    Returns:
+        AppCalendar/reschedule.html prompt if there is overlapping tasks,
+        saves task to schedule otherwise
+    """
     instance = Task()
     if task_id:
         instance = get_object_or_404(Task, pk=task_id)
@@ -75,8 +96,6 @@ def task(request, task_id=None):
         
         #print("Entering prioritize function!!")
         start_time = form.cleaned_data['start_time']
-        title = form.cleaned_data['title']
-        category = form.cleaned_data['category']
         duplicateTimes = Task.objects.exclude(pk=instance.pk).filter(
             start_time__date = start_time.date(),
             start_time__time = start_time.time()
@@ -90,9 +109,6 @@ def task(request, task_id=None):
                 if overlap:
                     return render(request, 'AppCalendar/reschedule.html', {'task': instance, 'overlap_task': task})
         
-        if duplicateTimes:
-            #print("There are tasks with the same date and times")
-            return render(request, 'AppCalendar/popup.html')
         else:
             #print("Saving edit")
             form.save()
@@ -102,6 +118,16 @@ def task(request, task_id=None):
 
 
 def task_delete(request, task_id=None):
+    """
+    Allows the user to delete a task.
+
+    Parameters:
+        request: The HTTP request object.
+        task_id: ID of task to be deleted
+
+    Returns: 
+        Task deletion prompt
+    """
     instance = Task.objects.get(pk=task_id)
 
     if request.method == 'POST':
