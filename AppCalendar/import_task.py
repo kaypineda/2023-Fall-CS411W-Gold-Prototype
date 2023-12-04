@@ -1,6 +1,7 @@
 import csv
 import icalendar
 from datetime import datetime, time
+from django.utils import timezone
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from .models import Task
@@ -51,14 +52,14 @@ def import_file(request):
                 end_datetime = datetime.strptime(f'{end_date} {end_time}', '%Y-%m-%d %H:%M:%S')
 
                 # Format datetime objects as strings for the Task model
-                formatted_start_time = start_datetime.strftime('%Y-%m-%dT%H:%M')
-                formatted_end_time = end_datetime.strftime('%Y-%m-%dT%H:%M')
+                start_datetime = timezone.make_aware(start_datetime)
+                end_datetime = timezone.make_aware(end_datetime)
                 
                 # Create and save a new Task object
                 new_task = Task(
                     title = title,
-                    start_time = formatted_start_time,
-                    end_time = formatted_end_time,
+                    start_time = start_datetime,
+                    end_time = end_datetime,
                     description = description
                 )
                 new_task.save()
@@ -69,7 +70,7 @@ def import_file(request):
                 return HttpResponse('No ICS file found.')
 
             # Parse ICS file and create tasks
-            cal = icalendar.Calendar.from_ical(ics_file.read().decode('utf-8'))
+            cal = icalendar.Calendar.from_ical(ics_file.read())
             
             for component in cal.walk():
                 if component.name == 'VEVENT':
@@ -92,59 +93,6 @@ def import_file(request):
     else:
         # Return an error message if the request method is not POST
         return HttpResponse('File not uploaded.')
-   
 
-# def import_ics(request):
-#     if request.method == 'POST':
-#         ics_file = request.FILES.get('ics_file')
-        
-#         if ics_file is None:
-#             return HttpResponse('No file was uploaded.')
-        
-#         if not ics_file.name.endswith('.ics'):
-#             return HttpResponse('The uploaded file is not an ICS file.')
-        
-#         cal = icalendar.Calendar.from_ical(ics_file.read().decode('utf-8'))
-        
-#         for component in cal.walk():
-#             if component.name == 'VEVENT':
-#                 title = component.get('summary')
-#                 start_time = component.get('dtstart').dt
-#                 end_time = component.get('dtend').dt
-#                 description = component.get('description')
-                
-#                 new_task = Task(
-#                     title = title,
-#                     start_time = start_time,
-#                     end_time = end_time,
-#                     description = description
-#                 )
-#                 new_task.save()
-            
-#         return redirect('AppCalendar:calendar')
-#     else:
-#         return HttpResponse('File not uploaded.')
-            
-   
-    # task_list = []
-    # dupe_task_list = []
-    
-    #     existing_task = Task.objects.filter(
-    #         title = title, 
-    #         start_time = formatted_start_time, 
-    #         end_time = formatted_end_time
-    #         ).first()
-        
-    #     if existing_task:
-    #         dupe_task_list.append(existing_task)
-    #     else:
-    #         task_list.append(Task(
-    #             title = title,
-    #             start_time = formatted_start_time,
-    #             end_time = formatted_end_time,
-    #             description = description
-    #         ))
-            
-    # return task_list, dupe_task_list
         
             
