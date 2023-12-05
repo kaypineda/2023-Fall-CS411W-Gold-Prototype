@@ -100,10 +100,6 @@ def task(request, task_id=None):
             start_time__date = start_time.date(),
             start_time__time = start_time.time()
         ) 
-
-        if duplicateTimes:
-            #print("There are tasks with the same date and times")
-            return render(request, 'AppCalendar/popup.html')
         
         form.save()
 
