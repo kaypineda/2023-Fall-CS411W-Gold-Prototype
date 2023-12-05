@@ -1,9 +1,8 @@
 from django.conf import settings
-from django.urls import reverse
-from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
+
 
 # Define a Django model for scheduling
 class Schedule(models.Model):

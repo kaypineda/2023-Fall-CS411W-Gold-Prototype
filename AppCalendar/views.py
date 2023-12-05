@@ -1,12 +1,8 @@
 import calendar
-from collections import Counter
 from datetime import date, datetime, timedelta
-from .models import Task
 
-from django.contrib import messages
-from django.db.models import Count
 from django.db.models.functions import TruncDate
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -14,6 +10,7 @@ from django.views import generic
 
 from .forms import TaskForm
 from .models import *
+from .models import Task
 from .utils import Calendar
 
 

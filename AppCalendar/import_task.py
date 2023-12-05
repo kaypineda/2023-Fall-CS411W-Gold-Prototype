@@ -1,11 +1,14 @@
 import csv
+from datetime import datetime
+
 import icalendar
-from datetime import datetime, time
-from django.utils import timezone
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
-from .models import Task
 from django.contrib import messages
+from django.http import HttpResponse
+from django.shortcuts import redirect
+from django.utils import timezone
+
+from .models import Task
+
 
 def import_file(request):
     

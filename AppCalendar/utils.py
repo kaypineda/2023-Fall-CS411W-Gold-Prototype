@@ -1,6 +1,7 @@
-from datetime import datetime, timedelta
 from calendar import HTMLCalendar
+
 from .models import Task
+
 
 class Calendar(HTMLCalendar):
 	def __init__(self, year=None, month=None):
