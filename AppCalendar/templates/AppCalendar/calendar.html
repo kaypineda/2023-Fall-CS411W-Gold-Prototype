@@ -69,15 +69,21 @@
                 <a class="btn btn-info right" style="background-color: #ffffff;" href="{% url 'AppCalendar:task_new' %}"> New Task </a>
                 <h2>To-do List</h2>
                 <hr style="height: 1px; background-color: #000000">
-                {% for task in task_list %}
-                    <b>Task Name: </b> {{ task.title }} <br>
-                    <b>Start Time: </b> {{task.start_time}} <br>
-                    <b>End Time: </b> {{task.end_time}} <br> <br>
-                    <b>Description: </b> {{task.description}} <br>
-                    <hr style="height: 1px; background-color: #aaaaaa">
-                {% endfor %}
+                <ul id="task-list">
+                    {% for task in task_list %}
+                        <li data-task-id="{{ task.id }}">
+                            <b>Task Name: </b> {{ task.title }} <br>
+                            <b>Start Time: </b> {{task.start_time}} <br>
+                            <b>End Time: </b> {{task.end_time}} <br> <br>
+                            <b>Description: </b> {{task.description}} <br>
+                            <hr style="height: 1px; background-color: #aaaaaa">
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         </td>
+
+        
 
         <td style="vertical-align: top;">
             <div class="clearfix">
@@ -89,7 +95,18 @@
         </td>
     </tr>
 </table>
-
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script>
+$( function() {
+    $( "#task-list" ).sortable({
+        update: function(event, ui) {
+            var newOrder = $(this).sortable('toArray', {attribute: 'data-task-id'});
+            $.post("{% url 'AppCalendar:update_order' %}", {new_order: JSON.stringify(newOrder)});
+        }
+    });
+});
+</script>
 {% endblock content %}   
 
 
