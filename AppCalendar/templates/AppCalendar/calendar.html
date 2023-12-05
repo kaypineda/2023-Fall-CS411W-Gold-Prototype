@@ -74,6 +74,12 @@
                     <b>Start Time: </b> {{task.start_time}} <br>
                     <b>End Time: </b> {{task.end_time}} <br> <br>
                     <b>Description: </b> {{task.description}} <br>
+                    {% if task.task_id in tasks_to_reschedule %}
+                    <div class="alert-warning" role="alert">
+                        Warning: This task has the same priority as another task 
+                        scheduled on the same day!
+                    </div>
+                    {% endif %}
                     <hr style="height: 1px; background-color: #aaaaaa">
                 {% endfor %}
             </div>
