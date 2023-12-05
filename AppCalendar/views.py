@@ -95,12 +95,7 @@ def task(request, task_id=None):
     if request.POST and form.is_valid():
         
         #print("Entering prioritize function!!")
-        start_time = form.cleaned_data['start_time']
-        duplicateTimes = Task.objects.exclude(pk=instance.pk).filter(
-            start_time__date = start_time.date(),
-            start_time__time = start_time.time()
-        ) 
-        
+
         form.save()
 
         tasks = Task.objects.exclude(pk=instance.pk)
