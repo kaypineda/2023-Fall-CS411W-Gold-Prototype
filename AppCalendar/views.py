@@ -1,4 +1,5 @@
 import calendar
+from collections import defaultdict
 from datetime import date, datetime, timedelta
 
 from django.db.models.functions import TruncDate
@@ -40,13 +41,29 @@ class CalendarView(generic.ListView):
         today = datetime.today()
         start_week = today - timedelta(days=today.weekday() + 1)
         end_week = start_week + timedelta(days=6)
-        context['task_list'] = Task.objects.annotate(
+        tasks = Task.objects.annotate(
             end_date=TruncDate('end_time')
         ).filter(
             end_date__range=[
                 start_week,
                 end_week
         ]).order_by('priority', 'end_time')
+        
+        tasks_to_reschedule = []
+        tasks_by_date = defaultdict(list)
+        for task in tasks:
+            tasks_by_date[task.end_date].append(task)
+        for tasks_on_same_date in tasks_by_date.values():
+            tasks_by_priority = defaultdict(list)
+            for task in tasks_on_same_date:
+                tasks_by_priority[task.priority].append(task)
+            for tasks_with_same_priority in tasks_by_priority.values():
+                if len(tasks_with_same_priority) > 1:
+                    tasks_to_reschedule.extend(task.task_id for task in tasks_with_same_priority)
+
+                    
+        context['task_list'] = tasks
+        context['tasks_to_reschedule'] = tasks_to_reschedule
         
         return context
 
