@@ -1,12 +1,16 @@
 import calendar
 from datetime import date, datetime, timedelta
+from django.db import transaction
+import json
 
 from django.db.models.functions import TruncDate
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.views import generic
+from django.views.decorators.csrf import csrf_exempt
+
 
 from .forms import TaskForm
 from .models import *
@@ -46,7 +50,7 @@ class CalendarView(generic.ListView):
             end_date__range=[
                 start_week,
                 end_week
-        ]).order_by('priority', 'end_time')
+        ]).order_by('priority', 'order','end_time')
         
         return context
 
@@ -92,6 +96,9 @@ def task(request, task_id=None):
     if request.POST and form.is_valid():
         
         #print("Entering prioritize function!!")
+        start_time = form.cleaned_data['start_time'].date()
+        existing_task_count = Task.objects.filter(start_time = start_time).count()
+        instance.order = existing_task_count
 
         form.save()
 
@@ -127,3 +134,16 @@ def task_delete(request, task_id=None):
 
     return render(request, 'AppCalendar/delete.html', {'task': instance})
 
+@csrf_exempt
+def update_order(request):
+    if request.method == 'POST':
+        new_order = json.loads(request.POST['new_order'])
+        with transaction.atomic():
+            for i, task_id in enumerate(new_order):
+                Task.objects.filter(pk=task_id).update(order=i)
+                
+        return JsonResponse({"status": "success"})
+    else:
+        return JsonResponse({"status": "fail", "message": "Invalid method"})
+        
+        
