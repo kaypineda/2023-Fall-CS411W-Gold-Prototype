@@ -140,7 +140,13 @@ def update_order(request):
         new_order = json.loads(request.POST['new_order'])
         with transaction.atomic():
             for i, task_id in enumerate(new_order):
-                Task.objects.filter(pk=task_id).update(order=i)
+                if task_id == '':
+                    continue
+                try:
+                    Task.objects.filter(pk=task_id).update(order=i)
+                except ValueError:
+                    return JsonResponse({"status": "fall", "message": "Invalid task id:{}"
+                                         .format(task_id)})
                 
         return JsonResponse({"status": "success"})
     else:
