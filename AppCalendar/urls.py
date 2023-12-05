@@ -12,4 +12,5 @@ urlpatterns = [
     #path('import/', import_task.import_csv, name='import_csv'),
     #path('calendar/list/', views.sidebar, name='sidebar'),
     path('import/', import_task.import_file, name='import_file'),
+    path('update/', views.update_order, name="update_order"),
 ]
