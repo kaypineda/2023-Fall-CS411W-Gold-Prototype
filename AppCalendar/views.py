@@ -101,6 +101,12 @@ def task(request, task_id=None):
             start_time__time = start_time.time()
         ) 
 
+        if duplicateTimes:
+            #print("There are tasks with the same date and times")
+            return render(request, 'AppCalendar/popup.html')
+        
+        form.save()
+
         tasks = Task.objects.exclude(pk=instance.pk)
         if tasks.exists():
             for task in tasks:
@@ -109,10 +115,7 @@ def task(request, task_id=None):
                 if overlap:
                     return render(request, 'AppCalendar/reschedule.html', {'task': instance, 'overlap_task': task})
         
-        else:
-            #print("Saving edit")
-            form.save()
-            return HttpResponseRedirect(reverse('AppCalendar:calendar'))   
+        return HttpResponseRedirect(reverse('AppCalendar:calendar'))   
     #print("Returning to form.")        
     return render(request, 'AppCalendar/task.html', {'form': form})
 
