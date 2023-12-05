@@ -73,9 +73,17 @@
                     {% for task in task_list %}
                         <li data-task-id="{{ task.id }}">
                             <b>Task Name: </b> {{ task.title }} <br>
+                    <b>Priority: </b> {{task.priority}} <br>
                             <b>Start Time: </b> {{task.start_time}} <br>
                             <b>End Time: </b> {{task.end_time}} <br> <br>
                             <b>Description: </b> {{task.description}} <br>
+                    {% if task.task_id in tasks_to_reschedule %}
+                    <div class="alert-warning" role="alert">
+                        Warning: This task has the same priority as another task 
+                        scheduled on the same day!
+                        <a href="{% url 'AppCalendar:task_edit' task.task_id %}" class="btn btn-primary">Reschedule</a>
+                    </div>
+                    {% endif %}
                             <hr style="height: 1px; background-color: #aaaaaa">
                         </li>
                     {% endfor %}
