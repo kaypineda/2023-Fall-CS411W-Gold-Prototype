@@ -78,6 +78,7 @@
                     <div class="alert-warning" role="alert">
                         Warning: This task has the same priority as another task 
                         scheduled on the same day!
+                        <a href="{% url 'AppCalendar:task_edit' task.task_id %}" class="btn btn-primary">Reschedule</a>
                     </div>
                     {% endif %}
                     <hr style="height: 1px; background-color: #aaaaaa">
