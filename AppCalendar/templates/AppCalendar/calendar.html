@@ -71,6 +71,7 @@
                 <hr style="height: 1px; background-color: #000000">
                 {% for task in task_list %}
                     <b>Task Name: </b> {{ task.title }} <br>
+                    <b>Priority: </b> {{task.priority}} <br>
                     <b>Start Time: </b> {{task.start_time}} <br>
                     <b>End Time: </b> {{task.end_time}} <br> <br>
                     <b>Description: </b> {{task.description}} <br>
