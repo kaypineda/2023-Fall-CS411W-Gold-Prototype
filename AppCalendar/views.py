@@ -95,13 +95,20 @@ def task(request, task_id=None):
 
         form.save()
 
+        msg = ""
         tasks = Task.objects.exclude(pk=instance.pk)
         if tasks.exists():
             for task in tasks:
                 overlap = instance.check_overlap(task.start_time, task.end_time, instance.start_time, instance.end_time)
                 #print(overlap)
                 if overlap:
-                    return render(request, 'AppCalendar/reschedule.html', {'task': instance, 'overlap_task': task})
+                    if instance.priority < task.priority: # lower number is higher priority
+                        msg = "This task conflicts with a task of a lower priority."
+                    elif instance.priority > task.priority:
+                        msg = "This task conflicts with a task of a higher priority."
+                    else:
+                        msg = "This task conflicts with another task."
+                    return render(request, 'AppCalendar/reschedule.html', {'task': instance, 'overlap_task': task, 'message': msg})
         
         return HttpResponseRedirect(reverse('AppCalendar:calendar'))   
     #print("Returning to form.")        

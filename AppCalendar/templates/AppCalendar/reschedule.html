@@ -9,22 +9,26 @@
 <div class="clearfix">
     {% csrf_token %}
     <table class="form form-table">
-        <h2 class="warning"> There is a schedule conflict</h2> <br>
+        <h2 class="warning"> {{ message }}</h2> <br>
         <tr>
             <td>
                 <p>
-                    <b>Task Name: </b> {{ task.title }} <br>
-                    <b>Start Time: </b> {{task.start_time}} <br>
-                    <b>End Time: </b> {{task.end_time}} <br> <br>
-                    <b>Description: </b> {{task.description}} <br>
+                    <b>Existing Task: </b> <br>
+                    <b>Task Name: </b> {{ overlap_task.title }} <br>
+                    <b>Priority: </b> {{ overlap_task.priority }} <br>
+                    <b>Start Time: </b> {{ overlap_task.start_time }} <br>
+                    <b>End Time: </b> {{ overlap_task.end_time }} <br> <br>
+                    <b>Description: </b> {{ overlap_task.description }} <br>
                 </p>
             </td>
             <td>
                 <p>
-                    <b>Task Name: </b> {{ overlap_task.title }} <br>
-                    <b>Start Time: </b> {{ overlap_task.start_time }} <br>
-                    <b>End Time: </b> {{ overlap_task.end_time }} <br> <br>
-                    <b>Description: </b> {{ overlap_task.description }} <br>
+                    <b>Incoming Task: </b> <br>
+                    <b>Task Name: </b> {{ task.title }} <br>
+                    <b>Priority: </b> {{ task.priority }} <br>
+                    <b>Start Time: </b> {{task.start_time}} <br>
+                    <b>End Time: </b> {{task.end_time}} <br> <br>
+                    <b>Description: </b> {{task.description}} <br>
                 </p>
             </td>
         </tr>
