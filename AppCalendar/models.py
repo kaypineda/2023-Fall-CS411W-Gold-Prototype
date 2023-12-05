@@ -19,6 +19,7 @@ class Task(models.Model):
     description = models.TextField(null=True, blank=True)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+    order = models.IntegerField(default=0)
 
     # String representation of the Task object, used for display purposes
     def __str__(self):
