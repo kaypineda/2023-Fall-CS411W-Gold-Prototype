@@ -13,10 +13,10 @@ class Schedule(models.Model):
 # Define a Django model for tasks
 class Task(models.Model):
     task_id = models.AutoField(primary_key=True)
-    category = models.CharField(max_length=200, default='')
+    category = models.CharField(max_length=200, default='', blank=True)
     priority = models.IntegerField(default=1)
     title = models.CharField(max_length=200)
-    description = models.TextField(null=True, blank=True)
+    description = models.TextField(default='', blank=True)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     order = models.IntegerField(default=0)
