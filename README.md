@@ -11,4 +11,26 @@ Prototype for CS411W Group Gold
   - ryanktran23 - Ryan Tran - rtran004@odu.edu
   - jaust6 - Jake Austin - jaust006@odu.edu
 
-pablo was here
+## Install Instructions
+
+### Clone this repository
+ ```git clone https://github.com/kaypineda/2023-Fall-CS411W-Gold-Prototype.git ```
+
+### Install python
+- Download [python](https://www.python.org/downloads/)
+
+### Create and activate virtual envionment
+``` python3 -m venv .venv```
+``` source .venv/bin/activate```
+
+### Install required packages
+``` pip install -r requirements.txt```
+
+### Create database
+``` python manage.py makemigrations```
+``` python manage.py migrate```
+
+### Start the server
+``` python manage.py runserver```
+
+
