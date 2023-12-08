@@ -20,14 +20,14 @@ Prototype for CS411W Group Gold
 - Download [python](https://www.python.org/downloads/)
 
 ### Create and activate virtual envionment
-``` python3 -m venv .venv```
+``` python3 -m venv .venv```<br>
 ``` source .venv/bin/activate```
 
 ### Install required packages
 ``` pip install -r requirements.txt```
 
 ### Create database
-``` python manage.py makemigrations```
+``` python manage.py makemigrations```<br>
 ``` python manage.py migrate```
 
 ### Start the server
