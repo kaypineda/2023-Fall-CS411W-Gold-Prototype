@@ -6,4 +6,4 @@ from .models import Schedule, Task
 admin.site.register(Task)
 admin.site.register(Schedule)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ['task_id', 'category', 'priority', 'title', 'description', 'start_time', 'end_time']
+    list_display = ['task_id', 'category', 'priority', 'title', 'description', 'start_time', 'end_time','address','weather']
