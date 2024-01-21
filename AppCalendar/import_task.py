@@ -8,7 +8,27 @@ from django.shortcuts import redirect
 from django.utils import timezone
 
 from .models import Task
+from geopy.geocoders import Nominatim
+import requests
 
+def get_weather(latitude, longitude):
+    # Replace 'YOUR_API_KEY' with your OpenWeatherMap API key
+    api_key = '587a4f810149d6e5b5c28466131f4335'
+    base_url = 'http://api.openweathermap.org/data/2.5/weather'
+    params = {
+        'lat': latitude,
+        'lon': longitude,
+        'appid': api_key,
+    }
+    response = requests.get(base_url, params=params)
+    weather_data = response.json()
+
+    # Extract relevant weather information
+    if 'main' in weather_data and 'temp' in weather_data['main']:
+        temperature = weather_data['main']['temp']
+        return f"Temperature: {temperature}°C"
+    else:
+        return "Weather information not available"
 
 def import_file(request):
     
@@ -53,6 +73,7 @@ def import_file(request):
                 end_date = row.get('End Date')
                 end_time = row.get('End Time')
                 description = row.get('Description')
+                address = row.get('Location')  # Assuming 'Location' is the column for address
                  
                 # Convert date and time strings to datetime objects
                 start_datetime = datetime.strptime(f'{start_date} {start_time}', '%Y-%m-%d %H:%M:%S')
@@ -68,6 +89,7 @@ def import_file(request):
                     title=title,
                     start_time=start_datetime,
                     end_time=end_datetime
+
                 )
                 if duplicate_tasks.exists():
                     duplicate_task_list.append(title)
@@ -80,7 +102,9 @@ def import_file(request):
                         title = title,
                         start_time = start_datetime,
                         end_time = end_datetime,
-                        description = description
+                        description = description,
+                        address=address,
+                        weather=weather_info
                     )
                     
                     new_task.save()
@@ -92,14 +116,14 @@ def import_file(request):
 
             # Parse ICS file and create tasks
             cal = icalendar.Calendar.from_ical(ics_file.read())
-            
-            
+                       
             for component in cal.walk():
                 if component.name == 'VEVENT':
                     title = component.get('summary').to_ical().decode('utf-8')
                     start_time = component.get('dtstart').dt
                     end_time = component.get('dtend').dt
                     description = component.get('description')
+                    address = component.get('location')  # Assuming 'location' is the ICS field for address
                     
                     # Check for duplicate tasks
                     duplicate_tasks = Task.objects.filter(
@@ -118,6 +142,8 @@ def import_file(request):
                             start_time = start_time,
                             end_time = end_time,
                             description = description
+                            address=address,
+                            weather=weather_info                            
                         )
                         new_task.save()
         if duplicate_task_list:
