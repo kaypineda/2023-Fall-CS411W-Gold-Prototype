@@ -19,6 +19,8 @@ class Task(models.Model):
     description = models.TextField(default='', blank=True)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+    address = models.CharField(max_length=200, default='', blank=True)
+    weather = models.TextField(default='', blank=True)
 
     # String representation of the Task object, used for display purposes
     def __str__(self):
@@ -36,7 +38,9 @@ class Task(models.Model):
         overlap = False
         if new_start == fixed_end or new_end == fixed_start:    #edge case
             overlap = False
-        elif (new_start >= fixed_start and new_start <= fixed_end) or (new_end >= fixed_start and new_end <= fixed_end): #innner limits
+        elif (new_start >= fixed_start and new_start <= fixed_end) or (
+            new_end >= fixed_start and new_end <= fixed_end
+            ): #innner limits
             overlap = True
         elif new_start <= fixed_start and new_end >= fixed_end: #outter limits
             overlap = True
