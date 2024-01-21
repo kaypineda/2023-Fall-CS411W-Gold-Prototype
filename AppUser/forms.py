@@ -3,8 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 
 class CustomUserForm(UserCreationForm):
-    email = forms.EmailField(required = True)
-    
+    email = forms.EmailField(label="Email", required=True, error_messages={'unique': 'This email is already in use.'})
+    # This helps improve the user experience by providing more informative error messages.
     class Meta:
         model = get_user_model()
         fields = ("email", "password1", "password2")
