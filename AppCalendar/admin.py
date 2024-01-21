@@ -5,7 +5,7 @@ from .models import Schedule, Task
 # Register your models here.
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ['task_id', 'category', 'priority', 'title', 'description', 'start_time', 'end_time','address','get_weather']
+    list_display = ['task_id', 'category', 'priority', 'title', 'description', 'start_time', 'end_time','address','weather']
     
  #def get_weather(self, obj):
         #return obj.weather if obj.weather else "Weather information not available"
