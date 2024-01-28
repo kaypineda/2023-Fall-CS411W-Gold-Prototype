@@ -1,0 +1,30 @@
+<div id="popUp" class="popupWindow">
+  <div class="popupWindow-content">
+    <div class="popupWindow-header">
+      <h2>Change address</h2>
+    </div>
+    <div class="popupWindow-body">
+      <p>This feature changes the task's address from physical to coordinates and vice versa.</p>
+    </div>
+    <button id="closeWindowBtn" class="closeWindowBtn">Close Window</button>
+  </div>
+</div>
+
+{% include 'AppCalendar/AppCalendar.html' %}
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+   /* var openWindowBtn = document.querySelector('.add-button');
+    var closeWindowBtn = document.getElementById('closeWindowBtn');
+    var popupWindow = document.getElementById('popUp');
+
+    openWindowBtn.addEventListener('click', function(event) {
+      event.preventDefault();
+      popupWindow.style.display = "block";
+    });
+
+    closeWindowBtn.addEventListener('click', function() {
+      popupWindow.style.display = 'none';
+      window.location.href='{% url "AppCalendar:task_new" %}'; */
+    });
+  });
+</script>
