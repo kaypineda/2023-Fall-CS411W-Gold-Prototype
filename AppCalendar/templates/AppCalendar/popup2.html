@@ -74,15 +74,35 @@
       // Handle conversion failure
       alert('Failed to convert address to coordinates.');
     }
+       // Close the pop-up
+    closePopup();
+  })
   }
-        }
-  elif(location == 'address')
-    {
-      
+  elif(location == 'address'){
+      fetch('your_backend_url/convert_coordinates_to_address', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ latitude: latitude, longitude: longitude }),
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // Handle successful conversion (data.address)
+      alert(`Address: ${data.address}`);
+    } else {
+      // Handle conversion failure
+      alert('Failed to convert coordinates to address.');
+    }
+
+    // Close the pop-up
+    closePopup();
+  })
     }
     else
     {
-      
+      #nothing
     }
   
     // Close the pop-up
