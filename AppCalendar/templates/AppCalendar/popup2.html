@@ -1,9 +1,10 @@
-<div id="popUp" class="popupWindow">
-  <div class="popupWindow-content">
-    <div class="popupWindow-header">
+<button id="openPopupBtn" class="openPopupBtn">Address Change</button>
+<div id="popUpBtn" class="popupBtnWindow">
+  <div class="popupBtnWindow-content">
+    <div class="popupBtnWindow-header">
       <h2>Change address</h2>
     </div>
-    <div class="popupWindow-body">
+    <div class="popupBtnWindow-body">
       <p>This feature changes the task's address from physical to coordinates and vice versa.</p>
     </div>
     <button id="closeWindowBtn" class="closeWindowBtn">Close Window</button>
@@ -13,9 +14,15 @@
 {% include 'AppCalendar/SwitchAddress.html' %}
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-   /* var openWindowBtn = document.querySelector('.add-button');
+    var openPopupBtn = document.getElementById('openPopupBtn');
+    var popupWindow = document.getElementById('popUpBtn');
+    var openWindowBtn = document.querySelector('.add-button');
     var closeWindowBtn = document.getElementById('closeWindowBtn');
-    var popupWindow = document.getElementById('popUp');
+
+    openPopupBtn.addEventListener('click', function(event) {
+        event.preventDefault();
+        popupWindow.style.display = "block";
+    });
 
     openWindowBtn.addEventListener('click', function(event) {
       event.preventDefault();
@@ -24,7 +31,7 @@
 
     closeWindowBtn.addEventListener('click', function() {
       popupWindow.style.display = 'none';
-      window.location.href='{% url "AppCalendar:task_new" %}'; */
+      window.location.href='{% url "AppCalendar:task_new" %}'; 
     });
   });
 </script>
