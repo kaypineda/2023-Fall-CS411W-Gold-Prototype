@@ -16,17 +16,11 @@
   document.addEventListener("DOMContentLoaded", function() {
     var openPopupBtn = document.getElementById('openPopupBtn');
     var popupWindow = document.getElementById('popUpBtn');
-    var openWindowBtn = document.querySelector('.add-button');
     var closeWindowBtn = document.getElementById('closeWindowBtn');
 
     openPopupBtn.addEventListener('click', function(event) {
         event.preventDefault();
         popupWindow.style.display = "block";
-    });
-
-    openWindowBtn.addEventListener('click', function(event) {
-      event.preventDefault();
-      popupWindow.style.display = "block";
     });
 
     closeWindowBtn.addEventListener('click', function() {
