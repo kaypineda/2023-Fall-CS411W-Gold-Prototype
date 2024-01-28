@@ -58,7 +58,7 @@
    location = "Neither";
 
   if(location == 'address'){
-  fetch('AppCalendar/switchAddress.html/convert_address_to_coordinates', {
+  fetch('AppCalendar/switchAddress.html/convert_address', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -79,7 +79,7 @@
   })
   }
   elif(location == 'address'){
-      fetch('your_backend_url/convert_coordinates_to_address', {
+      fetch('your_backend_url/convert_coordinates', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
