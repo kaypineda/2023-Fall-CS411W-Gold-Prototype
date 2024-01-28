@@ -33,6 +33,9 @@ class Migration(migrations.Migration):
                 ('description', models.TextField()),
                 ('start_time', models.DateTimeField(default=django.utils.timezone.now)),
                 ('end_time', models.DateTimeField(default=django.utils.timezone.now)),
+                ('address' models.CharField(max_length=200, default='', blank=True)),
+                ('weather' models.TextField(default='', blank=True)),
+
             ],
         ),
         migrations.CreateModel(
