@@ -5,6 +5,21 @@
 Task
 {% endblock %}
 
+{% comment %}
+<button id="openPopupBtn" class="openPopupBtn">Address Change</button>
+<div id="popUpBtn" class="popupBtnWindow">
+  <div class="popupBtnWindow-content">
+    <div class="popupBtnWindow-header">
+      <h2>Address Converter</h2>
+    </div>
+    <div class="popupBtnWindow-body">
+      <p>This feature changes the task's address from physical to coordinates and vice versa.</p>
+      <button onclick="convertAddress()">Convert</button>
+    </div>
+    <button id="closeWindowBtn" class="closeWindowBtn">Close Window</button>
+  </div>
+</div>
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   var openPopupBtn = document.getElementById('openPopupBtn');
