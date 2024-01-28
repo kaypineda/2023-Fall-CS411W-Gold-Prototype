@@ -8,7 +8,7 @@ from geopy.geocoders import Nominatim
 import requests
 
 def get_weather(latitude, longitude):
-    # Replace 'YOUR_API_KEY' with your OpenWeatherMap API key
+    # Must have OpenWeatherMap API key!
     api_key = '587a4f810149d6e5b5c28466131f4335'
     base_url = 'http://api.openweathermap.org/data/2.5/weather'
     params = {
