@@ -57,7 +57,7 @@
     # If neither address nor coordinates
    location = "Neither";
 
-  if(location == 'address'){
+  if(location == 'Address'){
   fetch('AppCalendar/switchAddress.html/convert_address', {
     method: 'POST',
     headers: {
@@ -78,7 +78,7 @@
     closePopup();
   })
   }
-  elif(location == 'address'){
+  elif(location == 'Coordinates'){
       fetch('your_backend_url/convert_coordinates', {
     method: 'POST',
     headers: {
