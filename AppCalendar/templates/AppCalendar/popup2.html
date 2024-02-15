@@ -29,88 +29,80 @@
       window.location.href='{% url "AppCalendar:SwitchAddress" %}';
     });
   });
-  function convertAddress() {
-  var addressInput = document.getElementById('addressInput');
-  var address = addressInput.value;
-  var location; 
+    function convertAddress() {
+    var addressInput = document.getElementById('addressInput').value;
+    var geolocator = new Nominatim({ user_agent: "AppCalendar" });
 
-  // Call a backend function to convert address to latitude and longitude
-  // You can use AJAX to send the address to the backend
-  // For simplicity, let's assume you have a function called 'convertAddressToLatLon' in your backend
-  // Replace 'your_backend_url' with the actual URL where your backend is hosted
-  geolocator = Nominatim(user_agent="AppCalendar")
-    try:
-        location = geolocator.geocode(task.address)
-        if ',' in location:
-       location = "Address";
-    
-    # Check if the location is coordinates
-    parts = location.split()
-    if len(parts) == 2:
-        try:
-            float(parts[0])
-            float(parts[1])
-           location = "Coordinates";
-        except ValueError:
-            pass
-    
-    # If neither address nor coordinates
-   location = "Neither";
-
-  if(location == 'Address'){
-  fetch('AppCalendar/switchAddress.html/convert_address', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ address: address }),
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.success) {
-      // Handle successful conversion (data.latitude, data.longitude)
-      alert(`Latitude: ${data.latitude}, Longitude: ${data.longitude}`);
-    } else {
-      // Handle conversion failure
-      alert('Failed to convert address to coordinates.');
-    }
-       // Close the pop-up
-    closePopup();
-  })
+    geolocator.geocode(addressInput)
+      .then(location => {
+        if (location) {
+          var parts = location.split(' ');
+          if (parts.length == 2 && !isNaN(parseFloat(parts[0])) && !isNaN(parseFloat(parts[1]))) {
+            // Coordinates
+            convertCoordinates(location);
+          } else {
+            // Address
+            convertAddressToCoordinates(addressInput);
+          }
+        } else {
+          alert("Location not found.");
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while converting address.');
+      });
   }
-  elif(location == 'Coordinates'){
-      fetch('your_backend_url/convert_coordinates', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ latitude: latitude, longitude: longitude }),
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.success) {
-      // Handle successful conversion (data.address)
-      alert(`Address: ${data.address}`);
-    } else {
-      // Handle conversion failure
-      alert('Failed to convert coordinates to address.');
-    }
-
-    // Close the pop-up
-    closePopup();
-  })
-    }
-    else
-    {
-      #nothing
-    }
-  
-    // Close the pop-up
-    closePopup();
-  })
+  function convertAddressToCoordinates(address) {
+    fetch('AppCalendar/switchAddress.html/convertaddress', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ address: address }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Handle successful conversion (data.latitude, data.longitude)
+          alert(`Latitude: ${data.latitude}, Longitude: ${data.longitude}`);
+        } else {
+          // Handle conversion failure
+          alert('Failed to convert address to coordinates.');
+        }
+        closePopup();
+      })
   .catch(error => {
     console.error('Error:', error);
     alert('An error occurred while converting address.');
   });
 }
+  function convertCoordinates(coordinates) {
+    fetch('AppCalendar/switchAddress.html/convertcoordinates', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ latitude: coordinates.split(' ')[0], longitude: coordinates.split(' ')[1] }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Handle successful conversion (data.address)
+          alert(`Address: ${data.address}`);
+        } else {
+          // Handle conversion failure
+          alert('Failed to convert coordinates to address.');
+        }
+        closePopup();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while converting coordinates.');
+      });
+  }
+   function closePopup() {
+    var popupWindow = document.getElementById('popUpBtn');
+    popupWindow.style.display = 'none';
+  }
 </script>
