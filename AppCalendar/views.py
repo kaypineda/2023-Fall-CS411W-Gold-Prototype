@@ -151,3 +151,36 @@ def task_delete(request, task_id=None):
 
     return render(request, 'AppCalendar/delete.html', {'task': instance})
 
+def convert_address_to_lat_lon(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        address = data.get('address')
+        
+        # Perform geocoding to get latitude and longitude
+        geolocator = Nominatim(user_agent="AppCalendar")
+        location = geolocator.geocode(address)
+        
+        if location:
+            return JsonResponse({'success': True, 'latitude': location.latitude, 'longitude': location.longitude})
+        else:
+            return JsonResponse({'success': False})
+    else:
+        return JsonResponse({'success': False})
+
+def convert_lat_lon_to_address(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        latitude = data.get('latitude')
+        longitude = data.get('longitude')
+        
+        # Perform reverse geocoding to get address
+        geolocator = Nominatim(user_agent="AppCalendar")
+        location = geolocator.reverse((latitude, longitude))
+        
+        if location:
+            return JsonResponse({'success': True, 'address': location.address})
+        else:
+            return JsonResponse({'success': False})
+    else:
+        return JsonResponse({'success': False})
+
