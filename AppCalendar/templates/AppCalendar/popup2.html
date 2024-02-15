@@ -54,7 +54,7 @@
       });
   }
   function convertAddressToCoordinates(address) {
-    fetch('AppCalendar/switchAddress.html/convertaddress', {
+    fetch('AppCalendar/switchAddress.html/convertAddress', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -77,8 +77,8 @@
     alert('An error occurred while converting address.');
   });
 }
-  function convertCoordinates(coordinates) {
-    fetch('AppCalendar/switchAddress.html/convertcoordinates', {
+  function convertCoordinatestoAddress(coordinates) {
+    fetch('AppCalendar/switchAddress.html/convertCoordinates', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
