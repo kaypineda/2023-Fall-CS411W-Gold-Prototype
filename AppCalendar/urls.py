@@ -12,4 +12,6 @@ urlpatterns = [
     #path('import/', import_task.import_csv, name='import_csv'),
     #path('calendar/list/', views.sidebar, name='sidebar'),
     path('import/', import_task.import_file, name='import_file'),
+    path('convert_address_to_lat_lon/', convert_address_to_lat_lon, name='convert_address_to_lat_lon'),
+    path('convert_lat_lon_to_address/', convert_lat_lon_to_address, name='convert_lat_lon_to_address'),
 ]
