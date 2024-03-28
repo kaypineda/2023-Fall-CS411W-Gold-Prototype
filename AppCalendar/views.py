@@ -184,3 +184,44 @@ def convert_lat_lon_to_address(request):
     else:
         return JsonResponse({'success': False})
 
+def get_weather_for_address(request):
+    if request.method == 'POST':
+        address = request.POST.get('address')
+        geocoded = geocode_address(address)
+        if geocoded:
+            weather_data = fetch_weather(api_key, geocoded['latitude'], geocoded['longitude'])
+            if weather_data:
+                # Process weather data or return it to the client
+                return JsonResponse(weather_data)
+            else:
+                return HttpResponse("Failed to fetch weather data", status=500)
+        else:
+            return HttpResponse("Failed to geocode address", status=500)
+    else:
+        return HttpResponse("Method not allowed", status=405)
+        
+def is_severe_weather(weather_data):
+    # Extract relevant weather parameters from the weather data
+    temperature = weather_data['temperature']
+    precipitation = weather_data['precipitation']
+    wind_speed = weather_data['wind_speed']
+    # Add more parameters as needed
+
+    # Define criteria for severe weather conditions
+    severe_weather_criteria = {
+        'temperature': 90,  # Example: Temperature above 90°F
+        'precipitation': 0.5,  # Example: Precipitation over 0.5 inches
+        'wind_speed': 30  # Example: Wind speed over 30 mph
+        # Add more criteria as needed
+    }
+
+    # Check if any of the weather parameters exceed the severe weather criteria
+    for param, threshold in severe_weather_criteria.items():
+        if param in weather_data and weather_data[param] > threshold:
+            return True
+
+    return False
+
+
+
+
