@@ -72,17 +72,23 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Make a request to your weather API here
     // Example:
-    // fetchWeather(eventLocation, eventDateTime);
+    fetchWeather(latitude, longitude)
+      .then(function(weatherData) {
+        // After fetching weather data, determine if pop-up should be displayed
+        var shouldDisplayPopUp = checkWeatherForCancellation(weatherData); // Adjust this logic based on weather conditions
+
+        if (shouldDisplayPopUp) {
+          weatherPopUp.style.display = "block";
+          // You can also update the message based on weather conditions
+          document.getElementById('weatherAlertMessage').innerText = "Weather alert message goes here";
+        }
+      })
+      .catch(function(error) {
+        console.error('Error fetching weather data:', error);
+      });
+  });
 
     // After fetching weather data, determine if pop-up should be displayed
-    var shouldDisplayPopUp = true; // Adjust this logic based on weather conditions
-
-    if (shouldDisplayPopUp) {
-      weatherPopUp.style.display = "block";
-      // You can also update the message based on weather conditions
-      document.getElementById('weatherAlertMessage').innerText = "Weather alert message goes here";
-    }
-  });
 
   closeWeatherPopUpBtn.addEventListener('click', function() {
     weatherPopUp.style.display = 'none';
@@ -102,6 +108,55 @@ document.addEventListener("DOMContentLoaded", function() {
     window.location.href = '{% url "AppCalendar:task_delete" %}';
   });
 });
+
+// Function to fetch weather data from the API
+function fetchWeather(latitude, longitude) {
+    var apiKey = '587a4f810149d6e5b5c28466131f4335'; // Replace 'YOUR_API_KEY' with your actual API key
+    var url = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+
+    return fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+  }
+
+  // Function to check weather conditions for cancellation
+  function checkWeatherForCancellation(weatherData) {
+    // Extract relevant weather parameters from the weather data
+    var temperature = weatherData.temperature;
+    var precipitation = weatherData.precipitation;
+    var windSpeed = weatherData.wind_speed;
+    var humidity = weatherData.humidity;
+    var visibility = weatherData.visibility;
+    var thunderstormProbability = weatherData.thunderstormProbability;
+    var snowDepth = weatherData.snowDepth;
+
+    // Define criteria for severe weather conditions
+    var severeWeatherCriteria = {
+        temperature: 90,      // Example: Temperature above 90°F
+        precipitation: 0.5,   // Example: Precipitation over 0.5 inches
+        windSpeed: 30,         // Example: Wind speed over 30 mph
+        humidity: 80,              // Example: Humidity above 80%
+        visibility: 0.5,           // Example: Visibility less than 0.5 miles
+        thunderstormProbability: 50,  // Example: Probability of thunderstorm over 50%
+         snowDepth: 6               // Example: Snow depth over 6 inches
+    };
+
+    // Check if any of the weather parameters exceed the severe weather criteria
+    for (var param in severeWeatherCriteria) {
+        if (weatherData.hasOwnProperty(param) && weatherData[param] > severeWeatherCriteria[param]) {
+            return true;// Severe weather condition found
+        }
+    }
+
+    return false;// No severe weather conditions found
+  }
 </script>
 {% endcomment %}
 
