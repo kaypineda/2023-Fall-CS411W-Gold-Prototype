@@ -1,1 +1,48 @@
+{% extends 'AppCalendar/base.html' %}
+{% load static %}
 
+{% block title %}
+Task
+{% endblock %}
+
+{% block content %}
+<div class="clearfix">
+  <a class="btn btn-info right" href="{% url 'AppCalendar:calendar' %}"> Cancel </a>
+</div>
+
+{% if messages %}
+  <div class="alert alert-warning">
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+  </div>
+{% endif %}
+
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                {{ field.label }} <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ field.label }} <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<form method="post">
+  {% csrf_token %}
+  <table class="form form-table">
+    {{ form }}
+    <tr>
+      <td>
+        <input class="btn buttons add-button login_btn" type="submit" value="Save">
+      </td>
+     </tr>
+  </table>
+</form>
+
+{% comment %}
