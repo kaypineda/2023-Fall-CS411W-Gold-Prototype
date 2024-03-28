@@ -11,6 +11,8 @@
   </div>
 </div>
 
+{% include 'AppCalendar/switchAddress.html' %}
+<script>
 document.addEventListener("DOMContentLoaded", function() {
   var openWeatherPopUpBtn = document.querySelector('.add-button'); // Adjust this selector as needed
   var closeWeatherPopUpBtn = document.getElementById('closeWeatherPopUpBtn');
@@ -39,3 +41,4 @@ document.addEventListener("DOMContentLoaded", function() {
     // window.location.href = '{% url "AppCalendar:task_new" %}';
   });
 });
+<script>
