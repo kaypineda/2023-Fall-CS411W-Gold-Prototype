@@ -46,7 +46,48 @@ Task
 </form>
 
 {% comment %}
+<div id="weatherPopUp" class="popupWindow">
+  <div class="popupWindow-content">
+    <div class="popupWindow-header">
+      <h2>Weather Alert</h2>
+    </div>
+    <div class="popupWindow-body">
+      <p id="weatherAlertMessage"></p>
+      <p>You may want to reschedule or delete this event due to weather conditions.</p>
+    </div>
+    <button id="closeWeatherPopUpBtn" class="closeWindowBtn">Close Window</button>
+  </div>
+</div>
 
+{% include 'AppCalendar/weatherAlert.html' %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var openWeatherPopUpBtn = document.querySelector('.add-button'); // Adjust this selector as needed
+  var closeWeatherPopUpBtn = document.getElementById('closeWeatherPopUpBtn');
+  var weatherPopUp = document.getElementById('weatherPopUp');
+
+  openWeatherPopUpBtn.addEventListener('click', function(event) {
+    event.preventDefault();
+    
+    // fetchWeather(eventLocation, eventDateTime);
+
+    // After fetching weather data, determine if pop-up should be displayed
+    var shouldDisplayPopUp = true; // Adjust this logic based on weather conditions
+
+    if (shouldDisplayPopUp) {
+      weatherPopUp.style.display = "block";
+      // You can also update the message based on weather conditions
+      document.getElementById('weatherAlertMessage').innerText = "Weather alert message goes here";
+    }
+  });
+
+  closeWeatherPopUpBtn.addEventListener('click', function() {
+    weatherPopUp.style.display = 'none';
+    // You may want to redirect the user to a different URL after closing the pop-up
+    // window.location.href = '{% url "AppCalendar:task_new" %}';
+  });
+});
+<script>
 {% endcomment %}
 
 {% endblock %}
