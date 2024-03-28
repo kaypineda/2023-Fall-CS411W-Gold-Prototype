@@ -43,7 +43,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
   rescheduleBtn.addEventListener('click', function() {
     // Perform reschedule action here, e.g., redirect to reschedule page
-    window.location.href = '{% url "AppCalendar:task_reschedule" %}';
+    alert("Event Has Been Rescheduled!");
+    window.location.href = '{% url "AppCalendar/reschedule.html" %}';
   });
 
   deleteBtn.addEventListener('click', function() {
@@ -55,8 +56,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // and update the calendar interface accordingly
     // Example:
     // deleteEvent(eventId);
-    alert("Event deleted!");
+    alert("Event Has Been deleted!");
     weatherPopUp.style.display = 'none'; // Close the pop-up after action
+    window.location.href = '{% url "AppCalendar/delete.html" %}';
   });
 });
 </script>
