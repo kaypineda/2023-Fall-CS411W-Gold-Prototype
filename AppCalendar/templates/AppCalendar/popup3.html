@@ -50,12 +50,6 @@ document.addEventListener("DOMContentLoaded", function() {
   deleteBtn.addEventListener('click', function() {
     // Perform delete action here, e.g., send delete request to server
     // and update calendar accordingly
-    // You may also want to confirm the deletion with the user before proceeding
-    // For simplicity, let's assume the deletion is confirmed and performed directly
-    // Here, you would typically make an AJAX request to your server to delete the event
-    // and update the calendar interface accordingly
-    // Example:
-    // deleteEvent(eventId);
     alert("Event Has Been deleted!");
     weatherPopUp.style.display = 'none'; // Close the pop-up after action
     window.location.href = '{% url "AppCalendar:task_delete" %}';
