@@ -16,11 +16,15 @@
 document.addEventListener("DOMContentLoaded", function() {
   var openWeatherPopUpBtn = document.querySelector('.add-button'); // Adjust this selector as needed
   var closeWeatherPopUpBtn = document.getElementById('closeWeatherPopUpBtn');
+  var rescheduleBtn = document.getElementById('rescheduleBtn');
+  var deleteBtn = document.getElementById('deleteBtn');
   var weatherPopUp = document.getElementById('weatherPopUp');
 
   openWeatherPopUpBtn.addEventListener('click', function(event) {
     event.preventDefault();
     
+    // Make a request to your weather API here
+    // Example:
     // fetchWeather(eventLocation, eventDateTime);
 
     // After fetching weather data, determine if pop-up should be displayed
@@ -35,8 +39,24 @@ document.addEventListener("DOMContentLoaded", function() {
 
   closeWeatherPopUpBtn.addEventListener('click', function() {
     weatherPopUp.style.display = 'none';
-    // You may want to redirect the user to a different URL after closing the pop-up
-    // window.location.href = '{% url "AppCalendar:task_new" %}';
+  });
+
+  rescheduleBtn.addEventListener('click', function() {
+    // Perform reschedule action here, e.g., redirect to reschedule page
+    window.location.href = '{% url "AppCalendar:task_reschedule" %}';
+  });
+
+  deleteBtn.addEventListener('click', function() {
+    // Perform delete action here, e.g., send delete request to server
+    // and update calendar accordingly
+    // You may also want to confirm the deletion with the user before proceeding
+    // For simplicity, let's assume the deletion is confirmed and performed directly
+    // Here, you would typically make an AJAX request to your server to delete the event
+    // and update the calendar interface accordingly
+    // Example:
+    // deleteEvent(eventId);
+    alert("Event deleted!");
+    weatherPopUp.style.display = 'none'; // Close the pop-up after action
   });
 });
 </script>
