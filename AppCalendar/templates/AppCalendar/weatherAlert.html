@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function() {
   var deleteBtn = document.getElementById('deleteBtn');
   var weatherPopUp = document.getElementById('weatherPopUp');
 
+  if(openWindowBtn && closeWindowBtn) {
   openWeatherPopUpBtn.addEventListener('click', function(event) {
     event.preventDefault();
     
@@ -107,6 +108,9 @@ document.addEventListener("DOMContentLoaded", function() {
     weatherPopUp.style.display = 'none'; // Close the pop-up after action
     window.location.href = '{% url "AppCalendar:task_delete" %}';
   });
+} else {
+      console.error('One or more elements not found. Check your IDs');
+    }
 });
 
 // Function to fetch weather data from the API
