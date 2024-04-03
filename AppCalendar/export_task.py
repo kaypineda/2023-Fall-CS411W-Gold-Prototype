@@ -61,7 +61,8 @@ def export(request):
                          'All Day Event', 'Description', 'Location', 'Private', 'Weather'])
         
         # Iterate over tasks and write each row to the CSV file
-        for task in Task.objects.all().values_list('title', 'start_time', 'end_time','description', 'address'):
+        for task in Task.objects.all().values_list('title', 'start_time', 'end_time',
+        'description', 'address', 'latitude', 'longitude'):
             start_time = task[1].time()
             end_time = task[2].time() 
 
