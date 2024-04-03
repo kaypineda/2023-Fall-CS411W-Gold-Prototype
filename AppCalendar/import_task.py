@@ -74,6 +74,8 @@ def import_file(request):
                 end_time = row.get('End Time')
                 description = row.get('Description')
                 address = row.get('Location')  # Assuming 'Location' is the column for address
+                latitude = row.get('Location')
+                longitude = row.get('Location')
                  
                 # Convert date and time strings to datetime objects
                 start_datetime = datetime.strptime(f'{start_date} {start_time}', '%Y-%m-%d %H:%M:%S')
@@ -104,7 +106,9 @@ def import_file(request):
                         end_time = end_datetime,
                         description = description,
                         address=address,
-                        weather=weather_info
+                        weather=weather_info,
+                        latitude=latitude,
+                        longitude=longitude
                     )
                     
                     new_task.save()
@@ -124,6 +128,8 @@ def import_file(request):
                     end_time = component.get('dtend').dt
                     description = component.get('description')
                     address = component.get('location')  # Assuming 'location' is the ICS field for address
+                    latitude = component.get('location')
+                    longitude = component.get('location')
                     
                     # Check for duplicate tasks
                     duplicate_tasks = Task.objects.filter(
@@ -143,7 +149,9 @@ def import_file(request):
                             end_time = end_time,
                             description = description
                             address=address,
-                            weather=weather_info                            
+                            weather=weather_info 
+                            latitude=latitude
+                            longitude=longitude                           
                         )
                         new_task.save()
         if duplicate_task_list:

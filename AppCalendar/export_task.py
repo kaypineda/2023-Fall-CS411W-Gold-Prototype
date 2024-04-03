@@ -108,7 +108,7 @@ def export(request):
             # ical_task.add('uid', task.task_id)
             ical_task.add('uid', uid)
             ical_task.add('summary', f"{task.title} - {task.address} - {weather_info}")
-            ical_task.add('location', task.address)  # Add address to the location property
+            ical_task.add('location', task.address, task.latitude, task.longitude)  # Add address to the location property
             ical_task.add('dtstart', start_time_naive)
             ical_task.add('dtend', end_time_naive)
             ical_task.add('dtstamp', datetime.now())
