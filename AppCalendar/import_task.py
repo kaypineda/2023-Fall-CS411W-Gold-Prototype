@@ -149,8 +149,8 @@ def import_file(request):
                             end_time = end_time,
                             description = description
                             address=address,
-                            weather=weather_info 
-                            latitude=latitude
+                            weather=weather_info,
+                            latitude=latitude,
                             longitude=longitude                           
                         )
                         new_task.save()
