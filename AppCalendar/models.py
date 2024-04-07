@@ -21,6 +21,8 @@ class Task(models.Model):
     end_time = models.DateTimeField()
     address = models.CharField(max_length=200, default='', blank=True)
     weather = models.TextField(default='', blank=True)
+    latitude = models.FloatField(null=True, blank=True)  # Add latitude field
+    longitude = models.FloatField(null=True, blank=True)  # Add longitude field
 
     # String representation of the Task object, used for display purposes
     def __str__(self):
