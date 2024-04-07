@@ -109,11 +109,12 @@ def export(request):
             # ical_task.add('uid', task.task_id)
             ical_task.add('uid', uid)
             ical_task.add('summary', f"{task.title} - {task.address} - {weather_info}")
-            ical_task.add('location', task.address, task.latitude, task.longitude)  # Add address to the location property
+            ical_task.add('location', task.address)  # Add address to the location property
             ical_task.add('dtstart', start_time_naive)
             ical_task.add('dtend', end_time_naive)
             ical_task.add('dtstamp', datetime.now())
-            ical_task.add('description', f"{task.description}\nWeather: {weather_info}")
+            ical_task.add('description', f"{task.description}\nLocation: {task.address}
+            \nLatitude: {task.latitude}\nLongitude: {task.longitude}\nWeather: {weather_info}")
 
             # Add the ICS event to the calendar
             cal.add_component(ical_task)
