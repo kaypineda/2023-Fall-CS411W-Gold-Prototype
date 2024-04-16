@@ -64,7 +64,7 @@ def export(request):
         
         # Iterate over tasks and write each row to the CSV file
         for task in Task.objects.all().values_list('title', 'start_time', 'end_time',
-        'description', 'address', 'latitude', 'longitude'):
+        'description', 'address', 'latitude', 'longitude', 'weather'):
             start_time = task[1].time()
             end_time = task[2].time() 
 
@@ -77,12 +77,14 @@ def export(request):
             if location:
                 task[5], task[6] = location.latitude, location.longitude
                 weather_info = get_weather(task[5], task[6])
+                task[7] = weather_info
             else:
                 weather_info = "Weather information not available"
+                task[7] = weather_info
             
             # Write task details to the CSV file
             writer.writerow([task[0], task[1].date(), start_time.strftime('%H:%M:%S'), task[2].date(), end_time.strftime('%H:%M:%S'),
-                             all_day_event, task[3], task[4], '', weather_info])
+                             all_day_event, task[3], task[4], '', task[7]])
         return response
     
     elif format == 'ics':
@@ -116,7 +118,7 @@ def export(request):
             ical_task.add('dtend', end_time_naive)
             ical_task.add('dtstamp', datetime.now())
             ical_task.add('description', f"{task.description}\nLocation: {task.address}
-            \nLatitude: {task.latitude}\nLongitude: {task.longitude}\nWeather: {weather_info}")
+            \nLatitude: {task.latitude}\nLongitude: {task.longitude}\nWeather: {task.weather}")
 
             # Add the ICS event to the calendar
             cal.add_component(ical_task)
