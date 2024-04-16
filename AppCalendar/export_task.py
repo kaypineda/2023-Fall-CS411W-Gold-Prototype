@@ -73,8 +73,8 @@ def export(request):
             location = geolocator.geocode(task[4])
 
             if location:
-                latitude, longitude = location.latitude, location.longitude
-                weather_info = get_weather(latitude, longitude)
+                task[5], task[6] = location.latitude, location.longitude
+                weather_info = get_weather(task[5], task[6])
             else:
                 weather_info = "Weather information not available"
             
