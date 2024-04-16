@@ -23,12 +23,14 @@ def get_weather(latitude, longitude):
     response = requests.get(base_url, params=params)
     weather_data = response.json()
 
-    # Extract relevant weather information
+    """
+    # Extract relevant weather information example
     if 'main' in weather_data and 'temp' in weather_data['main']:
         temperature = weather_data['main']['temp']
         return f"Temperature: {temperature}°C"
     else:
         return "Weather information not available"
+    """
 
 def import_file(request):
     
