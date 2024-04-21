@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Make a request to your weather API here
     // Example:
-    fetchWeather(latitude, longitude)
+    weatherData = fetchWeather(latitude, longitude)
       .then(function(weatherData) {
         // After fetching weather data, determine if pop-up should be displayed
         var shouldDisplayPopUp = checkWeatherForCancellation(weatherData); // Adjust this logic based on weather conditions
