@@ -70,7 +70,10 @@ document.addEventListener("DOMContentLoaded", function() {
   if(openWindowBtn && closeWindowBtn) {
   openWeatherPopUpBtn.addEventListener('click', function(event) {
     event.preventDefault();
-    
+      var latitudeInput = document.getElementById('latitude');
+      var latitude = addressInput.value;
+      var longitudeInput = document.getElementById('longitude');
+      var longitude = addressInput.value;
     // Make a request to your weather API here
     // Example:
     weatherData = fetchWeather(latitude, longitude)
