@@ -118,6 +118,8 @@ def export(request):
             ical_task.add('dtend', end_time_naive)
             ical_task.add('dtstamp', datetime.now())
             ical_task.add('description', f"{task.description}\nLocation: {task.address} \nWeather: {task.weather}")
+            ical_task.add('latitude', task.latitude)
+            ical_task.add('longitude', task.longitude)
 
             # Add the ICS event to the calendar
             cal.add_component(ical_task)
