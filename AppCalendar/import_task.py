@@ -78,6 +78,7 @@ def import_file(request):
                 address = row.get('Location')  # Assuming 'Location' is the column for address
                 latitude = row.get('Latitude')
                 longitude = row.get('Longitude')
+                weather = row.get('Weather')
                  
                 # Convert date and time strings to datetime objects
                 start_datetime = datetime.strptime(f'{start_date} {start_time}', '%Y-%m-%d %H:%M:%S')
@@ -108,7 +109,7 @@ def import_file(request):
                         end_time = end_datetime,
                         description = description,
                         address=address,
-                        weather=weather_info,
+                        weather=weather,
                         latitude=latitude,
                         longitude=longitude
                     )
@@ -132,6 +133,7 @@ def import_file(request):
                     address = component.get('location')  # Assuming 'location' is the ICS field for address
                     latitude = component.get('latitude')
                     longitude = component.get('longitude')
+                    weather = component.get('weather')
                     
                     # Check for duplicate tasks
                     duplicate_tasks = Task.objects.filter(
@@ -151,7 +153,7 @@ def import_file(request):
                             end_time = end_time,
                             description = description
                             address=address,
-                            weather=weather_info,
+                            weather=weather,
                             latitude=latitude,
                             longitude=longitude                           
                         )
